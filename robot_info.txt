@@ -1,0 +1,42 @@
+
+модель: NXT
+
+
+http://mindstorms.lego.com/en-us/whatisnxt/default.aspx
+
+сенсоры:
+прикосновени€ (2шт) - просто кнопка по сути 0 или 1 - http://mindstorms.lego.com/en-us/products/9843.aspx
+освещенности (есть подсветка) от 0 до 100% - http://mindstorms.lego.com/en-us/products/9844.aspx
+звука - http://mindstorms.lego.com/en-us/products/9845.aspx
+ультразвуковой датчик - http://mindstorms.lego.com/en-us/products/9846.aspx
++ ещЄ есть 3 лампочки3 сервопривода - т.е. не только вращаютс€, но и знают в каком положении наход€тс€ (даже если не самомсто€тельно, а их крутить рукой). 
+
+http://lejos.sourceforge.net/
+http://en.wikipedia.org/wiki/Lego_Mindstorms#Programming_languages_2.
+
+инсталл€ци€ LEJOS
+http://lejos.sourceforge.net/nxj-downloads.php
+
+инструкци€ пользовани€ LEJOS
+http://lejos.sourceforge.net/nxt/nxj/tutorial/index.htm
+
+переменные среды дл€ работы с LEJOS:
+NXJ_HOME: C:\Program Files\leJOS NXJ
+PATH: путь к bin-директории jdk
+CLASSPATH: путь к pccomm.jar (по умолчанию c:\Documents and Settings\<пользователь>\leJOSNXJProjects\pccomms\lib\pccomm.jar)
+
+--------------------------------------------------------------------
+существующа€ программа дл€ программировани€ робота визуально
+http://mindstorms.lego.com/en-us/Software/Default.aspx
+
+
+
+
+---------------------------------------------------------------------
+в каком формате или в какой структуре сохран€етс€ карта местности робота:
+
+в 2-х мерном массиве. проходима€, нероходима€ территори€. ¬начале все территори€ проходима, по мере возникновений преп€тствий редактируетс€.
+ее можно передать на компьютер и там запомнить.
+
+ј движение в 2-х мерном координатном пространстве реализовано на уровне базовых классов
+
