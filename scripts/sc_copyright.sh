@@ -1,3 +1,4 @@
+#!/bin/bash
 usage="Usage: sc_copyright.sh target file"
 
 if [ $# -lt 2 ]

@@ -1,4 +1,4 @@
-cp sc_makefile0 makefile
+#!/bin/bash
 
 rm -rf "./source"
 rm -rf "./binary"
@@ -15,6 +15,7 @@ mkdir "./source/all"
 mkdir "./objects"
 mkdir "./objects/linux"
 mkdir "./objects/win"
+mkdir "./objects/all"
 mkdir "./binary"
 mkdir "./binary/linux"
 mkdir "./binary/win"
@@ -22,6 +23,9 @@ mkdir "./data"
 mkdir "./config"
 mkdir "./etc"
 mkdir "./log"
+
+cp "./scripts/sc_makefile0" "makefile"
+cp "./scripts/sc_source_config0" "./config/source_config"
 
 echo "
 Initialization of project completed
@@ -31,5 +35,9 @@ sharp-end must not to be deleted
 #end
 " > "./etc/copyright"
 gedit "./etc/copyright" 2> "./log/log_gedit"
+
+echo "#end" > "./config/modules"
+
+touch README
 
 

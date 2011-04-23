@@ -15,6 +15,7 @@ mkdir "./source/all"
 mkdir "./objects"
 mkdir "./objects/linux"
 mkdir "./objects/win"
+mkdir "./objects/all"
 mkdir "./binary"
 mkdir "./binary/linux"
 mkdir "./binary/win"
@@ -35,6 +36,8 @@ sharp-end must not to be deleted
 " > "./etc/copyright"
 gedit "./etc/copyright" 2> "./log/log_gedit"
 
-touch "./config/modules"
+echo "#end" > "./config/modules"
+
+touch README
 
 

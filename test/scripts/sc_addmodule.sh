@@ -1,6 +1,6 @@
 #!/bin/bash
-usage="Usage: sc_ismoduleexist.sh target/module"
-if [ $# -lt 1 ]
+usage="Usage: sc_addmodule.sh target/module comm"
+if [ $# -lt 2 ]
 then
 	echo "${usage}"
 	exit
@@ -8,7 +8,9 @@ fi
 
 mfile="./config/modules"
 pmodule="$1"
+pcom="$2"
 
+rm temp
 cat "${mfile}" | while :
 do
 
@@ -17,16 +19,13 @@ do
 	e=`echo ${instr} | grep "#end"`
 	if [ "$e" != "" ] 
 	then
-		echo "0"
+		echo "[module ${pmodule}] - ${pcom}" >> temp
+		echo ${instr} >> temp
 		break
 	fi
 
-	a1=`echo "${instr}" | grep "module ${pmodule}"`
-	if [ "$a1" != "" ] 
-	then
-		echo "1"
-		break
-	fi
+	echo ${instr} >> temp
 
 done
+cp temp "${mfile}"
 
