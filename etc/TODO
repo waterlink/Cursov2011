@@ -1,0 +1,52 @@
+1) robocore:
+	- create interface for z0rch's program and for BTExecutor.java
+	- create test classes, that emulates robot
+2) guicore	{winapi for WIN_target} and {opengl or qt for LINUX_target}
+	- messaging system
+	- client
+	- menu
+	- toolbox
+	- view
+	- status
+	- popup
+	- properties
+3) filecore
+	- C.O.
+4) mapcore
+	- work with filecore to read chosen map from file
+	- integer coordinate system (or real ?)
+	- absolute coordinate system (problem with determining start point)
+		call NP-area strategy, which determines area template (a piece of a map, rectangle or circular ?),
+		searches this template in our map, and
+		if there more than one matches, ask user to choose one.
+5) fogcore
+	- exploration of map
+6) markercore
+	- start point
+	- target
+	- edge
+	- multitarget
+	- properties of markers and edges
+7) scenariocore
+	- vector of commands i think
+	- load
+	- save
+	- prepare (start point)
+	- run
+	- cancel (??? maybe ???)
+8) strategycore
+	- optimalstrategy for targets
+		use Markelov's module to determine the best way for each edge
+		use z0rch's module to control the robot
+	- non-optimalstrategy for targets
+		use Manhetton-way, as a way
+		use z0rch's module to control the robot
+	- optimalstrategy for multitargets
+		use Gamilton-way algo to determine best way
+		use z0rch's module to control the robot
+	- non-optimalstrategy for multitargets
+		use geometrical greed algo
+		use z0rch's module to control the robot
+	- NP area template determinant
+		dfs, i think, using BTExecutor to control robot, algo mine
+

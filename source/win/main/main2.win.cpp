@@ -25,15 +25,26 @@ WinMain(
 	){
 
 	#ifdef WIN_target
-		printf("everything is ok!\n");
+		fprintf(stderr, "everything is ok!\n");
 	#endif
 	#ifdef LINUX_target
-		printf("WTF???");
+		fprintf(stderr, "WTF???");
 	#endif
 
-	MessageBox (NULL, TEXT ("Hello, Windowman!"), TEXT ("HelloMsg"), 0);
+	mainclass
+	*MC = new mainclass;
+	MC->init(
+			Inst, 
+			CmdParam, 
+			CmdShow
+		);
 
-	return 0;
+	int
+	errcode = MC->run();
+
+	delete MC;
+
+	return errcode;
 
 }
 

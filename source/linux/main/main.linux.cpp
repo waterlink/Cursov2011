@@ -20,7 +20,10 @@ int
 main(int argc, char ** argv){
 
 	#ifdef LINUX_target
-		printf("Hello, linuxoid!!!\n");
+		fprintf(stderr, "Hello, linuxoid!!!\n");
+	#endif
+	#ifdef WIN_target
+		fprintf(stderr, "WTF???\n");
 	#endif
 	printf("Hello, world!\n");
 

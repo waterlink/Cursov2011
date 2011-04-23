@@ -1,2 +1,3 @@
 [code main2] - main file, runs mainclass
+[class mainclass] - win version of main class, contains initialization, run method and finalization
 #end

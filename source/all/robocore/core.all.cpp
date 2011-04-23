@@ -10,18 +10,11 @@
 //	
 
 //
-//	header file
-//	main file, runs mainclass
+//	source file
+//	core class for robocore subsystem
 //
 
-#ifndef main2_hpp
-#define main2_hpp
+#include "core.all.hpp"
 
-#include <windows.h>
-#include <cstdio>
-
-#include "mainclass.win.hpp"
-
-#endif
 
 //#end

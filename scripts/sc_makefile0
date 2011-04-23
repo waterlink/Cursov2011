@@ -9,7 +9,7 @@ linux_spec_SOURCES=
 linux_spec_HEADERS= 
 linux_spec_OBJECTS= 
 
-win_CC=i586-mingw32msvc-gcc
+win_CC=i586-mingw32msvc-g++
 win_RC=i586-mingw32msvc-windres
 win_CFLAGS= -c -Wall -mwindows
 win_LDFLAGS= -mwindows -Wl,--allow-multiple-definition

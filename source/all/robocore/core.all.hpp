@@ -11,16 +11,30 @@
 
 //
 //	header file
-//	main file, runs mainclass
+//	class core
+//	interface
+//	core class for robocore subsystem
 //
 
-#ifndef main2_hpp
-#define main2_hpp
+#ifndef core_hpp
+#define core_hpp
 
-#include <windows.h>
-#include <cstdio>
+class
+core{
 
-#include "mainclass.win.hpp"
+public:
+
+	
+
+protected:
+
+	
+
+private:
+
+	
+
+};
 
 #endif
 

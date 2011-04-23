@@ -1,3 +1,4 @@
 [module linux/main] - linux main file
 [module win/main] - windows main module
+[module all/robocore] - robot core, use of another modules, they are connecting to robot, and sends queries to him
 #end
