@@ -1,0 +1,3 @@
+[code main] - main file
+[class mainclass] - main class, contains initializer for parameters and method run, to run application
+#end

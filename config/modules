@@ -1,1 +1,3 @@
+[module linux/main] - linux main file
+[module win/main] - windows main module
 #end

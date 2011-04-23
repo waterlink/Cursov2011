@@ -1,4 +1,4 @@
- target= all 
- module= ___none___ 
-
+target= win 
+module= main 
+ 
 #end

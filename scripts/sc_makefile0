@@ -39,7 +39,7 @@ $(linux_EXECUTABLE): $(linux_spec_OBJECTS)
 	$(linux_CC) $(linux_LDFLAGS) $(linux_spec_OBJECTS) -o $@ $(LIBRARIES) $(linux_LIBRARIES) $(DEBUG)
 
 #tab
-$(win_EXECUTABLE): $(linux_spec_OBJECTS)
+$(win_EXECUTABLE): $(win_spec_OBJECTS)
 	$(win_CC) $(win_LDFLAGS) $(win_spec_OBJECTS) -o $@ $(LIBRARIES) $(win_LIBRARIES) $(DEBUG)
 
 #tab
