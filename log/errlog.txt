@@ -1,1 +1,0 @@
-sh: Can't open gedit
