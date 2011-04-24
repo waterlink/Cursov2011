@@ -1,2 +1,4 @@
 [class core] - core class for robocore subsystem
+[class izprog] - interface for z0rch's program
+[class ibtexec] - interface for BTExecutor external module
 #end

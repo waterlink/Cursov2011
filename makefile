@@ -67,4 +67,18 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/robocore/core.all.cpp $(win_CFLAGS) -o ./objects/all/robocore/core.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/robocore/izprog.linux.all.o: ./source/all/robocore/izprog.all.cpp ./source/all/robocore/izprog.all.hpp 
+	$(linux_CC) ./source/all/robocore/izprog.all.cpp $(linux_CFLAGS) -o ./objects/all/robocore/izprog.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/robocore/izprog.all.cpp $(win_CFLAGS) -o ./objects/all/robocore/izprog.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/robocore/ibtexec.linux.all.o: ./source/all/robocore/ibtexec.all.cpp ./source/all/robocore/ibtexec.all.hpp 
+	$(linux_CC) ./source/all/robocore/ibtexec.all.cpp $(linux_CFLAGS) -o ./objects/all/robocore/ibtexec.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/robocore/ibtexec.all.cpp $(win_CFLAGS) -o ./objects/all/robocore/ibtexec.win.all.o $(win_DEFFS) 
 #end
