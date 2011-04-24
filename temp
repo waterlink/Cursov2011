@@ -3,4 +3,5 @@
 [class ibtexec] - interface for BTExecutor external module
 [class test_zprogemu] - console emulator of external module z0rch's program
 [class test_roboemu_params] - robot emulator, contains parameters, and full map
+[class test_btexecemu] - test class for kbtexec (Krachkovskiy's BTExecutor external module), emulates direct control of robot
 #end

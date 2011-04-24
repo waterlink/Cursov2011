@@ -35,6 +35,12 @@ public:
 	rd0, rd1;
 
 	bool
+	light;
+
+	double
+	voltage;
+
+	bool
 	**map;
 
 	int

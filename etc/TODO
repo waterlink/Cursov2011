@@ -11,7 +11,7 @@
 	- popup
 	- properties
 3) filecore
-	- C.O.
+	- map loading
 4) mapcore
 	- work with filecore to read chosen map from file
 	- integer coordinate system (or real ?)

@@ -16,5 +16,14 @@
 
 #include "test_roboemu_params.all.hpp"
 
+#include <cstdio>
+
+void
+test_roboemu_params::loadmap(string path){
+
+	// TODO: here must be loading of map through filecore
+	printf("map loaded :)\n");
+
+}
 
 //#end
