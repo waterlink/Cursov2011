@@ -16,6 +16,9 @@
 
 #include "mainclass.linux.hpp"
 #include <cstdio>
+#include <cstdlib>
+
+#include "../../all/robocore/test_zprogemu.all.hpp"
 
 mainclass::mainclass(int argc, char ** argv){
 
@@ -29,7 +32,23 @@ mainclass::~mainclass(){}
 int
 mainclass::run(){
 
-	printf("program is working!!!");
+	printf("program is working!!!\n");
+
+	test_zprogemu
+	*tzpe = new test_zprogemu(NULL);
+	
+		tzpe->passstartcoords(30, 30, 35, 30);
+		tzpe->moverel(10, 5);
+		tzpe->beep();
+		tzpe->moverel(-40, 55);
+		tzpe->setlight(true);
+		tzpe->moverel(30, -60);
+		tzpe->setlight(false);
+
+		tzpe->run();
+
+	delete tzpe;
+
 	return 0;
 
 }

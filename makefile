@@ -81,4 +81,18 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/robocore/ibtexec.all.cpp $(win_CFLAGS) -o ./objects/all/robocore/ibtexec.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/robocore/test_zprogemu.linux.all.o: ./source/all/robocore/test_zprogemu.all.cpp ./source/all/robocore/test_zprogemu.all.hpp 
+	$(linux_CC) ./source/all/robocore/test_zprogemu.all.cpp $(linux_CFLAGS) -o ./objects/all/robocore/test_zprogemu.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/robocore/test_zprogemu.all.cpp $(win_CFLAGS) -o ./objects/all/robocore/test_zprogemu.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/robocore/test_roboemu_params.linux.all.o: ./source/all/robocore/test_roboemu_params.all.cpp ./source/all/robocore/test_roboemu_params.all.hpp 
+	$(linux_CC) ./source/all/robocore/test_roboemu_params.all.cpp $(linux_CFLAGS) -o ./objects/all/robocore/test_roboemu_params.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/robocore/test_roboemu_params.all.cpp $(win_CFLAGS) -o ./objects/all/robocore/test_roboemu_params.win.all.o $(win_DEFFS) 
 #end
