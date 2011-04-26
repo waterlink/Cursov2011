@@ -1,6 +1,7 @@
 1) robocore:
    OK	- create interface for z0rch's program and for BTExecutor.java
-	- create test classes, that emulates robot
+   OK	- create test classes, that emulates robot
+	- code both emulators to be really emulators of something ;)
 2) guicore	{winapi for WIN_target} and {opengl or qt for LINUX_target}
 	- messaging system
 	- client
