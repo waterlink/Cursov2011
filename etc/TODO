@@ -4,7 +4,7 @@
 	- code both emulators to be really emulators of something ;)
 2) guicore	{winapi for WIN_target} and {opengl or qt for LINUX_target}
 	- messaging system
-	  OK	1) component, form - abstracts
+	  TWOK	1) component, form - abstracts, {winapi partially, there still some todo's in code}
 	  OK	2) messager - just a class-method delegate
 	  OK	3) namer
 	  OK	4) message & param interfaces (
@@ -16,7 +16,7 @@
 				m	mouse, 
 				m	paint
 			)
-  OK	- client
+  TWOK	- client
   OK	- menu
   OK	- button
   OK	- bitbutton
@@ -27,6 +27,7 @@
   OK	- properties
 	- make this all mess for winapi (W-mark)
 	- make this all mess for linux (l-mark)
+	- complete all todo's (T-mark)
 3) filecore
 	- map loading
 4) mapcore

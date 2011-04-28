@@ -16,10 +16,10 @@ win_LDFLAGS= -mwindows -Wl,--allow-multiple-definition
 win_DEFFS= -DWIN_target 
 win_LIBRARIES= -lwinspool -lcomctl32 
  
-win_spec_SOURCES= ./source/win/main/*.win.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp 
-win_spec_HEADERS= ./source/win/main/*.win.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp 
+win_spec_SOURCES= ./source/win/main/*.win.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/win/Wguicore/*.win.cpp 
+win_spec_HEADERS= ./source/win/main/*.win.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/win/Wguicore/*.win.hpp 
 win_spec_RESOURCES= 
-win_spec_OBJECTS= ./objects/win/main/*.win.o ./objects/all/robocore/*.win.all.o ./objects/all/guicore/*.win.all.o 
+win_spec_OBJECTS= ./objects/win/main/*.win.o ./objects/all/robocore/*.win.all.o ./objects/all/guicore/*.win.all.o ./objects/win/Wguicore/*.win.o 
  
 LIBRARIES= 
  
@@ -249,4 +249,12 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/guicore/properties.all.cpp $(win_CFLAGS) -o ./objects/all/guicore/properties.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/win/Wguicore/Wform.win.o: ./source/win/Wguicore/Wform.win.cpp ./source/win/Wguicore/Wform.win.hpp 
+	$(win_CC) ./source/win/Wguicore/Wform.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wform.win.o $(win_DEFFS) 
+ 
+#tab 
+./objects/win/Wguicore/Wclient.win.o: ./source/win/Wguicore/Wclient.win.cpp ./source/win/Wguicore/Wclient.win.hpp 
+	$(win_CC) ./source/win/Wguicore/Wclient.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wclient.win.o $(win_DEFFS) 
 #end
