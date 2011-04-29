@@ -17,8 +17,8 @@
 				m	paint
 			)
   TWOK	- client
-  OK	- menu
-  OK	- button
+  TWOK	- menu
+  TWOK	- button
   OK	- bitbutton
   OK	- toolbox
   OK	- view
@@ -68,5 +68,5 @@
 	- NP area template determinant
 		dfs, i think, using BTExecutor to control robot, algo mine
 9) utilcore
-	- string tokenizer
+  OK	- string tokenizer
 

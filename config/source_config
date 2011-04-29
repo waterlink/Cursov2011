@@ -1,4 +1,4 @@
-target= win 
-module= Wguicore 
+target= all 
+module= utilcore 
  
 #end

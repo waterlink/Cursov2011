@@ -21,6 +21,10 @@
 
 #include "../../all/guicore/client.all.hpp"
 
+#include <windows.h>
+
+long WINAPI wndproc(HWND,UINT,UINT,LONG);
+
 class
 Wclient: public client{
 

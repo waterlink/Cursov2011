@@ -19,9 +19,52 @@
 #include <cstdio>
 #include <cstdlib>
 
+#include "Wclient.win.hpp"
+#include "../main/mainclass.win.hpp"
+
 Wform::Wform(string name){
 
 	this->name = name;
+
+	HWND hWnd; 
+	WNDCLASS WndClass; 
+	HINSTANCE hInst = mainclass::getInst();
+
+	fprintf(stderr, "Wguicore--Wform::Wform::debug: Inst = %d\n", hInst);
+
+	WndClass.style = CS_HREDRAW | CS_VREDRAW;
+	WndClass.lpfnWndProc = (WNDPROC)wndproc;
+	WndClass.cbClsExtra = 0;
+	WndClass.cbWndExtra = 0;
+	WndClass.hInstance = hInst;
+	WndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
+	WndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
+	WndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	WndClass.lpszMenuName = "";
+	WndClass.lpszClassName = name.c_str();
+
+	if(!RegisterClass(&WndClass)){
+
+		MessageBox(NULL,"Cannot register class","Error",MB_OK);
+		return;
+
+	}
+
+	hWnd = CreateWindow(name.c_str(), name.c_str(),
+				WS_OVERLAPPEDWINDOW, 
+				CW_USEDEFAULT,CW_USEDEFAULT,
+				CW_USEDEFAULT,CW_USEDEFAULT,
+				NULL,NULL,
+				hInst,NULL);
+
+	if(!hWnd){
+
+		MessageBox(NULL,"Cannot create window","Error",MB_OK);
+		return;
+
+	}
+
+	hwnd = hWnd;
 
 }
 Wform::~Wform(){
@@ -37,7 +80,9 @@ Wform::~Wform(){
 void Wform::show(){
 
 	// TODO: make this work with winapi
-	fprintf(stderr, "Wguicore--Wform::show::fixme: stub\n");
+	/*fprintf(stderr, "Wguicore--Wform::show::fixme: stub\n");*/
+	ShowWindow(hwnd, 10);
+	UpdateWindow(hwnd);
 	visible = true;
 
 }
@@ -118,6 +163,13 @@ void Wform::setposition(int x, int y){
 
 	position.first = x;
 	position.second = y;
+
+}
+
+// winapi sensitive
+HWND Wform::gethandle(){
+
+	return hwnd;
 
 }
 

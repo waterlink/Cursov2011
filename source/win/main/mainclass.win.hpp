@@ -27,6 +27,8 @@ mainclass{
 
 public:
 
+	static HINSTANCE getInst();
+
 	mainclass();
 
 	void
@@ -47,7 +49,7 @@ protected:
 
 private:
 
-	HINSTANCE
+	static HINSTANCE
 	Inst;
 	
 	LPSTR

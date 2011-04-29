@@ -11,30 +11,20 @@
 
 //
 //	header file
-//	class enableble
+//	class utilcore
 //	interface
-//	interface for components that could be enabled or disabled
+//	phasade class for utilcore
 //
 
-#ifndef enableble_hpp
-#define enableble_hpp
+#ifndef utilcore_hpp
+#define utilcore_hpp
 
 class
-enableble{
+utilcore{
 
 public:
 
-	virtual
-	~enableble() = 0;
-
-	virtual void
-	enable() = 0;
-
-	virtual void
-	disable() = 0;
-
-	virtual bool
-	isenable() = 0;
+	
 
 protected:
 

@@ -24,6 +24,8 @@
 #include <map>
 #include <string>
 
+#include <windows.h>
+
 using namespace std;
 
 class
@@ -53,6 +55,9 @@ public:
 	void setsize(int w, int h);
 	void setposition(int x, int y);
 
+	// winapi-sensitive
+	HWND gethandle();
+
 protected:
 
 	
@@ -69,7 +74,7 @@ private:
 	pair < int, int > size;
 
 	// winapi header
-	int hwnd;
+	HWND hwnd;
 
 };
 

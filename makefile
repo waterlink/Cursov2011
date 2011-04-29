@@ -5,9 +5,9 @@ linux_LDFLAGS= -Wl,--allow-multiple-definition
 linux_LIBRARIES= 
 linux_DEFFS= -DLINUX_target 
  
-linux_spec_SOURCES= ./source/linux/main/*.linux.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp 
-linux_spec_HEADERS= ./source/linux/main/*.linux.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp 
-linux_spec_OBJECTS= ./objects/linux/main/*.linux.o ./objects/all/robocore/*.linux.all.o ./objects/all/guicore/*.linux.all.o 
+linux_spec_SOURCES= ./source/linux/main/*.linux.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/all/utilcore/*.all.cpp 
+linux_spec_HEADERS= ./source/linux/main/*.linux.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/all/utilcore/*.all.hpp 
+linux_spec_OBJECTS= ./objects/linux/main/*.linux.o ./objects/all/robocore/*.linux.all.o ./objects/all/guicore/*.linux.all.o ./objects/all/utilcore/*.linux.all.o 
  
 win_CC=i586-mingw32msvc-g++ 
 win_RC=i586-mingw32msvc-windres 
@@ -16,10 +16,10 @@ win_LDFLAGS= -mwindows -Wl,--allow-multiple-definition
 win_DEFFS= -DWIN_target 
 win_LIBRARIES= -lwinspool -lcomctl32 
  
-win_spec_SOURCES= ./source/win/main/*.win.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/win/Wguicore/*.win.cpp 
-win_spec_HEADERS= ./source/win/main/*.win.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/win/Wguicore/*.win.hpp 
+win_spec_SOURCES= ./source/win/main/*.win.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/win/Wguicore/*.win.cpp ./source/all/utilcore/*.all.cpp 
+win_spec_HEADERS= ./source/win/main/*.win.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/win/Wguicore/*.win.hpp ./source/all/utilcore/*.all.hpp 
 win_spec_RESOURCES= 
-win_spec_OBJECTS= ./objects/win/main/*.win.o ./objects/all/robocore/*.win.all.o ./objects/all/guicore/*.win.all.o ./objects/win/Wguicore/*.win.o 
+win_spec_OBJECTS= ./objects/win/main/*.win.o ./objects/all/robocore/*.win.all.o ./objects/all/guicore/*.win.all.o ./objects/win/Wguicore/*.win.o ./objects/all/utilcore/*.win.all.o 
  
 LIBRARIES= 
  
@@ -257,4 +257,34 @@ all: linux win
 #tab 
 ./objects/win/Wguicore/Wclient.win.o: ./source/win/Wguicore/Wclient.win.cpp ./source/win/Wguicore/Wclient.win.hpp 
 	$(win_CC) ./source/win/Wguicore/Wclient.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wclient.win.o $(win_DEFFS) 
+ 
+#tab 
+./objects/win/Wguicore/Wmenu.win.o: ./source/win/Wguicore/Wmenu.win.cpp ./source/win/Wguicore/Wmenu.win.hpp 
+	$(win_CC) ./source/win/Wguicore/Wmenu.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wmenu.win.o $(win_DEFFS) 
+ 
+ 
+#tab 
+./objects/win/Wguicore/Wbutton.win.o: ./source/win/Wguicore/Wbutton.win.cpp ./source/win/Wguicore/Wbutton.win.hpp 
+	$(win_CC) ./source/win/Wguicore/Wbutton.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wbutton.win.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/utilcore/utilcore.linux.all.o: ./source/all/utilcore/utilcore.all.cpp ./source/all/utilcore/utilcore.all.hpp 
+	$(linux_CC) ./source/all/utilcore/utilcore.all.cpp $(linux_CFLAGS) -o ./objects/all/utilcore/utilcore.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/utilcore/utilcore.all.cpp $(win_CFLAGS) -o ./objects/all/utilcore/utilcore.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/utilcore/tokenizer.linux.all.o: ./source/all/utilcore/tokenizer.all.cpp ./source/all/utilcore/tokenizer.all.hpp 
+	$(linux_CC) ./source/all/utilcore/tokenizer.all.cpp $(linux_CFLAGS) -o ./objects/all/utilcore/tokenizer.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/utilcore/tokenizer.all.cpp $(win_CFLAGS) -o ./objects/all/utilcore/tokenizer.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/utilcore/stringtokenizer.linux.all.o: ./source/all/utilcore/stringtokenizer.all.cpp ./source/all/utilcore/stringtokenizer.all.hpp 
+	$(linux_CC) ./source/all/utilcore/stringtokenizer.all.cpp $(linux_CFLAGS) -o ./objects/all/utilcore/stringtokenizer.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/utilcore/stringtokenizer.all.cpp $(win_CFLAGS) -o ./objects/all/utilcore/stringtokenizer.win.all.o $(win_DEFFS) 
 #end

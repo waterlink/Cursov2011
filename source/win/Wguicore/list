@@ -1,3 +1,5 @@
 [class Wform] - gui class form for winapi
 [class Wclient] - gui class client for winapi
+[class Wmenu] - gui class menu for winapi
+[class Wbutton] - gui class button version for winapi
 #end
