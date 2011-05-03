@@ -1,4 +1,4 @@
-[class utilcore] - phasade class for utilcore
-[class tokenizer] - this class allows to work with strings, as they are datastructures with unknown signature (param:value param:value ...)
-[class stringtokenizer] - tokenizer realization for strings
+target= win 
+module= Wguicore 
+ 
 #end

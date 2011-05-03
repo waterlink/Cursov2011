@@ -27,11 +27,20 @@ int processmessage(
 			Wclient *, 
 			form *, 
 			map < int, component * > *, 
-			HACCEL 
+			HACCEL,
+			int & rescode 
 		);
 long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 
 	// TODO: code this up!
+
+	switch (Message){
+
+		case WM_DESTROY: 
+			PostQuitMessage(0);
+			return 0;
+
+	}
 
 	return DefWindowProc(hWnd,Message,wParam,lParam);
 
@@ -40,7 +49,8 @@ int processmessage(
 			Wclient * pcl, 
 			Wform * pfrm, 
 			map < int, component * > * pIC, 
-			HACCEL hAcc
+			HACCEL hAcc,
+			int & rescode 
 		){
 
 	MSG Msg;
@@ -76,6 +86,8 @@ int processmessage(
 		}
 
 	}
+
+	rescode = Msg.wParam;
 
 	return flag;
 
@@ -142,12 +154,14 @@ int Wclient::mainloop(){
 		return Msg.wParam;
 
 	*/
-	while (processmessage(this, (Wform *)(forms[mainform]), NULL, NULL)){
+	int rescode = 0;
+	while (processmessage(this, (Wform *)(forms[mainform]), NULL, NULL, rescode)){
 
 		fprintf(stderr, "Wguicore--Wclient::mainloop::fixme: stub\n");
 		dispatch("");
 
 	}
+	return rescode;
 
 }
 void Wclient::newform(form * container, bool show){

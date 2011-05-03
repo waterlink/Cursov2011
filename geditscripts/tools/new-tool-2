@@ -1,0 +1,16 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=[single file] g++ compile current
+# Shortcut=<Shift><Control>g
+# Languages=c,cpp,chdr
+# Applicability=all
+# Output=output-panel
+# Input=nothing
+# Save-files=all
+
+cdir=$GEDIT_CURRENT_DOCUMENT_DIR
+cpath=$GEDIT_CURRENT_DOCUMENT_PATH
+xpath=`echo $GEDIT_CURRENT_DOCUMENT_NAME | sed s/"\.cpp"/".elf"/g | sed s/"\.c"/".elf"/g`
+g++ $cpath -o $cdir/$xpath
+$cdir/$xpath
+echo here

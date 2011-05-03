@@ -1,0 +1,11 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=[edit] &all
+# Shortcut=<Shift><Control>ampersand
+# Languages=cpp
+# Applicability=all
+# Output=replace-selection
+# Input=selection
+# Save-files=nothing
+
+sed s/"[A-Za-z0-9_][A-Za-z0-9_]*"/"\&&"/g

@@ -68,9 +68,7 @@ mainclass::run(){
 	form1->setposition(150, 100);
 	form1->setsize(400, 300);
 	app->newmainform(form1);
-	app->mainloop();
-
-	return 0;
+	return app->mainloop();
 
 }
 

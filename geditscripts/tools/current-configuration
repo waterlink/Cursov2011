@@ -1,0 +1,46 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=Current configuration
+# Shortcut=<Shift><Control>v
+# Applicability=all
+# Output=output-panel
+# Input=nothing
+# Save-files=nothing
+
+export configured="1";
+export currdir=`pwd`;
+hasscripts=`find "scripts"`;
+echo "$hasscripts" > ~/log.txt;
+echo "$currdir";
+while `test "$hasscripts" = ""`
+do
+	echo "going up";
+	cd ..;
+	currdir=`pwd`;
+	echo $currdir;
+	if `test "$currdir" = "/"`
+	then
+		echo "can't find project files";
+		configured="0";
+		break;
+	fi
+	hasscripts=`ls "./scripts/" | grep "sc_"`;
+done
+if `test "$configured" = "1"`
+then
+	echo "success: project dir = $currdir";
+else
+	echo "failed";
+fi
+export currdir="$currdir";
+export configured="$configured";
+
+if [ "$configured" = "1" ]
+then
+	cd "$currdir"
+	pwd
+	scfg=`./scripts/sc_sourceconfig.sh`
+	zenity --info --text="$scfg" --title="Current configuration - gedit"
+else
+	echo "project isn't configured!!"
+fi

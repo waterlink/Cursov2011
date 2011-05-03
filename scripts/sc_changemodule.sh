@@ -3,7 +3,7 @@ usage="sc_changemodule.sh target module"
 if [ $# -lt 2 ]
 then
 	echo "${usage}"
-	break
+	exit
 fi
 
 ptarget="$1"

@@ -1,0 +1,138 @@
+<?xml version='1.0' encoding='utf-8'?>
+<snippets language="cpp">
+  <snippet>
+    <text><![CDATA[class
+${1:classname}{
+
+public:
+
+	
+
+protected:
+
+	
+
+private:
+
+	
+
+};
+]]></text>
+    <tag>class</tag>
+    <description>class{...}</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[
+using namespace std;
+
+]]></text>
+    <tag>std</tag>
+    <description>std</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
+#include <cmath>
+#include <vector>
+#include <list>
+#include <map>
+#include <set>
+#include <algorithm>
+#include <complex>
+#include <string>
+#include <iostream>
+#include <fstream>
+
+]]></text>
+    <tag>include</tag>
+    <description>damn all includes</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[#define max${1:n} ${2:1000} ]]></text>
+    <tag>max</tag>
+    <description>define const</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[#define ${1:name} ]]></text>
+    <tag>def</tag>
+    <description>define</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[#define ${1:name} ${2:macro} ]]></text>
+    <tag>mac</tag>
+    <description>define macro</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[#define maxn 10100
+#define inf 1000000000
+#define eps 1e-9
+
+typedef long long LL;
+#define II pair < int, int >
+#define vI vector < int >
+#define vII vector < II >
+#define sI set < int >
+#define sII set < II >
+#define isI sI::iterator
+#define isII sII::iterator
+#define ImI map < int, int >
+#define iImI ImI::iterator
+
+#define III pair < int, II >
+
+#define mp make_pair
+#define pb push_back
+#define lb lower_bound
+#define ub upper_bound
+
+#define all(x) (x).begin(), (x).end()
+
+#define i_ first
+#define _i second
+#define i__ first
+#define _i_ second.first
+#define __i second.second
+
+#define sqr(x) (x) * (x)
+]]></text>
+    <tag>macro</tag>
+    <description>macroses</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[freopen("${1:x}.${2:in}", "r", stdin);
+freopen("${1:x}.${3:out}", "w", stdout);
+]]></text>
+    <tag>openx</tag>
+    <description>freopens x.in</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[freopen("${1:input.txt}", "r", stdin);
+freopen("${2:output.txt}", "w", stdout);
+]]></text>
+    <tag>open</tag>
+    <description>freopens input.txt</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[pair < ${1:int}, ${2:int} >]]></text>
+    <tag>pair</tag>
+    <description>pair</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[pair < ${1:int}, ${1:int} >]]></text>
+    <tag>pp</tag>
+    <description>pair &lt; T, T &gt;</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[scanf("%${1:d}", &${2:n});]]></text>
+    <tag>sc</tag>
+    <description>scanf</description>
+  </snippet>
+  <snippet>
+    <text><![CDATA[printf("%${1:d}\n", ${2:res});]]></text>
+    <tag>pr</tag>
+    <description>printf</description>
+  </snippet>
+</snippets>
