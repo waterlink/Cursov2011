@@ -35,6 +35,7 @@ public:
 	~Wview();
 
 	void draw(string primitive);
+	void undraw(string primitive);
 
 	// component:
 	int dispatch(string message);

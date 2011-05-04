@@ -39,6 +39,9 @@ public:
 	virtual void
 	draw(string primitive) = 0;
 
+	virtual void
+	undraw(string primitive) = 0;
+
 protected:
 
 	

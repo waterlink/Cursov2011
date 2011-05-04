@@ -33,6 +33,16 @@ void Wview::draw(string primitive){
 	drawqueue.push_back(primitive);
 
 }
+void Wview::undraw(string primitive){
+
+	list < string >::iterator iter;
+	for (iter = drawqueue.begin(); iter != drawqueue.end(); ++iter)
+		if (*iter == primitive)
+			break;
+	if (iter != drawqueue.end())
+		drawqueue.erase(iter);
+
+}
 
 // component:
 int Wview::dispatch(string message){
