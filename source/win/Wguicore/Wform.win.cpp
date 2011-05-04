@@ -18,9 +18,13 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <iostream>
 
 #include "Wclient.win.hpp"
 #include "../main/mainclass.win.hpp"
+#include "../../all/utilcore/stringtokenizer.all.hpp"
+
+using namespace std;
 
 Wform::Wform(string name){
 
@@ -32,7 +36,7 @@ Wform::Wform(string name){
 
 	fprintf(stderr, "Wguicore--Wform::Wform::debug: Inst = %d\n", hInst);
 
-	WndClass.style = CS_HREDRAW | CS_VREDRAW;
+	WndClass.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
 	WndClass.lpfnWndProc = (WNDPROC)wndproc;
 	WndClass.cbClsExtra = 0;
 	WndClass.cbWndExtra = 0;
@@ -121,9 +125,60 @@ component * Wform::getcomponent(string name){
 // component methods
 int Wform::dispatch(string message){
 
+#define clean \
+		delete token;\
+		delete token2; \
+		return 0;
+
 	// TODO: make this work with winapi
 	// TODO: use tokenizer here
 	fprintf(stderr, "Wguicore--Wform::dispatch::fixme: stub\nMessage is: %s\n", message.c_str());
+
+	// here we have a paint, mousecapture
+	string msg = message;
+	tokenizer * token = new stringtokenizer(&message);
+	tokenizer * token2 = new stringtokenizer(&msg);
+	if (token->getparam("message") == "paint"){
+
+		for (map < string, component * >::iterator iter = controls.begin(); iter != controls.end(); ++iter)
+			iter->second->dispatch(message);
+
+	}
+	if (	token->getparam("message") == "mousedown" ||
+		token->getparam("message") == "mouseup" ||
+		token->getparam("message") == "mousemove"){
+
+		for (map < string, component * >::iterator iter = controls.begin(); iter != controls.end(); ++iter){
+
+			sizeble * control = dynamic_cast < sizeble * >(iter->second);
+			if (control == NULL) continue;
+			//fprintf(stderr, "Wguicore--Wform::dispatch::debug: control->sizeble_markup: %d\n", (int)(control->sizeble_markup));
+			if (1){
+
+				fprintf(stderr, "Wguicore--Wform::dispatch::debug: found sizeble control: %s\n", iter->second->getname().c_str());
+				pair < int, int > size = control->getsize();
+				pair < int, int > pos = control->getposition();
+				int x = token->getparam("x", 0);
+				int y = token->getparam("y", 0);
+				if (	x >= pos.first && x <= pos.first + size.first &&
+					y >= pos.second && y <= pos.second + size.second){
+
+					token2->setparam("x", x - pos.first);
+					token2->setparam("y", y - pos.second);
+					cerr << "Wguicore--Wform::dispatch::debug: msg is " << msg << endl;
+					iter->second->dispatch(msg);
+
+				}
+
+			}
+
+		}
+
+	}
+
+	clean;
+
+#undef clean
 
 }
 void Wform::setparent(component * parent){
@@ -157,12 +212,14 @@ void Wform::setsize(int w, int h){
 
 	size.first = w;
 	size.second = h;
+	MoveWindow(hwnd, position.first, position.second, w, h, true);
 
 }
 void Wform::setposition(int x, int y){
 
 	position.first = x;
 	position.second = y;
+	MoveWindow(hwnd, x, y, size.first, size.second, true);
 
 }
 

@@ -16,13 +16,13 @@
 				m	mouse, 
 				m	paint
 			)
-  TWOK	- client
-  TWOK	- menu
-  TWOK	- button
+  WOK	- client
+  WOK	- menu
+  WOK	- button
   OK	- bitbutton
   OK	- toolbox
-  OK	- view
-  OK	- status
+  TWOK	- view
+  TWOK	- status
 ######	- popup, don't need now
   OK	- properties
 	- make this all mess for winapi (W-mark)

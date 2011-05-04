@@ -30,6 +30,7 @@ public:
 
 	virtual ~tokenizer() = 0;
 	virtual void setparam(string param, string value) = 0;
+	virtual void setparam(string param, int value) = 0;
 	virtual string getparam(string param) = 0;
 	virtual int getparam(string param, int) = 0;	// int added just for distinguishing
 

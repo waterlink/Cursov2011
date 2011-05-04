@@ -18,14 +18,21 @@
 
 #include <cstdio>
 #include <cstdlib>
+#include <iostream>
 
 #include "Wform.win.hpp"
+#include "idmaster.win.hpp"
+#include "../../all/utilcore/stringtokenizer.all.hpp"
 
 #include <windows.h>
 
+map < int, component * > test_pIC;
+map < int, component * > * controlhandles;
+Wform * currform;
+
 int processmessage(
 			Wclient *, 
-			form *, 
+			Wform *, 
 			map < int, component * > *, 
 			HACCEL,
 			int & rescode 
@@ -34,15 +41,111 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 
 	// TODO: code this up!
 
+#define clean \
+		delete msgtoken; \
+		return 0;
+
+	string msg;
+	char buff[30];
+	tokenizer * msgtoken = new stringtokenizer(&msg);
+	int x, y;
+	fprintf(stderr, "Wguicore--wndproc::debug: here, form: %d\n", currform);
+	if (currform == NULL) return DefWindowProc(hWnd,Message,wParam,lParam);
+
 	switch (Message){
+
+		case WM_SIZE:
+			SendMessage(hWnd, WM_PAINT, NULL, NULL);
+			clean;
+
+		case WM_COMMAND:
+			msgtoken->setparam("message", "activate");
+			if ((*controlhandles)[LOWORD(wParam)])
+				(*controlhandles)[LOWORD(wParam)]->dispatch(msg);
+			clean;
+
+		case WM_PAINT:
+			msgtoken->setparam("message", "paint");
+			currform->dispatch(msg);
+			clean;
+
+		// mouse downs
+		case WM_LBUTTONDOWN: msgtoken->setparam("button", "left"); goto dispdown;
+		case WM_MBUTTONDOWN: msgtoken->setparam("button", "middle"); goto dispdown;
+		case WM_RBUTTONDOWN: msgtoken->setparam("button", "right");
+		dispdown: msgtoken->setparam("message", "mousedown"); goto disp;
+
+		// mouse ups
+		case WM_LBUTTONUP: msgtoken->setparam("button", "left"); goto dispup;
+		case WM_MBUTTONUP: msgtoken->setparam("button", "middle"); goto dispup;
+		case WM_RBUTTONUP: msgtoken->setparam("button", "right");
+		dispup: msgtoken->setparam("message", "mouseup"); goto disp;
+
+		// mouse dblcliks
+		case WM_LBUTTONDBLCLK: msgtoken->setparam("button", "left"); goto dispdbl;
+		case WM_MBUTTONDBLCLK: msgtoken->setparam("button", "middle"); goto dispdbl;
+		case WM_RBUTTONDBLCLK: msgtoken->setparam("button", "right");
+		dispdbl: msgtoken->setparam("message", "mousedown");
+			 msgtoken->setparam("doubleclick", "true");
+
+		disp:
+			x = LOWORD(lParam);
+			y = HIWORD(lParam);
+			sprintf(buff, "%d", x);
+			msgtoken->setparam("x", buff);
+			sprintf(buff, "%d", y);
+			msgtoken->setparam("y", buff);
+			if (wParam & MK_SHIFT)
+				msgtoken->setparam("shift", "true");
+			else msgtoken->setparam("shift", "false");
+			if (wParam & MK_CONTROL)
+				msgtoken->setparam("control", "true");
+			else msgtoken->setparam("control", "false");
+			currform->dispatch(msg);
+			clean;
+
+		case WM_MOUSEMOVE:
+			x = LOWORD(lParam);
+			y = HIWORD(lParam);
+			msgtoken->setparam("message", "mousemove");
+			sprintf(buff, "%d", x);
+			msgtoken->setparam("x", buff);
+			sprintf(buff, "%d", y);
+			msgtoken->setparam("y", buff);
+			if (wParam & MK_SHIFT)
+				msgtoken->setparam("shift", "true");
+			else msgtoken->setparam("shift", "false");
+			if (wParam & MK_CONTROL)
+				msgtoken->setparam("control", "true");
+			else msgtoken->setparam("control", "false");
+			if (wParam & MK_LBUTTON)
+				msgtoken->setparam("left", "true");
+			else msgtoken->setparam("left", "false");
+			if (wParam & MK_MBUTTON)
+				msgtoken->setparam("middle", "true");
+			else msgtoken->setparam("middle", "false");
+			if (wParam & MK_RBUTTON)
+				msgtoken->setparam("right", "true");
+			else msgtoken->setparam("right", "false");
+			currform->dispatch(msg);
+			clean;
+
+		case WM_MENUSELECT:
+			msgtoken->setparam("message", "select");
+			if ((*controlhandles)[LOWORD(wParam)])
+				(*controlhandles)[LOWORD(wParam)]->dispatch(msg);
+			clean;
 
 		case WM_DESTROY: 
 			PostQuitMessage(0);
-			return 0;
+			clean;
 
 	}
 
+	delete msgtoken;
 	return DefWindowProc(hWnd,Message,wParam,lParam);
+
+#undef clean
 
 }
 int processmessage(
@@ -55,10 +158,12 @@ int processmessage(
 
 	MSG Msg;
 	HWND hWnd = pfrm->gethandle();
+	currform = pfrm;
 	int flag = 1;
 	fprintf(stderr, "Wguicore--processmessage::debug: here!\n");
 	int val = GetMessage(&Msg, NULL, 0, 0);
 	fprintf(stderr, "Wguicore--processmessage::debug: here!\n");
+	controlhandles = pIC;
 	if (val == -1){
 
 		// error handling
@@ -155,7 +260,8 @@ int Wclient::mainloop(){
 
 	*/
 	int rescode = 0;
-	while (processmessage(this, (Wform *)(forms[mainform]), NULL, NULL, rescode)){
+	cerr << "Wguicore--Wclient::mainloop::debug: mainform: " << mainform << endl;
+	while (processmessage(this, (Wform *)(forms[mainform]), idmaster::getmap(), NULL, rescode)){
 
 		fprintf(stderr, "Wguicore--Wclient::mainloop::fixme: stub\n");
 		dispatch("");
@@ -183,17 +289,23 @@ void Wclient::newmainform(form * container){
 
 	// setup our main form
 	string cname = container->getname();
+	cerr << "Wguicore--Wclient::newmainform::debug: cname: " << cname << endl;
 	mainform = cname;
+	cerr << "Wguicore--Wclient::newmainform::debug: mainform: " << mainform << endl;
+	fprintf(stderr, "Wguicore--Wclient::newmainform::debug: forms[mainform]: %d\n", forms[mainform]);
 
 	// check if exists
-	if (forms[cname] != NULL)
+	if (forms[mainform] != NULL)
 		return;
 
 	// add our main form
-	forms[cname] = container;
+	forms[mainform] = container;
+	fprintf(stderr, "Wguicore--Wclient::newmainform::debug: forms[mainform]: %d\n", forms[mainform]);
 
+	fprintf(stderr, "Wguicore--Wclient::newmainform::debug: start show of form\n");
 	// show main form
 	container->show();
+	fprintf(stderr, "Wguicore--Wclient::newmainform::debug: end show of form\n");
 
 }
 

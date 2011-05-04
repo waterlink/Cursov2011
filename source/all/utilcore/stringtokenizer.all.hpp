@@ -29,6 +29,7 @@ public:
 	stringtokenizer(string * data);
 	~stringtokenizer();
 	void setparam(string param, string value);
+	void setparam(string param, int value);
 	string getparam(string param);
 	int getparam(string param, int);	// int added just for distinguishing
 

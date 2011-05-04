@@ -20,6 +20,7 @@
 #define sizeble_hpp
 
 #include <map>
+#include <cstring>
 
 using namespace std;
 
@@ -27,6 +28,8 @@ class
 sizeble{
 
 public:
+
+	sizeble(){ sizeble_markup = new char[8]; strcpy(sizeble_markup, "sizeble"); }
 
 	virtual
 	~sizeble() = 0;
@@ -42,6 +45,8 @@ public:
 
 	virtual void
 	setposition(int x, int y) = 0;
+
+	char * sizeble_markup;
 
 protected:
 

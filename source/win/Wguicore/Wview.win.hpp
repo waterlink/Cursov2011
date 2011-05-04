@@ -11,49 +11,44 @@
 
 //
 //	header file
-//	class Wbutton
+//	class Wview
 //	interface
-//	gui class button version for winapi
+//	guicore view class for winapi
 //
 
-#ifndef Wbutton_hpp
-#define Wbutton_hpp
+#ifndef Wview_hpp
+#define Wview_hpp
 
-#include "../../all/guicore/button.all.hpp"
-#include "Wform.win.hpp"
-
-#include <windows.h>
+#include "../../all/guicore/view.all.hpp"
+#include "../../all/guicore/form.all.hpp"
 
 class
-Wbutton: public button{
+Wview: public view{
 
 public:
 
-	// component
-	Wbutton(string name, Wform * parent);
-	~Wbutton();
+	Wview(string name, form * parent);
+	~Wview();
+
+	// component:
 	int dispatch(string message);
 	void setparent(component * parent);
 	component * getparent();
 	string getname();
 
-	// textable
-	void settext(string text);
-	string gettext();
-
-	// activateble
-	void setactivate(messager * onactivate);
-
-	// enableble
-	void enable();
-	void disable();
-	bool isenable();
-
-	// sizeble
+	// sizeble:
 	pair < int, int > getsize();
 	pair < int, int > getposition();
 	void setsize(int w, int h);
 	void setposition(int x, int y);
+
+	// mousecaptureble:
+	void setmousedown(messager * onmousedown);
+	void setmouseup(messager * onmouseup);
+	void setmousemove(messager * onmousemove);
+
+	// paintable:
+	void setpaint(messager * onpaint);
 
 protected:
 
@@ -64,16 +59,14 @@ private:
 	string name;
 	component * parent;
 
-	string text;
-
-	messager * onactivate;
-
-	bool enabled;
-
-	pair < int, int > size;
 	pair < int, int > position;
+	pair < int, int > size;
 
-	HWND hwnd;
+	messager * onmousedown;
+	messager * onmouseup;
+	messager * onmousemove;
+
+	messager * onpaint;
 
 };
 

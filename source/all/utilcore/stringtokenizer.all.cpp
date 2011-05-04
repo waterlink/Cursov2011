@@ -43,6 +43,14 @@ void stringtokenizer::setparam(string param, string value){
 	data.replace(found, pv.size(), npv);
 
 }
+void stringtokenizer::setparam(string param, int value){
+
+	char buf[30];
+	sprintf(buf, "%d", value);
+	string S = buf;
+	setparam(param, S);
+
+}
 string stringtokenizer::getparam(string param){
 
 	string & data = *(this->data);

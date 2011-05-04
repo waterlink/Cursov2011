@@ -2,4 +2,6 @@
 [class Wclient] - gui class client for winapi
 [class Wmenu] - gui class menu for winapi
 [class Wbutton] - gui class button version for winapi
+[class idmaster] - class for managing ID* for our components
+[class Wview] - guicore view class for winapi
 #end

@@ -287,4 +287,12 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/utilcore/stringtokenizer.all.cpp $(win_CFLAGS) -o ./objects/all/utilcore/stringtokenizer.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/win/Wguicore/idmaster.win.o: ./source/win/Wguicore/idmaster.win.cpp ./source/win/Wguicore/idmaster.win.hpp 
+	$(win_CC) ./source/win/Wguicore/idmaster.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/idmaster.win.o $(win_DEFFS) 
+
+#tab 
+./objects/win/Wguicore/Wview.win.o: ./source/win/Wguicore/Wview.win.cpp ./source/win/Wguicore/Wview.win.hpp 
+	$(win_CC) ./source/win/Wguicore/Wview.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wview.win.o $(win_DEFFS) 
 #end
