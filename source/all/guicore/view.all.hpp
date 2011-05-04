@@ -36,6 +36,9 @@ public:
 	virtual
 	~view() = 0;
 
+	virtual void
+	draw(string primitive) = 0;
+
 protected:
 
 	

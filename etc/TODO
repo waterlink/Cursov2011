@@ -21,8 +21,8 @@
   WOK	- button
   OK	- bitbutton
   OK	- toolbox
-  TWOK	- view
-  TWOK	- status
+  WOK	- view
+  OK	- status
 ######	- popup, don't need now
   OK	- properties
 	- make this all mess for winapi (W-mark)

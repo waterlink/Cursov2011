@@ -28,6 +28,12 @@ Wview::Wview(string name, form * parent){
 }
 Wview::~Wview(){}
 
+void Wview::draw(string primitive){
+
+	drawqueue.push_back(primitive);
+
+}
+
 // component:
 int Wview::dispatch(string message){
 
@@ -41,8 +47,7 @@ int Wview::dispatch(string message){
 	if (token->getparam("message") == "paint"){
 
 		if (onpaint) (*onpaint)(this, message);
-		// just an example
-		/*Wform * parent = dynamic_cast < Wform * >(this->parent);
+		Wform * parent = dynamic_cast < Wform * >(this->parent);
 		if (parent){
 
 			HWND hwnd = parent->gethandle();
@@ -54,23 +59,63 @@ int Wview::dispatch(string message){
 			InvalidateRect(hwnd, &rect, true);
 			PAINTSTRUCT ps;
 			HDC hdc = BeginPaint(hwnd, &ps);
-			
-				HBRUSH hbrush;
-				HPEN hpen;
-				LOGBRUSH brush;
+
+			HBRUSH hbrush;
+			HPEN hpen;
+			LOGBRUSH brush;
+			for (list < string >::iterator iter = drawqueue.begin(); iter != drawqueue.end(); ++iter){
+
+				string next = *iter;
+				tokenizer * primitive = new stringtokenizer(&next);
+
+				string ptype = primitive->getparam("primitive");
+				int x = primitive->getparam("x", 0);
+				int y = primitive->getparam("y", 0);
+				int w = primitive->getparam("w", 0);
+				int h = primitive->getparam("h", 0);
+				int r = primitive->getparam("r", 0);
+				int cr = primitive->getparam("rcolor", 0);
+				int cg = primitive->getparam("gcolor", 0);
+				int cb = primitive->getparam("bcolor", 0);
+				int th = primitive->getparam("thickness", 0);
+
 				brush.lbStyle = BS_SOLID;
-				brush.lbColor = RGB(0, 0, 255);
+				brush.lbColor = RGB(cr, cg, cb);
 				hbrush = CreateBrushIndirect(&brush);
 				SelectObject(hdc, hbrush);
-				hpen = CreatePen(PS_NULL, 2, RGB(0, 0, 255));
+				hpen = CreatePen(PS_NULL, th, RGB(cr, cg, cb));
 				SelectObject(hdc, hpen);
-				Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+
+				if (ptype == "rectangle")
+					Rectangle(hdc, x, y, x + w, y + h);
+				if (ptype == "point")
+					SetPixel(hdc, x, y, RGB(cr, cg, cb));
+				if (ptype == "ellipse")
+					Ellipse(hdc, x, y, x + w, y + h);
+				if (ptype == "circle")
+					Ellipse(hdc, x - r / 2, y - r / 2, x + r / 2, y + r / 2);
+				if (ptype == "line"){
+
+					MoveToEx(hdc, x, y, NULL);
+					LineTo(hdc, x + w, y + h);
+
+				}
+				
+				delete primitive;
+				
+			}
 
 			EndPaint(hwnd, &ps);
 
-		}*/
+		}		
 
-	}	
+	}
+	else if (token->getparam("message") == "mousedown")
+		(*onmousedown)(this, message);
+	else if (token->getparam("message") == "mouseup")
+		(*onmouseup)(this, message);
+	else if (token->getparam("message") == "mousemove")
+		(*onmousemove)(this, message);
 
 	clean;
 

@@ -21,6 +21,7 @@
 #include "../Wguicore/Wbutton.win.hpp"
 #include "../Wguicore/Wview.win.hpp"
 #include "../../all/guicore/messager.all.hpp"
+#include "../../all/utilcore/stringtokenizer.all.hpp"
 
 HINSTANCE mainclass::Inst = 0;
 
@@ -62,6 +63,8 @@ mainclass::run(){
 	Wform * form1 = new Wform("form1");
 	Wbutton * btn1 = new Wbutton("btn1", form1);
 	Wview * view1 = new Wview("view1", form1);
+	string S = "";
+	stringtokenizer token(&S);
 
 	btn1->setposition(100, 100);
 	btn1->setsize(200, 200);
@@ -73,9 +76,16 @@ mainclass::run(){
 	form1->add(view1);
 	form1->setposition(150, 100);
 	form1->setsize(400, 300);
-	fprintf(stderr, "main--mainclass::run::debug: starting adding our mainform\n");
 	app->newmainform(form1);
-	fprintf(stderr, "main--mainclass::run::debug: mainform was added succesfully\n");
+	token.setparam("primitive", "ellipse");
+	token.setparam("x", 50);
+	token.setparam("y", 50);
+	token.setparam("w", 300);
+	token.setparam("h", 40);
+	token.setparam("rcolor", 255);
+	token.setparam("gcolor", 0);
+	token.setparam("bcolor", 0);
+	view1->draw(S);
 	return app->mainloop();
 
 }

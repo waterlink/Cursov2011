@@ -19,8 +19,12 @@
 #ifndef Wview_hpp
 #define Wview_hpp
 
+#include <list>
+
 #include "../../all/guicore/view.all.hpp"
 #include "../../all/guicore/form.all.hpp"
+
+using namespace std;
 
 class
 Wview: public view{
@@ -29,6 +33,8 @@ public:
 
 	Wview(string name, form * parent);
 	~Wview();
+
+	void draw(string primitive);
 
 	// component:
 	int dispatch(string message);
@@ -58,6 +64,8 @@ private:
 
 	string name;
 	component * parent;
+
+	list < string > drawqueue;
 
 	pair < int, int > position;
 	pair < int, int > size;

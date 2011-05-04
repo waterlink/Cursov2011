@@ -1,4 +1,4 @@
-target= all 
-module= guicore 
+target= win 
+module= Wguicore 
  
 #end
