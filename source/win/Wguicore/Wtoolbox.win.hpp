@@ -11,31 +11,32 @@
 
 //
 //	header file
-//	class Wform
+//	class Wtoolbox
 //	interface
-//	gui class form for winapi
+//	gui class toolbox for winapi
 //
 
-#ifndef Wform_hpp
-#define Wform_hpp
+#ifndef Wtoolbox_hpp
+#define Wtoolbox_hpp
 
-#include "../../all/guicore/form.all.hpp"
-
-#include <map>
 #include <string>
 
-#include <windows.h>
+#include "../../all/guicore/toolbox.all.hpp"
+#include "Wform.win.hpp"
 
 using namespace std;
 
 class
-Wform: public form{
+Wtoolbox: public toolbox{
 
 public:
 
-	Wform(string name);
-	Wform();
-	~Wform();
+	Wtoolbox();
+	Wtoolbox(string name, Wform * parent);
+	~Wtoolbox();
+
+	component * getactivecontrol();
+	void setactivecontrol(component * control);
 
 	// form methods
 	void show();
@@ -66,17 +67,10 @@ protected:
 
 private:
 
-	map < string, component * > controls;
-	bool visible;
-
-	component * parent;
-	string name;
-
-	pair < int, int > position;
-	pair < int, int > size;
-
-	// winapi header
+	Wform * myWform;
 	HWND hwnd;
+	component * activecontrol;
+	string name;
 
 };
 

@@ -291,8 +291,16 @@ all: linux win
 #tab 
 ./objects/win/Wguicore/idmaster.win.o: ./source/win/Wguicore/idmaster.win.cpp ./source/win/Wguicore/idmaster.win.hpp 
 	$(win_CC) ./source/win/Wguicore/idmaster.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/idmaster.win.o $(win_DEFFS) 
-
+ 
 #tab 
 ./objects/win/Wguicore/Wview.win.o: ./source/win/Wguicore/Wview.win.cpp ./source/win/Wguicore/Wview.win.hpp 
 	$(win_CC) ./source/win/Wguicore/Wview.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wview.win.o $(win_DEFFS) 
+ 
+#tab 
+./objects/win/Wguicore/Wtoolbox.win.o: ./source/win/Wguicore/Wtoolbox.win.cpp ./source/win/Wguicore/Wtoolbox.win.hpp 
+	$(win_CC) ./source/win/Wguicore/Wtoolbox.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wtoolbox.win.o $(win_DEFFS) 
+ 
+#tab 
+./objects/win/Wguicore/hwndmaster.win.o: ./source/win/Wguicore/hwndmaster.win.cpp ./source/win/Wguicore/hwndmaster.win.hpp 
+	$(win_CC) ./source/win/Wguicore/hwndmaster.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/hwndmaster.win.o $(win_DEFFS) 
 #end

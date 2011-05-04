@@ -20,7 +20,7 @@
   WOK	- menu
   WOK	- button
   OK	- bitbutton
-  OK	- toolbox
+  TWOK	- toolbox	there is some bug with active control (control is brushed)
   WOK	- view
   OK	- status
 ######	- popup, don't need now

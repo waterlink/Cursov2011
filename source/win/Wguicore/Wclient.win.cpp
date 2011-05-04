@@ -23,6 +23,7 @@
 #include "Wform.win.hpp"
 #include "idmaster.win.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
+#include "hwndmaster.win.hpp"
 
 #include <windows.h>
 
@@ -50,6 +51,7 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 	tokenizer * msgtoken = new stringtokenizer(&msg);
 	int x, y;
 	fprintf(stderr, "Wguicore--wndproc::debug: here, form: %d\n", currform);
+	currform = hwndmaster::byhandle(hWnd);
 	if (currform == NULL) return DefWindowProc(hWnd,Message,wParam,lParam);
 
 	switch (Message){

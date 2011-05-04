@@ -20,6 +20,7 @@
 #include "../Wguicore/Wform.win.hpp"
 #include "../Wguicore/Wbutton.win.hpp"
 #include "../Wguicore/Wview.win.hpp"
+#include "../Wguicore/Wtoolbox.win.hpp"
 #include "../../all/guicore/messager.all.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
 
@@ -63,6 +64,8 @@ mainclass::run(){
 	Wform * form1 = new Wform("form1");
 	Wbutton * btn1 = new Wbutton("btn1", form1);
 	Wview * view1 = new Wview("view1", form1);
+	Wtoolbox * toolbox1 = new Wtoolbox("toolbox1", form1);
+	Wbutton * btn2 = new Wbutton("btn2", (Wform *)toolbox1);
 
 	btn1->setposition(100, 100);
 	btn1->setsize(200, 200);
@@ -72,8 +75,17 @@ mainclass::run(){
 	view1->setposition(50, 50);
 	view1->setsize(300, 40);
 	form1->add(view1);
+	btn2->setposition(50, 50);
+	btn2->setsize(50, 16);
+	btn2->settext("BGA!!!");
+	btn2->setactivate(btn1click);
+	toolbox1->add(btn2);
+	toolbox1->setactivecontrol(btn2);
+	toolbox1->setposition(350, 350);
+	toolbox1->setsize(100, 100);
+	form1->add(toolbox1);
 	form1->setposition(150, 100);
-	form1->setsize(400, 300);
+	form1->setsize(500, 500);
 	app->newmainform(form1);
 	return app->mainloop();
 

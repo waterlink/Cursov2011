@@ -23,9 +23,11 @@
 #include "Wclient.win.hpp"
 #include "../main/mainclass.win.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
+#include "hwndmaster.win.hpp"
 
 using namespace std;
 
+Wform::Wform(){}
 Wform::Wform(string name){
 
 	this->name = name;
@@ -69,6 +71,7 @@ Wform::Wform(string name){
 	}
 
 	hwnd = hWnd;
+	hwndmaster::newform(hwnd, this);
 
 }
 Wform::~Wform(){
@@ -227,6 +230,12 @@ void Wform::setposition(int x, int y){
 HWND Wform::gethandle(){
 
 	return hwnd;
+
+}
+
+void Wform::sethandle(HWND handle){
+
+	hwnd = handle;
 
 }
 

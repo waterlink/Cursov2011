@@ -4,4 +4,6 @@
 [class Wbutton] - gui class button version for winapi
 [class idmaster] - class for managing ID* for our components
 [class Wview] - guicore view class for winapi
+[class Wtoolbox] - gui class toolbox for winapi
+[class hwndmaster] - class for managing hwnd's
 #end
