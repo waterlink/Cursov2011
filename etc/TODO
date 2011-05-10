@@ -20,9 +20,9 @@
   WOK	- menu
   WOK	- button
   OK	- bitbutton
-  TWOK	- toolbox	there is some bug with active control (control is brushed)
+  WOK	- toolbox
   WOK	- view
-  OK	- status
+  TWOK	- status
 ######	- popup, don't need now
   OK	- properties
 	- make this all mess for winapi (W-mark)

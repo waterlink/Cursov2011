@@ -303,4 +303,8 @@ all: linux win
 #tab 
 ./objects/win/Wguicore/hwndmaster.win.o: ./source/win/Wguicore/hwndmaster.win.cpp ./source/win/Wguicore/hwndmaster.win.hpp 
 	$(win_CC) ./source/win/Wguicore/hwndmaster.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/hwndmaster.win.o $(win_DEFFS) 
+ 
+#tab 
+./objects/win/Wguicore/Wstatus.win.o: ./source/win/Wguicore/Wstatus.win.cpp ./source/win/Wguicore/Wstatus.win.hpp 
+	$(win_CC) ./source/win/Wguicore/Wstatus.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wstatus.win.o $(win_DEFFS) 
 #end

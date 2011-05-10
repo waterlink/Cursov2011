@@ -6,4 +6,5 @@
 [class Wview] - guicore view class for winapi
 [class Wtoolbox] - gui class toolbox for winapi
 [class hwndmaster] - class for managing hwnd's
+[class Wstatus] - gui class status for winapi
 #end
