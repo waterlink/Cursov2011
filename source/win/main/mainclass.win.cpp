@@ -23,6 +23,7 @@
 #include "../Wguicore/Wtoolbox.win.hpp"
 #include "../Wguicore/Wstatus.win.hpp"
 #include "../Wguicore/Wproperties.win.hpp"
+#include "../Wguicore/Wmenu.win.hpp"
 
 #include "../../all/guicore/messager.all.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
@@ -41,6 +42,11 @@ public:
 	Wbutton * btn3;
 	Wstatus * stat1;
 	Wproperties * prop1;
+	Wmenu * mmain;
+	Wmenu * mfile;
+	Wmenu * mq;
+	Wmenu * mfile_exit;
+	Wmenu * mq_about;
 
 } * glbl_data = new data;
 
@@ -108,6 +114,24 @@ mainclass::run(){
 	glbl_data->btn3 = new Wbutton("btn3", glbl_data->toolbox1);
 	glbl_data->stat1 = new Wstatus("stat1", glbl_data->form1);
 	glbl_data->prop1 = new Wproperties("prop1", glbl_data->form1);
+
+	glbl_data->mmain = new Wmenu("mmain");
+	glbl_data->mfile = new Wmenu("mfile", true);
+	glbl_data->mq = new Wmenu("mq", true);
+	glbl_data->mfile_exit = new Wmenu("mfile_exit", false);
+	glbl_data->mq_about = new Wmenu("mq_about", false);
+
+	glbl_data->mfile->settext("&File");
+	glbl_data->mq->settext("&Help");
+	glbl_data->mfile_exit->settext("&Exit");
+	glbl_data->mq_about->settext("&About");
+
+	glbl_data->mmain->add(glbl_data->mfile);
+	glbl_data->mmain->add(glbl_data->mq);
+	glbl_data->mfile->add(glbl_data->mfile_exit);
+	glbl_data->mq->add(glbl_data->mq_about);
+
+	glbl_data->mmain->setparent(glbl_data->form1);
 
 	glbl_data->btn1->setposition(100, 100);
 	glbl_data->btn1->setsize(200, 200);

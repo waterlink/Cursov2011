@@ -36,9 +36,10 @@ public:
 
 	// menu methods
 	Wmenu(string name, bool popup);
+	Wmenu(string name);
 	Wmenu();
 	Wmenu(string name, Wform * parent);
-	Wmenu(string name, Wmenu * parent, int);
+	Wmenu(string name, Wmenu * parent, bool popup);
 	~Wmenu();
 	bool ispopup();
 	void add(menu * submenu);

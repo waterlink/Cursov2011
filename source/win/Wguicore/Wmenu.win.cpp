@@ -27,10 +27,36 @@ Wmenu::Wmenu(string name, bool popup){
 	this->name = name;
 	this->popup = popup;
 
+	if (!popup) hm = (HMENU)idmaster::gen(this);
+	else hm = CreatePopupMenu();
+
+}
+Wmenu::Wmenu(string name){
+
+	this->name = name;
+	this->popup = false;
+	hm = CreateMenu();
+
 }
 Wmenu::Wmenu(){}
-Wmenu::Wmenu(string name, Wform * parent){}
-Wmenu::Wmenu(string name, Wmenu * parent, int){}
+Wmenu::Wmenu(string name, Wform * parent){
+
+	popup = false;
+	this->name = name;
+	hm = CreateMenu();
+	parent->add(this);
+	this->parent = parent;
+
+}
+Wmenu::Wmenu(string name, Wmenu * parent, bool popup){
+
+	this->name = name;
+	this->popup = popup;
+	if (popup) hm = CreatePopupMenu();
+	else hm = (HMENU)(idmaster::gen(this));
+	parent->add(this);	
+
+}
 Wmenu::~Wmenu(){}
 bool Wmenu::ispopup(){
 
@@ -42,6 +68,8 @@ void Wmenu::add(menu * submenu){
 	// there will not be any checks, 'cause it possible to add the same menu 2 times
 	submenus.push_back(submenu);
 	submenu->setparent(this);
+	Wmenu * sm = dynamic_cast < Wmenu * >(submenu);
+	if (sm) AppendMenu(hm, MF_STRING, (UINT_PTR)(sm->gethandle()), sm->gettext().c_str());
 
 }
 
@@ -74,6 +102,12 @@ int Wmenu::dispatch(string message){
 void Wmenu::setparent(component * parent){
 
 	this->parent = parent;
+	Wform * par = dynamic_cast < Wform * >(parent);
+	if (par){
+
+		SetMenu(par->gethandle(), hm);
+
+	}
 
 }
 component * Wmenu::getparent(){
@@ -91,6 +125,14 @@ string Wmenu::getname(){
 void Wmenu::settext(string text){
 
 	this->text = text;
+	if (!parent) return;
+	ihandled * par = dynamic_cast < ihandled * >(parent);
+	if (par){
+
+		HMENU hanc = (HMENU)(par->gethandle());
+		ModifyMenu(hanc, (UINT)hm, MF_BYCOMMAND | MF_STRING, (UINT)hm, text.c_str());
+
+	}
 
 }
 string Wmenu::gettext(){
