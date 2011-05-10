@@ -27,7 +27,7 @@
 using namespace std;
 
 class
-Wtoolbox: public toolbox{
+Wtoolbox: public toolbox, public ihandled{
 
 public:
 

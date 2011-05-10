@@ -265,8 +265,8 @@ int Wclient::mainloop(){
 	cerr << "Wguicore--Wclient::mainloop::debug: mainform: " << mainform << endl;
 	while (processmessage(this, (Wform *)(forms[mainform]), idmaster::getmap(), NULL, rescode)){
 
-		fprintf(stderr, "Wguicore--Wclient::mainloop::fixme: stub\n");
-		dispatch("");
+		/*fprintf(stderr, "Wguicore--Wclient::mainloop::fixme: stub\n");
+		dispatch("");*/
 
 	}
 	return rescode;

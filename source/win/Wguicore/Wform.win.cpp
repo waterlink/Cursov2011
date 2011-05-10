@@ -141,6 +141,7 @@ int Wform::dispatch(string message){
 	string msg = message;
 	tokenizer * token = new stringtokenizer(&message);
 	tokenizer * token2 = new stringtokenizer(&msg);
+	fprintf(stderr, "Wguicore--Wform::dispatch::debug: created tokenizers\n");
 	if (token->getparam("message") == "paint"){
 
 		for (map < string, component * >::iterator iter = controls.begin(); iter != controls.end(); ++iter)
@@ -151,11 +152,14 @@ int Wform::dispatch(string message){
 		token->getparam("message") == "mouseup" ||
 		token->getparam("message") == "mousemove"){
 
+		fprintf(stderr, "Wguicore--Wform::dispatch::debug: entered into mousecapture dispatching\n");
+
 		for (map < string, component * >::iterator iter = controls.begin(); iter != controls.end(); ++iter){
 
 			sizeble * control = dynamic_cast < sizeble * >(iter->second);
+			fprintf(stderr, "Wguicore--Wform::dispatch::debug control is: %d\n", control);
 			if (control == NULL) continue;
-			//fprintf(stderr, "Wguicore--Wform::dispatch::debug: control->sizeble_markup: %d\n", (int)(control->sizeble_markup));
+			fprintf(stderr, "Wguicore--Wform::dispatch::debug: control->sizeble_markup: %d\n", (int)(control->sizeble_markup));
 			if (1){
 
 				fprintf(stderr, "Wguicore--Wform::dispatch::debug: found sizeble control: %s\n", iter->second->getname().c_str());

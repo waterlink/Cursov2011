@@ -29,7 +29,18 @@
 using namespace std;
 
 class
-Wform: public form{
+ihandled{
+
+public:
+
+	virtual ~ihandled(){}
+	virtual HWND gethandle() = 0;
+	virtual void sethandle(HWND handle) = 0;
+
+};
+
+class
+Wform: public form, public ihandled{
 
 public:
 

@@ -121,11 +121,14 @@ int Wview::dispatch(string message){
 
 	}
 	else if (token->getparam("message") == "mousedown")
-		(*onmousedown)(this, message);
+		if (onmousedown)
+			(*onmousedown)(this, message);
 	else if (token->getparam("message") == "mouseup")
-		(*onmouseup)(this, message);
+		if (onmouseup)
+			(*onmouseup)(this, message);
 	else if (token->getparam("message") == "mousemove")
-		(*onmousemove)(this, message);
+		if (onmousemove)
+			(*onmousemove)(this, message);
 
 	clean;
 

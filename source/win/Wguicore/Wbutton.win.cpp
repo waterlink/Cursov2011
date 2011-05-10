@@ -21,9 +21,12 @@
 #include "../../all/utilcore/stringtokenizer.all.hpp"
 
 // component
-Wbutton::Wbutton(string name, Wform * parent){ 
+Wbutton::Wbutton(string name, ihandled * parent){ 
 
 	this->name = name;
+	if (parent == NULL)
+		fprintf(stderr, "Wguicore--Wbutton::Wbutton::debug: parent handle = 0\n");
+	fprintf(stderr, "Wguicore--Wbutton::Wbutton::debug: parent handle = %d\n", parent->gethandle());
 	hwnd = CreateWindow(
 				"button",
 				name.c_str(),

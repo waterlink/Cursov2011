@@ -30,7 +30,7 @@ Wbutton: public button{
 public:
 
 	// component
-	Wbutton(string name, Wform * parent);
+	Wbutton(string name, ihandled * parent);
 	~Wbutton();
 	int dispatch(string message);
 	void setparent(component * parent);

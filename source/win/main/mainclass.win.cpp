@@ -65,7 +65,7 @@ mainclass::run(){
 	Wbutton * btn1 = new Wbutton("btn1", form1);
 	Wview * view1 = new Wview("view1", form1);
 	Wtoolbox * toolbox1 = new Wtoolbox("toolbox1", form1);
-	Wbutton * btn2 = new Wbutton("btn2", (Wform *)toolbox1);
+	Wbutton * btn2 = new Wbutton("btn2", /*dynamic_cast < ihandled * >*/(toolbox1));
 
 	btn1->setposition(100, 100);
 	btn1->setsize(200, 200);

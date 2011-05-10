@@ -40,7 +40,7 @@ Wtoolbox::Wtoolbox(string name, Wform * parent){
 	WndClass.hInstance = hInst;
 	WndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 	WndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	WndClass.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+	WndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
 	WndClass.lpszMenuName = "";
 	WndClass.lpszClassName = name.c_str();
 
@@ -52,7 +52,7 @@ Wtoolbox::Wtoolbox(string name, Wform * parent){
 	}
 
 	hWnd = CreateWindow(name.c_str(), name.c_str(),
-				WS_CHILD | WS_VISIBLE, 
+				WS_OVERLAPPEDWINDOW | WS_CHILD | WS_VISIBLE, 
 				0, 0,
 				0, 0,
 				parent->gethandle(),
@@ -67,6 +67,8 @@ Wtoolbox::Wtoolbox(string name, Wform * parent){
 		return;
 
 	}
+
+	fprintf(stderr, "Wguicore--Wtoolbox::Wtoolbox::debug: handle is %d\n", hWnd);
 
 	sethandle(hWnd);
 	hwndmaster::newform(hwnd, (Wform *)this);
@@ -105,24 +107,20 @@ int Wtoolbox::dispatch(string message){
 		rect.top = control->getposition().second;
 		rect.right = rect.left + control->getsize().first;
 		rect.bottom = rect.top + control->getsize().second;
-		InvalidateRect(hwnd, &rect, true);
-		PAINTSTRUCT ps;
+		//InvalidateRect(hwnd, &rect, true);
+		/*PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hwnd, &ps);
 
 		HBRUSH hbrush;
 		HPEN hpen;
 		LOGBRUSH brush;
 
-			brush.lbStyle = BS_SOLID;
-			brush.lbColor = RGB(0, 255, 0);
-			hbrush = CreateBrushIndirect(&brush);
-			SelectObject(hdc, hbrush);
-			hpen = CreatePen(PS_NULL, 4, RGB(0, 255, 0));
+			hpen = CreatePen(PS_NULL, 2, RGB(0, 255, 0));
 			SelectObject(hdc, hpen);
 
-			Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+			//Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
 
-		EndPaint(hwnd, &ps);
+		EndPaint(hwnd, &ps); */
 
 	}
 
