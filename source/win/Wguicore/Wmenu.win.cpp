@@ -69,7 +69,13 @@ void Wmenu::add(menu * submenu){
 	submenus.push_back(submenu);
 	submenu->setparent(this);
 	Wmenu * sm = dynamic_cast < Wmenu * >(submenu);
-	if (sm) AppendMenu(hm, MF_STRING, (UINT_PTR)(sm->gethandle()), sm->gettext().c_str());
+	if (sm){
+
+		if (sm->ispopup())
+			AppendMenu(hm, MF_POPUP, (UINT_PTR)(sm->gethandle()), sm->gettext().c_str());
+		else AppendMenu(hm, MF_STRING, (UINT_PTR)(sm->gethandle()), sm->gettext().c_str());
+
+	}
 
 }
 

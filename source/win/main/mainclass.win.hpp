@@ -22,6 +22,37 @@
 #include <windows.h>
 #include <cstdlib>
 
+#include "../Wguicore/Wclient.win.hpp"
+#include "../Wguicore/Wform.win.hpp"
+#include "../Wguicore/Wbutton.win.hpp"
+#include "../Wguicore/Wview.win.hpp"
+#include "../Wguicore/Wtoolbox.win.hpp"
+#include "../Wguicore/Wstatus.win.hpp"
+#include "../Wguicore/Wproperties.win.hpp"
+#include "../Wguicore/Wmenu.win.hpp"
+
+class
+data{
+
+public:
+
+	Wclient * app;
+	Wform * form1;
+	Wbutton * btn1;
+	Wview * view1;
+	Wtoolbox * toolbox1;
+	Wbutton * btn2;
+	Wbutton * btn3;
+	Wstatus * stat1;
+	Wproperties * prop1;
+	Wmenu * mmain;
+	Wmenu * mfile;
+	Wmenu * mq;
+	Wmenu * mfile_exit;
+	Wmenu * mq_about;
+
+} * glbl_data = new data;
+
 class
 mainclass{
 

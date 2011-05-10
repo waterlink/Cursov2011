@@ -28,28 +28,6 @@
 #include "../../all/guicore/messager.all.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
 
-class
-data{
-
-public:
-
-	Wclient * app;
-	Wform * form1;
-	Wbutton * btn1;
-	Wview * view1;
-	Wtoolbox * toolbox1;
-	Wbutton * btn2;
-	Wbutton * btn3;
-	Wstatus * stat1;
-	Wproperties * prop1;
-	Wmenu * mmain;
-	Wmenu * mfile;
-	Wmenu * mq;
-	Wmenu * mfile_exit;
-	Wmenu * mq_about;
-
-} * glbl_data = new data;
-
 HINSTANCE mainclass::Inst = 0;
 
 HINSTANCE mainclass::getInst(){ return Inst; }
@@ -75,11 +53,26 @@ class btn2_3_onclick: public messager{ public: btn2_3_onclick(){} ~btn2_3_onclic
 class view1_onmousemove: public messager{ public: view1_onmousemove(){} ~view1_onmousemove(){}
 	void operator ()(component * sender, string message){
 
-		fprintf(stdout, "main--view1mousemove::fixme: stub, catched!!\n");
 		glbl_data->stat1->settext("this is a main view");
 
 	}
 } * view1mousemove = new view1_onmousemove();
+
+class exit_onactivate: public messager{ public: exit_onactivate(){} ~exit_onactivate(){}
+	void operator ()(component * sender, string message){
+
+		PostQuitMessage(0);
+
+	}
+} * exitactivate = new exit_onactivate();
+
+class about_onactivate: public messager{ public: about_onactivate(){} ~about_onactivate(){}
+	void operator ()(component * sender, string message){
+
+		MessageBox(NULL, TEXT("author: Fedorov Alexey"), TEXT("About"), 0);
+
+	}
+} * aboutactivate = new about_onactivate();
 
 mainclass::mainclass(){}
 
@@ -132,6 +125,9 @@ mainclass::run(){
 	glbl_data->mq->add(glbl_data->mq_about);
 
 	glbl_data->mmain->setparent(glbl_data->form1);
+
+	glbl_data->mfile_exit->setactivate(exitactivate);
+	glbl_data->mq_about->setactivate(aboutactivate);
 
 	glbl_data->btn1->setposition(100, 100);
 	glbl_data->btn1->setsize(200, 200);

@@ -24,6 +24,8 @@
 #include "idmaster.win.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
 #include "hwndmaster.win.hpp"
+#include "Wmenu.win.hpp"
+#include "../main/mainclass.win.hpp"
 
 #include <windows.h>
 
@@ -71,9 +73,12 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 			clean;
 
 		case WM_COMMAND:
-			msgtoken->setparam("message", "activate");
-			if ((*controlhandles)[LOWORD(wParam)])
+			if ((*controlhandles)[LOWORD(wParam)]){
+
+				msgtoken->setparam("message", "activate");
 				(*controlhandles)[LOWORD(wParam)]->dispatch(msg);
+
+			}
 			clean;
 
 		case WM_PAINT:
@@ -151,6 +156,10 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 		case WM_DESTROY: 
 			PostQuitMessage(0);
 			clean;
+
+		default:
+			delete msgtoken;
+			return DefWindowProc(hWnd, Message, wParam, lParam);
 
 	}
 
