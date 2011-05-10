@@ -136,6 +136,13 @@ mainclass::run(){
 	glbl_data->form1->add(glbl_data->stat1);
 	glbl_data->prop1->setposition(150, 350);
 	glbl_data->prop1->setsize(100, 100);
+	glbl_data->prop1->addproperty("Beep", "false", "bool");
+	glbl_data->prop1->addproperty("Sound", "true", "bool");
+	glbl_data->prop1->addproperty("Laser", "true", "bool");
+	glbl_data->prop1->addproperty("BeepEx", "true", "bool");
+	glbl_data->prop1->addproperty("SoundEx", "false", "bool");
+	glbl_data->prop1->addproperty("LaserEx", "true", "bool");
+	glbl_data->prop1->addproperty("Title", "Hello world!!", "string");
 	glbl_data->form1->add(glbl_data->prop1);
 	glbl_data->form1->setposition(150, 100);
 	glbl_data->form1->setsize(500, 500);

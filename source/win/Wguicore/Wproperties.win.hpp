@@ -24,6 +24,10 @@
 
 #include <windows.h>
 
+#include <map>
+
+using namespace std;
+
 class
 Wproperties: public properties, public ihandled{
 
@@ -67,11 +71,15 @@ protected:
 private:
 
 	Wform * myWform;
-	HWND hwnd;
+	HWND hwnd, hWndVertScroll;
+	int currpos;
 	string name;
 
 	// name: < type, value >
 	map < string, pair < string, string > > props;
+	map < string, HWND > handles;
+	map < string, int > nums;
+	int maxnum;
 
 };
 

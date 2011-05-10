@@ -53,7 +53,7 @@ int Wbutton::dispatch(string message){
 
 	fprintf(stderr, "Wguicore--Wbutton::dispatch::fixme: stub, message: %s\n", message.c_str());
 	tokenizer * token = new stringtokenizer(&message);
-	if (token->getparam("message") == "activate"){
+	if (token->getparam("message") == "activate") if (onactivate){
 
 		(*onactivate)(this, message);
 

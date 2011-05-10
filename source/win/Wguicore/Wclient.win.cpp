@@ -52,9 +52,15 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 	int x, y;
 	fprintf(stderr, "Wguicore--wndproc::debug: here, form: %d\n", currform);
 	currform = hwndmaster::byhandle(hWnd);
-	if (currform == NULL) return DefWindowProc(hWnd,Message,wParam,lParam);
+	if (currform == NULL) return DefWindowProc(hWnd, Message, wParam, lParam);
 
 	switch (Message){
+
+		case WM_VSCROLL:
+			msgtoken->setparam("message", "vertscroll");
+			msgtoken->setparam("position", HIWORD(wParam));
+			currform->dispatch(msg);
+			clean;
 
 		case WM_SIZE:
 			SendMessage(hWnd, WM_PAINT, NULL, NULL);
@@ -149,7 +155,7 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 	}
 
 	delete msgtoken;
-	return DefWindowProc(hWnd,Message,wParam,lParam);
+	return DefWindowProc(hWnd, Message, wParam, lParam);
 
 #undef clean
 

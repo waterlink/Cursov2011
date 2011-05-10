@@ -24,8 +24,8 @@
   WOK	- view
   WOK	- status
 ######	- popup, don't need now
-  OK	- properties
-	- make this all mess for winapi (W-mark)
+  TWOK	- properties
+   T	- make this all mess for winapi (W-mark)
 	- make this all mess for linux (l-mark)
 	- complete all todo's (T-mark)
 3) filecore
