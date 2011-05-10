@@ -40,7 +40,7 @@ Wtoolbox::Wtoolbox(string name, Wform * parent){
 	WndClass.hInstance = hInst;
 	WndClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
 	WndClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-	WndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);
+	WndClass.hbrBackground = /*(HBRUSH)GetStockObject(WHITE_BRUSH)*/ (HBRUSH)(COLOR_BTNFACE + 1);
 	WndClass.lpszMenuName = "";
 	WndClass.lpszClassName = name.c_str();
 

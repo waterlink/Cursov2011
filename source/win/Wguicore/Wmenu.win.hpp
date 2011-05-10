@@ -25,14 +25,20 @@
 using namespace std;
 
 #include "../../all/guicore/menu.all.hpp"
+#include "Wform.win.hpp"
+
+#include <windows.h>
 
 class
-Wmenu: public menu{
+Wmenu: public menu, public ihandled{
 
 public:
 
 	// menu methods
 	Wmenu(string name, bool popup);
+	Wmenu();
+	Wmenu(string name, Wform * parent);
+	Wmenu(string name, Wmenu * parent, int);
 	~Wmenu();
 	bool ispopup();
 	void add(menu * submenu);
@@ -58,6 +64,10 @@ public:
 	void disable();
 	bool isenable();
 
+	// winapi-sensitive
+	HWND gethandle();
+	void sethandle(HWND handle);
+
 protected:
 
 	
@@ -76,6 +86,8 @@ private:
 	messager * onselect;
 
 	bool enabled;
+
+	HMENU hm;
 
 };
 

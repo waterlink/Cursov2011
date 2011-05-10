@@ -191,7 +191,7 @@ string Wproperties::getproperty(string name){
 }
 bool Wproperties::delproperty(string name){
 
-	// TODO: code this up (when it'll really need, it will be soon)
+	// TODO: code this up (when it'll really need, it will be soon)s
 
 }
 

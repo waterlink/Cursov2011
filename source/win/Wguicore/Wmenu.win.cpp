@@ -18,6 +18,9 @@
 
 #include <cstdio>
 
+#include "../../all/utilcore/stringtokenizer.all.hpp"
+#include "idmaster.win.hpp"
+
 // menu methods
 Wmenu::Wmenu(string name, bool popup){
 
@@ -25,6 +28,9 @@ Wmenu::Wmenu(string name, bool popup){
 	this->popup = popup;
 
 }
+Wmenu::Wmenu(){}
+Wmenu::Wmenu(string name, Wform * parent){}
+Wmenu::Wmenu(string name, Wmenu * parent, int){}
 Wmenu::~Wmenu(){}
 bool Wmenu::ispopup(){
 
@@ -45,6 +51,24 @@ int Wmenu::dispatch(string message){
 	// TODO: here is winapi dispatching
 	// TODO: use of tokenizer
 	fprintf(stderr, "Wguicore--Wmenu::dispatch::fixme: stub, message: %s\n", message.c_str());
+
+#define clean \
+		delete token; \
+		return 0;
+
+	tokenizer * token = new stringtokenizer(&message);
+
+	if (token->getparam("message") == "select"){
+		if (onselect)
+			(*onselect)(this, message);
+	} else if (token->getparam("message") == "activate"){
+		if (onactivate)
+			(*onactivate)(this, message);
+	}
+
+	clean;
+
+#undef clean
 
 }
 void Wmenu::setparent(component * parent){
@@ -103,6 +127,17 @@ void Wmenu::disable(){
 bool Wmenu::isenable(){
 
 	return enabled;
+
+}
+
+HWND Wmenu::gethandle(){
+
+	return (HWND)hm;
+
+}
+void Wmenu::sethandle(HWND handle){
+
+	hm = (HMENU)handle;
 
 }
 
