@@ -21,6 +21,8 @@
 #include "../Wguicore/Wbutton.win.hpp"
 #include "../Wguicore/Wview.win.hpp"
 #include "../Wguicore/Wtoolbox.win.hpp"
+#include "../Wguicore/Wstatus.win.hpp"
+
 #include "../../all/guicore/messager.all.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
 
@@ -36,6 +38,7 @@ public:
 	Wtoolbox * toolbox1;
 	Wbutton * btn2;
 	Wbutton * btn3;
+	Wstatus * stat1;
 
 } * glbl_data = new data;
 
@@ -60,6 +63,15 @@ class btn2_3_onclick: public messager{ public: btn2_3_onclick(){} ~btn2_3_onclic
 
 	}
 } * btn2_3click = new btn2_3_onclick();
+
+class view1_onmousemove: public messager{ public: view1_onmousemove(){} ~view1_onmousemove(){}
+	void operator ()(component * sender, string message){
+
+		fprintf(stdout, "main--view1mousemove::fixme: stub, catched!!\n");
+		glbl_data->stat1->settext("this is a main view");
+
+	}
+} * view1mousemove = new view1_onmousemove();
 
 mainclass::mainclass(){}
 
@@ -92,6 +104,7 @@ mainclass::run(){
 	glbl_data->toolbox1 = new Wtoolbox("toolbox1", glbl_data->form1);
 	glbl_data->btn2 = new Wbutton("btn2", /*dynamic_cast < ihandled * >*/(glbl_data->toolbox1));
 	glbl_data->btn3 = new Wbutton("btn3", glbl_data->toolbox1);
+	glbl_data->stat1 = new Wstatus("stat1", glbl_data->form1);
 
 	glbl_data->btn1->setposition(100, 100);
 	glbl_data->btn1->setsize(200, 200);
@@ -100,6 +113,7 @@ mainclass::run(){
 	glbl_data->form1->add(glbl_data->btn1);
 	glbl_data->view1->setposition(50, 50);
 	glbl_data->view1->setsize(300, 40);
+	glbl_data->view1->setmousemove(view1mousemove);
 	glbl_data->form1->add(glbl_data->view1);
 	glbl_data->btn2->setposition(50, 50);
 	glbl_data->btn2->setsize(50, 16);
@@ -115,6 +129,8 @@ mainclass::run(){
 	glbl_data->toolbox1->setposition(350, 350);
 	glbl_data->toolbox1->setsize(100, 100);
 	glbl_data->form1->add(glbl_data->toolbox1);
+	glbl_data->stat1->settext("Hello world");
+	glbl_data->form1->add(glbl_data->stat1);
 	glbl_data->form1->setposition(150, 100);
 	glbl_data->form1->setsize(500, 500);
 	glbl_data->app->newmainform(glbl_data->form1);

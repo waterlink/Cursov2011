@@ -20,6 +20,8 @@
 #define Wstatus_hpp
 
 #include "../../all/guicore/status.all.hpp"
+#include "Wform.win.hpp"
+#include <windows.h>
 
 class
 Wstatus: public status{
@@ -46,7 +48,14 @@ protected:
 
 private:
 
-	
+	string name;
+	component * parent;
+
+	string text;
+
+	UINT wId;
+
+	HWND hSW;
 
 };
 

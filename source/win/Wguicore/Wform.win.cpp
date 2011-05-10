@@ -182,6 +182,14 @@ int Wform::dispatch(string message){
 		}
 
 	}
+	if (token->getparam("message") == "resize"){
+
+		size.first = token->getparam("width", 0);
+		size.second = token->getparam("height", 0);
+		for (map < string, component * >::iterator iter = controls.begin(); iter != controls.end(); ++iter)
+			iter->second->dispatch(message);
+
+	}
 
 	clean;
 

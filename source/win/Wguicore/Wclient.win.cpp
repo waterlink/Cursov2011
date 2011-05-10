@@ -58,6 +58,10 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 
 		case WM_SIZE:
 			SendMessage(hWnd, WM_PAINT, NULL, NULL);
+			msgtoken->setparam("message", "resize");
+			msgtoken->setparam("width", LOWORD(lParam));
+			msgtoken->setparam("height", HIWORD(lParam));
+			currform->dispatch(msg);
 			clean;
 
 		case WM_COMMAND:

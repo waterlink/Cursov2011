@@ -53,6 +53,8 @@ int Wview::dispatch(string message){
 		delete token; \
 		return 0;
 
+	fprintf(stderr, "Wguicore--Wview::dispatch::debug: message is: %s\n", message.c_str());
+
 	tokenizer * token = new stringtokenizer(&message);
 	if (token->getparam("message") == "paint"){
 
@@ -120,15 +122,22 @@ int Wview::dispatch(string message){
 		}		
 
 	}
-	else if (token->getparam("message") == "mousedown")
+	else if (token->getparam("message") == "mousedown"){
 		if (onmousedown)
 			(*onmousedown)(this, message);
-	else if (token->getparam("message") == "mouseup")
+	}
+	else if (token->getparam("message") == "mouseup"){
 		if (onmouseup)
 			(*onmouseup)(this, message);
-	else if (token->getparam("message") == "mousemove")
-		if (onmousemove)
+	}
+	else if (token->getparam("message") == "mousemove"){
+		//fprintf(stderr, "Wguicore--Wview::dispatch::debug: trying to trigger onmousemove\n");
+		if (onmousemove){
+			//fprintf(stderr, "Wguicore--Wview::dispatch::debug: onmousemove triggered\n");
 			(*onmousemove)(this, message);
+
+		}
+	}
 
 	clean;
 

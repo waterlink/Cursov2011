@@ -19,10 +19,10 @@
   WOK	- client
   WOK	- menu
   WOK	- button
-  OK	- bitbutton
+  TOK	- bitbutton
   WOK	- toolbox
   WOK	- view
-  TWOK	- status
+  WOK	- status
 ######	- popup, don't need now
   OK	- properties
 	- make this all mess for winapi (W-mark)
