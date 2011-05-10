@@ -24,6 +24,21 @@
 #include "../../all/guicore/messager.all.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
 
+class
+data{
+
+public:
+
+	Wclient * app;
+	Wform * form1;
+	Wbutton * btn1;
+	Wview * view1;
+	Wtoolbox * toolbox1;
+	Wbutton * btn2;
+	Wbutton * btn3;
+
+} * glbl_data = new data;
+
 HINSTANCE mainclass::Inst = 0;
 
 HINSTANCE mainclass::getInst(){ return Inst; }
@@ -35,6 +50,16 @@ class btn1_onclick: public messager{ public: btn1_onclick(){} ~btn1_onclick(){}
 
 	}
 } * btn1click = new btn1_onclick();
+
+class btn2_3_onclick: public messager{ public: btn2_3_onclick(){} ~btn2_3_onclick(){}
+	void operator ()(component * sender, string message){
+
+		fprintf(stdout, "main--btn1click::fixme: stub, catched!!\n");
+
+		glbl_data->toolbox1->setactivecontrol(sender);
+
+	}
+} * btn2_3click = new btn2_3_onclick();
 
 mainclass::mainclass(){}
 
@@ -60,34 +85,40 @@ mainclass::run(){
 
 	MessageBox (NULL, TEXT ("mainclass: Hello, Windowman!"), TEXT ("HelloMsg"), 0);
 
-	Wclient * app = new Wclient("app");
-	Wform * form1 = new Wform("form1");
-	Wbutton * btn1 = new Wbutton("btn1", form1);
-	Wview * view1 = new Wview("view1", form1);
-	Wtoolbox * toolbox1 = new Wtoolbox("toolbox1", form1);
-	Wbutton * btn2 = new Wbutton("btn2", /*dynamic_cast < ihandled * >*/(toolbox1));
+	glbl_data->app = new Wclient("app");
+	glbl_data->form1 = new Wform("form1");
+	glbl_data->btn1 = new Wbutton("btn1", glbl_data->form1);
+	glbl_data->view1 = new Wview("view1", glbl_data->form1);
+	glbl_data->toolbox1 = new Wtoolbox("toolbox1", glbl_data->form1);
+	glbl_data->btn2 = new Wbutton("btn2", /*dynamic_cast < ihandled * >*/(glbl_data->toolbox1));
+	glbl_data->btn3 = new Wbutton("btn3", glbl_data->toolbox1);
 
-	btn1->setposition(100, 100);
-	btn1->setsize(200, 200);
-	btn1->settext("BGA!!!");
-	btn1->setactivate(btn1click);
-	form1->add(btn1);
-	view1->setposition(50, 50);
-	view1->setsize(300, 40);
-	form1->add(view1);
-	btn2->setposition(50, 50);
-	btn2->setsize(50, 16);
-	btn2->settext("BGA!!!");
-	btn2->setactivate(btn1click);
-	toolbox1->add(btn2);
-	toolbox1->setactivecontrol(btn2);
-	toolbox1->setposition(350, 350);
-	toolbox1->setsize(100, 100);
-	form1->add(toolbox1);
-	form1->setposition(150, 100);
-	form1->setsize(500, 500);
-	app->newmainform(form1);
-	return app->mainloop();
+	glbl_data->btn1->setposition(100, 100);
+	glbl_data->btn1->setsize(200, 200);
+	glbl_data->btn1->settext("BGA!!!");
+	glbl_data->btn1->setactivate(btn1click);
+	glbl_data->form1->add(glbl_data->btn1);
+	glbl_data->view1->setposition(50, 50);
+	glbl_data->view1->setsize(300, 40);
+	glbl_data->form1->add(glbl_data->view1);
+	glbl_data->btn2->setposition(50, 50);
+	glbl_data->btn2->setsize(50, 16);
+	glbl_data->btn2->settext("BGA!!!");
+	glbl_data->btn2->setactivate(btn2_3click);
+	glbl_data->btn3->setposition(50, 30);
+	glbl_data->btn3->setsize(50, 16);
+	glbl_data->btn3->settext("BGA!!! v2.0");
+	glbl_data->btn3->setactivate(btn2_3click);
+	glbl_data->toolbox1->add(glbl_data->btn2);
+	glbl_data->toolbox1->add(glbl_data->btn3);
+	glbl_data->toolbox1->setactivecontrol(glbl_data->btn2);
+	glbl_data->toolbox1->setposition(350, 350);
+	glbl_data->toolbox1->setsize(100, 100);
+	glbl_data->form1->add(glbl_data->toolbox1);
+	glbl_data->form1->setposition(150, 100);
+	glbl_data->form1->setsize(500, 500);
+	glbl_data->app->newmainform(glbl_data->form1);
+	return glbl_data->app->mainloop();
 
 }
 

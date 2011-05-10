@@ -103,24 +103,28 @@ int Wtoolbox::dispatch(string message){
 		sizeble * control = dynamic_cast < sizeble * >(activecontrol);
 
 		RECT rect;
-		rect.left = control->getposition().first;
-		rect.top = control->getposition().second;
-		rect.right = rect.left + control->getsize().first;
-		rect.bottom = rect.top + control->getsize().second;
-		//InvalidateRect(hwnd, &rect, true);
-		/*PAINTSTRUCT ps;
+		rect.left = control->getposition().first - 2;
+		rect.top = control->getposition().second - 2;
+		rect.right = rect.left + control->getsize().first + 4;
+		rect.bottom = rect.top + control->getsize().second + 4;
+		InvalidateRect(hwnd, &rect, true);
+		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hwnd, &ps);
 
 		HBRUSH hbrush;
 		HPEN hpen;
 		LOGBRUSH brush;
 
-			hpen = CreatePen(PS_NULL, 2, RGB(0, 255, 0));
+			brush.lbStyle = BS_SOLID;
+			brush.lbColor = RGB(0, 255, 0);
+			hbrush = CreateBrushIndirect(&brush);
+			SelectObject(hdc, hbrush);
+			hpen = CreatePen(PS_NULL, 4, RGB(0, 255, 0));
 			SelectObject(hdc, hpen);
 
-			//Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
+			Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
 
-		EndPaint(hwnd, &ps); */
+		EndPaint(hwnd, &ps); 
 
 	}
 
