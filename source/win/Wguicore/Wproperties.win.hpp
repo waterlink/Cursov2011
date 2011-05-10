@@ -22,14 +22,16 @@
 #include "../../all/guicore/properties.all.hpp"
 #include "Wform.win.hpp"
 
+#include <windows.h>
+
 class
 Wproperties: public properties, public ihandled{
 
 public:
 
-	Wform(string name);
-	Wform();
-	~Wform();
+	Wproperties(string name, Wform * parent);
+	Wproperties();
+	~Wproperties();
 
 	bool addproperty(string name, string value, string type);
 	string getproperty(string name);

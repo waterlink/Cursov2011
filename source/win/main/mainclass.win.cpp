@@ -22,6 +22,7 @@
 #include "../Wguicore/Wview.win.hpp"
 #include "../Wguicore/Wtoolbox.win.hpp"
 #include "../Wguicore/Wstatus.win.hpp"
+#include "../Wguicore/Wproperties.win.hpp"
 
 #include "../../all/guicore/messager.all.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
@@ -39,6 +40,7 @@ public:
 	Wbutton * btn2;
 	Wbutton * btn3;
 	Wstatus * stat1;
+	Wproperties * prop1;
 
 } * glbl_data = new data;
 
@@ -105,6 +107,7 @@ mainclass::run(){
 	glbl_data->btn2 = new Wbutton("btn2", /*dynamic_cast < ihandled * >*/(glbl_data->toolbox1));
 	glbl_data->btn3 = new Wbutton("btn3", glbl_data->toolbox1);
 	glbl_data->stat1 = new Wstatus("stat1", glbl_data->form1);
+	glbl_data->prop1 = new Wproperties("prop1", glbl_data->form1);
 
 	glbl_data->btn1->setposition(100, 100);
 	glbl_data->btn1->setsize(200, 200);
@@ -131,6 +134,9 @@ mainclass::run(){
 	glbl_data->form1->add(glbl_data->toolbox1);
 	glbl_data->stat1->settext("Hello world");
 	glbl_data->form1->add(glbl_data->stat1);
+	glbl_data->prop1->setposition(150, 350);
+	glbl_data->prop1->setsize(100, 100);
+	glbl_data->form1->add(glbl_data->prop1);
 	glbl_data->form1->setposition(150, 100);
 	glbl_data->form1->setsize(500, 500);
 	glbl_data->app->newmainform(glbl_data->form1);
