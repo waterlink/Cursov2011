@@ -1,4 +1,11 @@
-target= win 
-module= Wguicore 
- 
+[class Wform] - gui class form for winapi
+[class Wclient] - gui class client for winapi
+[class Wmenu] - gui class menu for winapi
+[class Wbutton] - gui class button version for winapi
+[class idmaster] - class for managing ID* for our components
+[class Wview] - guicore view class for winapi
+[class Wtoolbox] - gui class toolbox for winapi
+[class hwndmaster] - class for managing hwnd's
+[class Wstatus] - gui class status for winapi
+[class Wproperties] - gui class properties for winapi
 #end

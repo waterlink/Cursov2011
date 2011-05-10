@@ -7,4 +7,5 @@
 [class Wtoolbox] - gui class toolbox for winapi
 [class hwndmaster] - class for managing hwnd's
 [class Wstatus] - gui class status for winapi
+[class Wproperties] - gui class properties for winapi
 #end

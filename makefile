@@ -307,4 +307,8 @@ all: linux win
 #tab 
 ./objects/win/Wguicore/Wstatus.win.o: ./source/win/Wguicore/Wstatus.win.cpp ./source/win/Wguicore/Wstatus.win.hpp 
 	$(win_CC) ./source/win/Wguicore/Wstatus.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wstatus.win.o $(win_DEFFS) 
+ 
+#tab 
+./objects/win/Wguicore/Wproperties.win.o: ./source/win/Wguicore/Wproperties.win.cpp ./source/win/Wguicore/Wproperties.win.hpp 
+	$(win_CC) ./source/win/Wguicore/Wproperties.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wproperties.win.o $(win_DEFFS) 
 #end
