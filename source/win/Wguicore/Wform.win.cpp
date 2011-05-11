@@ -184,10 +184,13 @@ int Wform::dispatch(string message){
 	}
 	if (token->getparam("message") == "resize"){
 
+		token2->setparam("oldwidth", size.first);
+		token2->setparam("oldheight", size.second);
 		size.first = token->getparam("width", 0);
 		size.second = token->getparam("height", 0);
+		token2->setparam("message", "parentresize");
 		for (map < string, component * >::iterator iter = controls.begin(); iter != controls.end(); ++iter)
-			iter->second->dispatch(message);
+			iter->second->dispatch(msg);
 
 	}
 
@@ -250,5 +253,7 @@ void Wform::sethandle(HWND handle){
 	hwnd = handle;
 
 }
+void Wform::setresize(messager * onresize){ this->onresize = onresize; }
+void Wform::setparentresize(messager * onparentresize){ this->onparentresize = onparentresize; }
 
 //#end

@@ -22,6 +22,7 @@
 #include "stringtokenizer.all.hpp"
 
 #include <string>
+#include <map>
 
 using namespace std;
 
@@ -62,7 +63,7 @@ protected:
 
 private:
 
-	static string sgs;
+	static map < string, string > sgs;
 
 };
 

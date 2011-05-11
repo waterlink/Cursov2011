@@ -19,4 +19,5 @@
 [class paintable] - interface for components that could freely paint on themselves
 [class status] - gui status bar class
 [class properties] - gui property table class
+[class metrics] - class for independent coordinating for child forms
 #end

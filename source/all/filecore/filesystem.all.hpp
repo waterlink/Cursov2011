@@ -22,6 +22,10 @@
 #include "pather.all.hpp"
 #include "file.all.hpp"
 
+#include <string>
+
+using namespace std;
+
 class
 filesystem{
 

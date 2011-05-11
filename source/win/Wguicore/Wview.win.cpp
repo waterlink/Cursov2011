@@ -205,5 +205,7 @@ void Wview::setpaint(messager * onpaint){
 	this->onpaint = onpaint;
 
 }
+void Wview::setresize(messager * onresize){ this->onresize = onresize; }
+void Wview::setparentresize(messager * onparentresize){ this->onparentresize = onparentresize; }
 
 //#end

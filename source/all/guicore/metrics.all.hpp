@@ -11,26 +11,23 @@
 
 //
 //	header file
-//	class pather
+//	class metrics
 //	interface
-//	class for managing paths
+//	class for independent coordinating for child forms
 //
 
-#ifndef pather_hpp
-#define pather_hpp
+#ifndef metrics_hpp
+#define metrics_hpp
 
-#include <string>
-
-using namespace std;
+#include "../utilcore/settings.all.hpp"
 
 class
-pather{
+metrics{
 
 public:
 
-	virtual ~pather(){}
-
-	virtual string decode(string path) = 0;
+	static void set(int x, int y);
+	static pair < int, int > get();
 
 protected:
 

@@ -58,6 +58,22 @@ int Wbutton::dispatch(string message){
 		(*onactivate)(this, message);
 
 	}
+	if (token->getparam("message") == "parentresize"){
+
+		int width = token->getparam("width", 0);
+		int height = token->getparam("height", 0);
+		int oldwidth = token->getparam("oldwidth", 0);
+		int oldheight = token->getparam("oldheight", 0);
+
+		position.first = position.first * width / oldwidth;
+		position.second = position.second * height / oldheight;
+
+		size.first = position.first * width / oldwidth;
+		size.second = position.second * height / oldheight;
+
+		MoveWindow(hwnd, position.first, position.second, size.first, size.second, true);
+
+	}
 	clean;
 
 #undef clean
@@ -113,5 +129,7 @@ void Wbutton::setposition(int x, int y){
 	MoveWindow(hwnd, x, y, size.first, size.second, true);
 
 }
+void Wbutton::setresize(messager * onresize){ this->onresize = onresize; }
+void Wbutton::setparentresize(messager * onparentresize){ this->onparentresize = onparentresize; }
 
 //#end

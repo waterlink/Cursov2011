@@ -147,4 +147,7 @@ void Wtoolbox::setposition(int x, int y){ myWform->setposition(x, y); }
 HWND Wtoolbox::gethandle(){ return hwnd; }
 void Wtoolbox::sethandle(HWND handle){ hwnd = handle; myWform->sethandle(hwnd); }
 
+void Wtoolbox::setresize(messager * onresize){ myWform->setresize(onresize); }
+void Wtoolbox::setparentresize(messager * onparentresize){ myWform->setparentresize(onparentresize); }
+
 //#end

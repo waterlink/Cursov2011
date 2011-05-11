@@ -22,6 +22,8 @@
 #include <map>
 #include <cstring>
 
+#include "messager.all.hpp"
+
 using namespace std;
 
 class
@@ -45,6 +47,9 @@ public:
 
 	virtual void
 	setposition(int x, int y) = 0;
+
+	virtual void setresize(messager * onresize) = 0;
+	virtual void setparentresize(messager * onparentresize) = 0;
 
 	char * sizeble_markup;
 
