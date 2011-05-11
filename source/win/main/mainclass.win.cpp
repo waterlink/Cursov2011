@@ -27,6 +27,7 @@
 
 #include "../../all/guicore/messager.all.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
+#include "../../all/maincore/logic.all.hpp"
 
 HINSTANCE mainclass::Inst = 0;
 
@@ -167,7 +168,26 @@ mainclass::run(){
 	glbl_data->form1->setposition(150, 100);
 	glbl_data->form1->setsize(500, 500);
 	glbl_data->app->newmainform(glbl_data->form1);
-	return glbl_data->app->mainloop();
+	//return glbl_data->app->mainloop();
+
+	logic * lgck = new logic(
+					glbl_data->app,
+					glbl_data->form1,
+					glbl_data->btn1,
+					glbl_data->view1,
+					glbl_data->toolbox1,
+					glbl_data->btn2,
+					glbl_data->btn3,
+					glbl_data->stat1,
+					glbl_data->prop1,
+					glbl_data->mmain,
+					glbl_data->mfile,
+					glbl_data->mq,
+					glbl_data->mfile_exit,
+					glbl_data->mq_about
+				);
+
+	return lgck->run();
 
 }
 

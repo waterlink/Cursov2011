@@ -4,4 +4,5 @@
 [module all/guicore] - core module to work with graphic user interface
 [module win/Wguicore] - winapi realization module for guicore
 [module all/utilcore] - various utilities subsystem
+[module all/maincore] - module for OS-independent program logic
 #end

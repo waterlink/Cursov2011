@@ -5,9 +5,9 @@ linux_LDFLAGS= -Wl,--allow-multiple-definition
 linux_LIBRARIES= 
 linux_DEFFS= -DLINUX_target 
  
-linux_spec_SOURCES= ./source/linux/main/*.linux.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/all/utilcore/*.all.cpp 
-linux_spec_HEADERS= ./source/linux/main/*.linux.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/all/utilcore/*.all.hpp 
-linux_spec_OBJECTS= ./objects/linux/main/*.linux.o ./objects/all/robocore/*.linux.all.o ./objects/all/guicore/*.linux.all.o ./objects/all/utilcore/*.linux.all.o 
+linux_spec_SOURCES= ./source/linux/main/*.linux.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/all/utilcore/*.all.cpp ./source/all/maincore/*.all.cpp 
+linux_spec_HEADERS= ./source/linux/main/*.linux.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/all/utilcore/*.all.hpp ./source/all/maincore/*.all.hpp 
+linux_spec_OBJECTS= ./objects/linux/main/*.linux.o ./objects/all/robocore/*.linux.all.o ./objects/all/guicore/*.linux.all.o ./objects/all/utilcore/*.linux.all.o ./objects/all/maincore/*.linux.all.o 
  
 win_CC=i586-mingw32msvc-g++ 
 win_RC=i586-mingw32msvc-windres 
@@ -16,10 +16,10 @@ win_LDFLAGS= -mwindows -Wl,--allow-multiple-definition
 win_DEFFS= -DWIN_target 
 win_LIBRARIES= -lwinspool -lcomctl32 
  
-win_spec_SOURCES= ./source/win/main/*.win.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/win/Wguicore/*.win.cpp ./source/all/utilcore/*.all.cpp 
-win_spec_HEADERS= ./source/win/main/*.win.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/win/Wguicore/*.win.hpp ./source/all/utilcore/*.all.hpp 
+win_spec_SOURCES= ./source/win/main/*.win.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/win/Wguicore/*.win.cpp ./source/all/utilcore/*.all.cpp ./source/all/maincore/*.all.cpp 
+win_spec_HEADERS= ./source/win/main/*.win.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/win/Wguicore/*.win.hpp ./source/all/utilcore/*.all.hpp ./source/all/maincore/*.all.hpp 
 win_spec_RESOURCES= 
-win_spec_OBJECTS= ./objects/win/main/*.win.o ./objects/all/robocore/*.win.all.o ./objects/all/guicore/*.win.all.o ./objects/win/Wguicore/*.win.o ./objects/all/utilcore/*.win.all.o 
+win_spec_OBJECTS= ./objects/win/main/*.win.o ./objects/all/robocore/*.win.all.o ./objects/all/guicore/*.win.all.o ./objects/win/Wguicore/*.win.o ./objects/all/utilcore/*.win.all.o ./objects/all/maincore/*.win.all.o 
  
 LIBRARIES= 
  
@@ -311,4 +311,11 @@ all: linux win
 #tab 
 ./objects/win/Wguicore/Wproperties.win.o: ./source/win/Wguicore/Wproperties.win.cpp ./source/win/Wguicore/Wproperties.win.hpp 
 	$(win_CC) ./source/win/Wguicore/Wproperties.win.cpp $(win_CFLAGS) -o ./objects/win/Wguicore/Wproperties.win.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/maincore/logic.linux.all.o: ./source/all/maincore/logic.all.cpp ./source/all/maincore/logic.all.hpp 
+	$(linux_CC) ./source/all/maincore/logic.all.cpp $(linux_CFLAGS) -o ./objects/all/maincore/logic.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/maincore/logic.all.cpp $(win_CFLAGS) -o ./objects/all/maincore/logic.win.all.o $(win_DEFFS) 
 #end

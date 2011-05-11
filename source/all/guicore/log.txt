@@ -1,0 +1,2 @@
+/home/lexias/Documents/Cursov2011/source/all/guicore
+success: project dir = /home/lexias/Documents/Cursov2011

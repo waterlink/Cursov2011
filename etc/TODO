@@ -69,4 +69,7 @@
 		dfs, i think, using BTExecutor to control robot, algo mine
 9) utilcore
   OK	- string tokenizer
+10) maincore
+  TOK	- logic
+		main program logic
 
