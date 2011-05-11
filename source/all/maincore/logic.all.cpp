@@ -48,7 +48,7 @@ logic::logic(
 		menu * mq_about
 ){
 
-	this->app = app,
+	this->app = app, 
 	this->form1 = form1,
 	this->btn1 = btn1,
 	this->view1 = view1,
