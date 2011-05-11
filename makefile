@@ -357,11 +357,4 @@ all: linux win
 #tab 
 ./objects/win/Wfilecore/Wpather.win.o: ./source/win/Wfilecore/Wpather.win.cpp ./source/win/Wfilecore/Wpather.win.hpp 
 	$(win_CC) ./source/win/Wfilecore/Wpather.win.cpp $(win_CFLAGS) -o ./objects/win/Wfilecore/Wpather.win.o $(win_DEFFS) 
- 
-#tab 
-./objects/all/guicore/metrics.linux.all.o: ./source/all/guicore/metrics.all.cpp ./source/all/guicore/metrics.all.hpp 
-	$(linux_CC) ./source/all/guicore/metrics.all.cpp $(linux_CFLAGS) -o ./objects/all/guicore/metrics.linux.all.o $(linux_DEFFS) 
-#tab 
- 
-	$(win_CC) ./source/all/guicore/metrics.all.cpp $(win_CFLAGS) -o ./objects/all/guicore/metrics.win.all.o $(win_DEFFS) 
 #end

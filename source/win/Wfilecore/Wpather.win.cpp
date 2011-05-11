@@ -16,21 +16,9 @@
 
 #include "Wpather.win.hpp"
 
-Wpather::Wpather(){}
-Wpather::~Wpather(){}
+pather::pather(){}
+pather::~pather(){}
 
-string Wpather::decode(string path){
-
-	string res = "";
-	for (unsigned int i = 0; i < res.size(); i += 1)
-		if (path[i] == '/')
-			res.push_back('\\');
-		else res.push_back(path[i]);
-	if (res[0] == '\\')
-		res[0] = '.';
-
-	return res;
-
-}
+string pather::decode(string path){}
 
 //#end

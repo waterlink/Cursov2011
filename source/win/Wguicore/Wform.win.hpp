@@ -66,8 +66,6 @@ public:
 	pair < int, int > getposition();
 	void setsize(int w, int h);
 	void setposition(int x, int y);
-	void setresize(messager * onresize);
-	void setparentresize(messager * onparentresize);
 
 	// winapi-sensitive
 	HWND gethandle();
@@ -90,9 +88,6 @@ private:
 
 	// winapi header
 	HWND hwnd;
-
-	messager * onresize;
-	messager * onparentresize;
 
 };
 

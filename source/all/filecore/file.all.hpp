@@ -21,7 +21,6 @@
 
 #include <cstdio>
 #include <string>
-#include <fstream>
 
 using namespace std;
 
@@ -40,17 +39,6 @@ public:
 	virtual void close();
 	virtual bool isopened();
 
-	virtual int nextint();
-	virtual void nextint(int x);
-
-	virtual double nextdouble();
-	virtual void nextdouble(double x);
-
-	virtual string nextline();
-	virtual string nextword();
-	virtual void nextline(string s);
-	virtual void nextword(string s);
-
 protected:
 
 	
@@ -58,11 +46,8 @@ protected:
 private:
 
 	FILE * id;
-	ifstream ifid;
-	ofstream ofid;
 	bool opened;
 	string path;
-	string mode;
 
 };
 

@@ -1,4 +1,2 @@
-target= win 
-module= Wguicore 
- 
+[class Wpather] - filecore path class for windows
 #end

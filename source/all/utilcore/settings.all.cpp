@@ -16,11 +16,11 @@
 
 #include "settings.all.hpp"
 
-map < string, string > settings::sgs;
+string settings::sgs = "";
 
 string settings::get(string param){
 
-	tokenizer * token = new stringtokenizer(&(sgs[param]));
+	tokenizer * token = new stringtokenizer(&sgs);
 	string res = token->getparam(param);
 	delete token;
 	return res;
@@ -28,7 +28,7 @@ string settings::get(string param){
 }
 int settings::get(string param, int){
 
-	tokenizer * token = new stringtokenizer(&(sgs[param]));
+	tokenizer * token = new stringtokenizer(&sgs);
 	int res = token->getparam(param, 0);
 	delete token;
 	return res;
@@ -36,14 +36,14 @@ int settings::get(string param, int){
 }
 void settings::set(string param, string value){
 
-	tokenizer * token = new stringtokenizer(&(sgs[param]));
+	tokenizer * token = new stringtokenizer(&sgs);
 	token->setparam(param, value);
 	delete token;
 
 }
 void settings::set(string param, int value){
 
-	tokenizer * token = new stringtokenizer(&(sgs[param]));
+	tokenizer * token = new stringtokenizer(&sgs);
 	token->setparam(param, value);
 	delete token;
 

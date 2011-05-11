@@ -43,7 +43,7 @@ int Wstatus::dispatch(string message){
 
 	tokenizer * token = new stringtokenizer(&message);
 
-	if (token->getparam("message") == "parentresize"){
+	if (token->getparam("message") == "resize"){
 
 		int width = token->getparam("width", 0);
 		int height = token->getparam("height", 0);

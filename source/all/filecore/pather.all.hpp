@@ -19,10 +19,6 @@
 #ifndef pather_hpp
 #define pather_hpp
 
-#include <string>
-
-using namespace std;
-
 class
 pather{
 

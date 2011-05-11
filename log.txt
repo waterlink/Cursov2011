@@ -7,23 +7,3 @@
 [class filesystem] - class for managing filesystem
 [class file] - class that identifies a file
 [class filesystem] - class for managing filesystem
-[class logic] - class controlling main processes in program
-[class mainclass] - win version of main class, contains initialization, run method and finalization
-[class sizeble] - interface for components with adjustable size'n'position
-[class sizeble] - interface for components with adjustable size'n'position
-[class Wform] - gui class form for winapi
-[class Wbutton] - gui class button version for winapi
-[class Wform] - gui class form for winapi
-[class Wform] - gui class form for winapi
-[class Wview] - guicore view class for winapi
-[class Wtoolbox] - gui class toolbox for winapi
-[class Wproperties] - gui class properties for winapi
-[class Wtoolbox] - gui class toolbox for winapi
-[class Wclient] - gui class client for winapi
-[class Wform] - gui class form for winapi
-[class Wtoolbox] - gui class toolbox for winapi
-[class settings] - class for managing current settings of an application
-[class Wstatus] - gui class status for winapi
-[class logic] - class controlling main processes in program
-[class Wbutton] - gui class button version for winapi
-[class Wform] - gui class form for winapi

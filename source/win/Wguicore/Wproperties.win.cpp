@@ -250,7 +250,4 @@ void Wproperties::setposition(int x, int y){ myWform->setposition(x, y); }
 HWND Wproperties::gethandle(){ return hwnd; }
 void Wproperties::sethandle(HWND handle){ hwnd = handle; myWform->sethandle(hwnd); }
 
-void Wproperties::setresize(messager * onresize){ myWform->setresize(onresize); }
-void Wproperties::setparentresize(messager * onparentresize){ myWform->setparentresize(onparentresize); }
-
 //#end
