@@ -52,8 +52,8 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 	char buff[30];
 	tokenizer * msgtoken = new stringtokenizer(&msg);
 	int x, y;
-	fprintf(stderr, "Wguicore--wndproc::debug: here, form: %d\n", currform);
 	currform = hwndmaster::byhandle(hWnd);
+	fprintf(stderr, "Wguicore--wndproc::debug: here, form: %d\n", (int)currform);
 	if (currform == NULL) return DefWindowProc(hWnd, Message, wParam, lParam);
 
 	switch (Message){

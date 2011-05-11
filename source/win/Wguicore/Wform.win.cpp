@@ -193,6 +193,22 @@ int Wform::dispatch(string message){
 			iter->second->dispatch(msg);
 
 	}
+	if (token->getparam("message") == "parentresize"){
+
+		int width = token->getparam("width", 0);
+		int height = token->getparam("height", 0);
+		int oldwidth = token->getparam("oldwidth", 0);
+		int oldheight = token->getparam("oldheight", 0);
+
+		position.first = cposition.first * width / psize.first;
+		position.second = cposition.second * height / psize.second;
+
+		size.first = csize.first * width / psize.first;
+		size.second = csize.second * height / psize.second;
+
+		MoveWindow(hwnd, position.first, position.second, size.first, size.second, true);
+
+	}
 
 	clean;
 
@@ -228,16 +244,19 @@ pair < int, int > Wform::getposition(){
 }
 void Wform::setsize(int w, int h){
 
-	size.first = w;
-	size.second = h;
-	MoveWindow(hwnd, position.first, position.second, w, h, true);
+	sizeble * par = dynamic_cast < sizeble * >(parent);
+	if (par) 
+		psize = par->getsize();
+	csize.first = w;
+	csize.second = h;
+	//MoveWindow(hwnd, position.first, position.second, w, h, true);
 
 }
 void Wform::setposition(int x, int y){
 
-	position.first = x;
-	position.second = y;
-	MoveWindow(hwnd, x, y, size.first, size.second, true);
+	cposition.first = x;
+	cposition.second = y;
+	//MoveWindow(hwnd, x, y, size.first, size.second, true);
 
 }
 

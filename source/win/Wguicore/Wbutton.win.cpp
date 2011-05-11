@@ -65,11 +65,11 @@ int Wbutton::dispatch(string message){
 		int oldwidth = token->getparam("oldwidth", 0);
 		int oldheight = token->getparam("oldheight", 0);
 
-		position.first = position.first * width / oldwidth;
-		position.second = position.second * height / oldheight;
+		position.first = cposition.first * width / psize.first;
+		position.second = cposition.second * height / psize.second;
 
-		size.first = position.first * width / oldwidth;
-		size.second = position.second * height / oldheight;
+		size.first = csize.first * width / psize.first;
+		size.second = csize.second * height / psize.second;
 
 		MoveWindow(hwnd, position.first, position.second, size.first, size.second, true);
 
@@ -119,14 +119,17 @@ pair < int, int > Wbutton::getsize(){ return size; }
 pair < int, int > Wbutton::getposition(){ return position; }
 void Wbutton::setsize(int w, int h){ 
 
-	size = make_pair(w, h); 
-	MoveWindow(hwnd, position.first, position.second, w, h, true);
+	sizeble * par = dynamic_cast < sizeble * >(parent);
+	if (par) 
+		psize = par->getsize();
+	csize = make_pair(w, h);
+	//MoveWindow(hwnd, position.first, position.second, w, h, true);
 
 }
 void Wbutton::setposition(int x, int y){ 
 
-	position = make_pair(x, y); 
-	MoveWindow(hwnd, x, y, size.first, size.second, true);
+	cposition = make_pair(x, y); 
+	//MoveWindow(hwnd, x, y, size.first, size.second, true);
 
 }
 void Wbutton::setresize(messager * onresize){ this->onresize = onresize; }
