@@ -138,22 +138,6 @@ int Wview::dispatch(string message){
 
 		}
 	}
-	else if (token->getparam("message") == "parentresize"){
-
-		int width = token->getparam("width", 0);
-		int height = token->getparam("height", 0);
-		int oldwidth = token->getparam("oldwidth", 0);
-		int oldheight = token->getparam("oldheight", 0);
-
-		position.first = cposition.first * width / psize.first;
-		position.second = cposition.second * height / psize.second;
-
-		size.first = csize.first * width / psize.first;
-		size.second = csize.second * height / psize.second;
-
-		//MoveWindow(hwnd, position.first, position.second, size.first, size.second, true);
-
-	}
 
 	clean;
 
@@ -189,15 +173,12 @@ pair < int, int > Wview::getposition(){
 }
 void Wview::setsize(int w, int h){
 
-	sizeble * par = dynamic_cast < sizeble * >(parent);
-	if (par) 
-		psize = par->getsize();
-	csize = make_pair(w, h);
+	size = make_pair(w, h);
 
 }
 void Wview::setposition(int x, int y){
 
-	cposition = make_pair(x, y);
+	position = make_pair(x, y);
 
 }
 

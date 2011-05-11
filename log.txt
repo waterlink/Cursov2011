@@ -27,9 +27,3 @@
 [class logic] - class controlling main processes in program
 [class Wbutton] - gui class button version for winapi
 [class Wform] - gui class form for winapi
-[class Wview] - guicore view class for winapi
-[class Wtoolbox] - gui class toolbox for winapi
-[class Wform] - gui class form for winapi
-[class Wview] - guicore view class for winapi
-[class Wbutton] - gui class button version for winapi
-[class Wclient] - gui class client for winapi

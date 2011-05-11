@@ -75,10 +75,6 @@ private:
 	pair < int, int > size;
 	pair < int, int > position;
 
-	pair < int, int > psize;
-	pair < int, int > cposition;
-	pair < int, int > csize;
-
 	HWND hwnd;
 
 	messager * onresize;

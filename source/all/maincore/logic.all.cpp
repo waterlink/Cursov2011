@@ -82,11 +82,7 @@ logic::logic(
 	//mfile_exit->setactivate(exitactivate);
 	//mq_about->setactivate(aboutactivate);
 
-	/**/
-	app->newmainform(form1);
-	form1->setposition(150, 100);
-	form1->setsize(500, 500);
-	btn1->setposition(100, 100);
+	/*btn1->setposition(100, 100);
 	btn1->setsize(200, 200);
 	btn1->settext("BGA!!!");
 	//btn1->setactivate(btn1click);
@@ -120,11 +116,15 @@ logic::logic(
 	prop1->addproperty("SoundEx", "false", "bool");
 	prop1->addproperty("LaserEx", "true", "bool");
 	prop1->addproperty("Title", "Hello world!!", "string");
-	form1->add(prop1);/**/
+	form1->add(prop1);
+	form1->setposition(150, 100);
+	form1->setsize(500, 500);*/
 
 	// form1 setup
-//	form1->setposition(50, 50);
-//	form1->setsize(900, 700);
+	form1->setposition(50, 50);
+	form1->setsize(900, 700);
+
+	app->newmainform(form1);
 
 	btn1->setactivate(click_btn1);
 
