@@ -14,12 +14,14 @@ module=`./scripts/sc_getvalue.sh "./config/source_config" "module"`
 target=`echo ${target}`
 module=`echo ${module}`
 
+ptype="code"
 codeexist=`./scripts/sc_isnameexist.sh "${ptype}" "${target}/${module}" "${pname}"`
 if [ "$codeexist" == "1" ]
 then
 	gedit "./source/${target}/${module}/${pname}.${target}.hpp" 2> "./log/geditlog.txt"
 	gedit "./source/${target}/${module}/${pname}.${target}.cpp" 2> "./log/geditlog.txt"
 else
+	ptype="class"
 	classexist=`./scripts/sc_isnameexist.sh "${ptype}" "${target}/${module}" "${pname}"`
 	if [ "$classexist" == "1" ]
 	then

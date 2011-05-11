@@ -29,6 +29,9 @@
 	- make this all mess for linux (l-mark)
 	- complete all todo's (T-mark)
 3) filecore
+	- filesystem
+	- file
+	- pather
 	- map loading
 4) mapcore
 	- work with filecore to read chosen map from file
@@ -69,6 +72,7 @@
 		dfs, i think, using BTExecutor to control robot, algo mine
 9) utilcore
   OK	- string tokenizer
+  OK	- logger
 10) maincore
   TOK	- logic
 		main program logic

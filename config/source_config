@@ -1,4 +1,4 @@
 target= win 
-module= main 
+module= Wfilecore 
  
 #end

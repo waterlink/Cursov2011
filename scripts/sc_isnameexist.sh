@@ -23,9 +23,10 @@ do
 		break
 	fi
 	
-	a=`echo "${instr}" | grep "${ptype} ${pname}"`
+	a=`echo "${instr}" | grep "\[${ptype} ${pname}\]"`
 	if [ "$a" != "" ]
 	then
+		echo "$a" >> log.txt
 		echo "1"
 		break
 	fi

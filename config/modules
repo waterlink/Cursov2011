@@ -5,4 +5,6 @@
 [module win/Wguicore] - winapi realization module for guicore
 [module all/utilcore] - various utilities subsystem
 [module all/maincore] - module for OS-independent program logic
+[module all/filecore] - this module allows file managing
+[module win/Wfilecore] - filesystem specification for windows
 #end
