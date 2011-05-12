@@ -1,0 +1,3 @@
+[class marker] - class marker, abstract
+[class edge] - class edge, abstract, connects two markers, oriented
+#end
