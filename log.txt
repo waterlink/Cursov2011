@@ -43,3 +43,7 @@
 [class markermap] - class for managing markers
 [class markermap] - class for managing markers
 [class mainclass] - win version of main class, contains initialization, run method and finalization
+[class target] - class target - realization of marker
+[class logic] - class controlling main processes in program
+[class test_simplemap] - class mapcore, realization, for test purposes
+[class mainclass] - win version of main class, contains initialization, run method and finalization

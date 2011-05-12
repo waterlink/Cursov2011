@@ -19,6 +19,9 @@
 #include <cstdio>
 
 #include "../utilcore/stringtokenizer.all.hpp"
+#include "../mapcore/mapcore.all.hpp"
+#include "../mapcore/test_simplemap.all.hpp"
+#include "../markercore/markermap.all.hpp"
 
 EHandler(click_btn1, {
 
@@ -41,7 +44,9 @@ logic::logic(
 		menu * mfile,
 		menu * mq,
 		menu * mfile_exit,
-		menu * mq_about
+		menu * mq_about,
+
+		pather * decoder
 ){
 
 #define clean \
@@ -66,6 +71,8 @@ logic::logic(
 	this->mfile_exit = mfile_exit,
 	this->mq_about = mq_about;
 
+	this->decoder = decoder;
+
 	form1->setposition(50, 50);
 	form1->setsize(900, 650);
 
@@ -77,8 +84,8 @@ logic::logic(
 	token->setparam("w", view1->getsize().first);
 	token->setparam("h", view1->getsize().second);
 	token->setparam("rcolor", 255);
-	token->setparam("gcolor", 0);
-	token->setparam("bcolor", 0);
+	token->setparam("gcolor", 255);
+	token->setparam("bcolor", 255);
 	token->setparam("thickness", 2);
 	view1->draw(message);
 
@@ -91,6 +98,10 @@ logic::logic(
 	btn1->setsize(0, 0);
 
 	btn1->setactivate(click_btn1);
+
+	mapcore * M = new test_simplemap(decoder);
+	markermap * markers = new markermap();
+	manager = new mapmanager(M, markers, view1);
 
 	clean;
 

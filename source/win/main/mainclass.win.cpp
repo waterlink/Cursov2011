@@ -25,6 +25,8 @@
 #include "../Wguicore/Wproperties.win.hpp"
 #include "../Wguicore/Wmenu.win.hpp"
 
+#include "../Wfilecore/Wpather.win.hpp"
+
 #include "../../all/guicore/messager.all.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
 #include "../../all/maincore/logic.all.hpp"
@@ -184,7 +186,9 @@ mainclass::run(){
 					glbl_data->mfile,
 					glbl_data->mq,
 					glbl_data->mfile_exit,
-					glbl_data->mq_about
+					glbl_data->mq_about,
+
+					new Wpather
 				);
 
 	return lgck->run();

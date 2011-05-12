@@ -46,6 +46,7 @@ marker * markermap::catnextmarker(){
 		return catlastmarker();
 	marker * res = *markeriter;
 	++markeriter;
+	return res;
 
 }
 marker * markermap::catlastmarker(){ return 0; }
@@ -57,6 +58,7 @@ edge * markermap::catnextedge(){
 		return catlastedge();
 	edge * res = *edgeiter;
 	++edgeiter;
+	return res;
 
 }
 edge * markermap::catlastedge(){ return 0; }

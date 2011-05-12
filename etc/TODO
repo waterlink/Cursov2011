@@ -42,7 +42,7 @@
 		searches this template in our map, and
 		if there more than one matches, ask user to choose one.
 			still it'll be just asking of user
-	- mapmanager
+  TOK	- mapmanager
 5) fogcore - no module for now, this functionallity would be refactored later to this module
   TOK	- exploration of map
 		made this in test map class as 0-value - fogged position 

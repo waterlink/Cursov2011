@@ -20,6 +20,8 @@
 #define logic_hpp
 
 #include "../guicore/guicore.all.hpp"
+#include "../mapcore/mapmanager.all.hpp"
+#include "../filecore/pather.all.hpp"
 
 class
 logic{
@@ -41,7 +43,9 @@ public:
 			menu * mfile,
 			menu * mq,
 			menu * mfile_exit,
-			menu * mq_about
+			menu * mq_about,
+
+			pather * decoder
 	);
 
 	int run();
@@ -51,6 +55,8 @@ protected:
 	
 
 private:
+
+	//dependent:
 
 	client * app;
 	form * form1;
@@ -66,6 +72,12 @@ private:
 	menu * mq;
 	menu * mfile_exit;
 	menu * mq_about;
+
+	pather * decoder;
+
+	//independent:
+
+	mapmanager * manager;
 
 };
 

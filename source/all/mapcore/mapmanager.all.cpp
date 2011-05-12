@@ -22,6 +22,8 @@
 
 #include "../utilcore/stringtokenizer.all.hpp"
 
+#include "../markercore/target.all.hpp"
+
 class viewconnection: public messager{ public: viewconnection(){} ~viewconnection(){}
 
 	void setup(mapmanager * manager){
@@ -37,6 +39,11 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 			if (token->getparam("message") == "mousedown"){
 
 				// code this up
+				int x = token->getparam("x", 0);
+				int y = token->getparam("y", 0);
+				marker * mar = new target;
+				mar->setposition(x, y);
+				manager->addmarker(mar);
 				manager->redraweverything();
 
 			}
@@ -115,10 +122,10 @@ void mapmanager::redraweverything(){
 	}
 
 }
-void mapmanager::addmarker(marker * mar){}
-void mapmanager::delmarker(marker * mar){}
-void mapmanager::addedge(edge * edg){}
-void mapmanager::deledge(edge * edg){}
+void mapmanager::addmarker(marker * mar){ markersource->addmarker(mar); }
+void mapmanager::delmarker(marker * mar){ markersource->delmarker(mar); }
+void mapmanager::addedge(edge * edg){ markersource->addedge(edg); }
+void mapmanager::deledge(edge * edg){ markersource->deledge(edg); }
 pair < int, int > mapmanager::decodeposition(marker * mar){
 
 	// stub
