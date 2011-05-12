@@ -53,4 +53,6 @@ void multitarget::setoption(string param, int value){
 
 }
 
+string multitarget::gettype(){ return "multitarget"; }
+
 //#end

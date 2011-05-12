@@ -32,7 +32,7 @@
   OK	- filesystem
   TOK	- file
   WOK	- pather
-	- map loading
+  TOK	- map loading
 4) mapcore
   TOK	- work with filecore to read chosen map from file
 		created only test class, i don't know format still
@@ -42,6 +42,7 @@
 		searches this template in our map, and
 		if there more than one matches, ask user to choose one.
 			still it'll be just asking of user
+	- mapmanager
 5) fogcore - no module for now, this functionallity would be refactored later to this module
   TOK	- exploration of map
 		made this in test map class as 0-value - fogged position 
@@ -50,9 +51,10 @@
   TOK	- start point
   TOK	- target
   AOK	- edge
+		code a real edge
   TOK	- multitarget
   OK	- properties of markers and edges
-	- markermap
+  OK	- markermap
 7) scenariocore
   OK	- vector of commands i think
   OK	- load

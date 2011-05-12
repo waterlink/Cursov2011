@@ -46,6 +46,12 @@ private:
 
 };
 
+#define EHandler(name, x) \
+	\
+	class on##name: public messager{ public: on##name(){} ~on##name(){} \
+	void operator ()(component * sender, string message) x \
+} * name = new on##name();
+
 #endif
 
 //#end

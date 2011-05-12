@@ -53,4 +53,6 @@ void target::setoption(string param, int value){
 
 }
 
+string target::gettype(){ return "target"; }
+
 //#end

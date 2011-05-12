@@ -25,3 +25,21 @@
 [class izprog] - interface for z0rch's program
 [class mapcore] - class mapcore, contains a map, loads and saves it, abstract
 [class test_simplemap] - class mapcore, realization, for test purposes
+[class Wview] - guicore view class for winapi
+[class logic] - class controlling main processes in program
+[class messager] - delegate-method class for messaging
+[class target] - class target - realization of marker
+[class marker] - class marker, abstract
+[class multitarget] - class for gamilton-way
+[class multitarget] - class for gamilton-way
+[class startpoint] - class startpoint - realization of marker
+[class marker] - class marker, abstract
+[class markerdrawer] - class, makes primitive for desired marker
+[class edge] - class edge, abstract, connects two markers, oriented
+[class markermap] - class for managing markers
+[class view] - gui view class
+[class edge] - class edge, abstract, connects two markers, oriented
+[class marker] - class marker, abstract
+[class markermap] - class for managing markers
+[class markermap] - class for managing markers
+[class mainclass] - win version of main class, contains initialization, run method and finalization

@@ -59,4 +59,6 @@ void startpoint::detect(){
 
 }
 
+string startpoint::gettype(){ return "startpoint"; }
+
 //#end

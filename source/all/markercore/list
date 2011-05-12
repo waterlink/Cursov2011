@@ -3,4 +3,7 @@
 [class startpoint] - class startpoint - realization of marker
 [class target] - class target - realization of marker
 [class multitarget] - class for gamilton-way
+[class markermap] - class for managing markers
+[class markerdrawer] - class, makes primitive for desired marker
+[class edgedrawer] - class, creates primitive for edges
 #end

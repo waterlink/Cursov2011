@@ -36,6 +36,8 @@ public:
 	void setoption(string param, string value);
 	void setoption(string param, int value);
 
+	string gettype();
+
 protected:
 
 	

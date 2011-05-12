@@ -36,6 +36,7 @@ public:
 	virtual int getoption(string param, int) = 0;
 	virtual void setoption(string param, string value) = 0;
 	virtual void setoption(string param, int value) = 0;
+	virtual string gettype() = 0;
 
 protected:
 

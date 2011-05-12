@@ -420,4 +420,32 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/scenariocore/command.all.cpp $(win_CFLAGS) -o ./objects/all/scenariocore/command.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/markercore/markermap.linux.all.o: ./source/all/markercore/markermap.all.cpp ./source/all/markercore/markermap.all.hpp 
+	$(linux_CC) ./source/all/markercore/markermap.all.cpp $(linux_CFLAGS) -o ./objects/all/markercore/markermap.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/markercore/markermap.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/markermap.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/mapcore/mapmanager.linux.all.o: ./source/all/mapcore/mapmanager.all.cpp ./source/all/mapcore/mapmanager.all.hpp 
+	$(linux_CC) ./source/all/mapcore/mapmanager.all.cpp $(linux_CFLAGS) -o ./objects/all/mapcore/mapmanager.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/mapcore/mapmanager.all.cpp $(win_CFLAGS) -o ./objects/all/mapcore/mapmanager.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/markercore/markerdrawer.linux.all.o: ./source/all/markercore/markerdrawer.all.cpp ./source/all/markercore/markerdrawer.all.hpp 
+	$(linux_CC) ./source/all/markercore/markerdrawer.all.cpp $(linux_CFLAGS) -o ./objects/all/markercore/markerdrawer.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/markercore/markerdrawer.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/markerdrawer.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/markercore/edgedrawer.linux.all.o: ./source/all/markercore/edgedrawer.all.cpp ./source/all/markercore/edgedrawer.all.hpp 
+	$(linux_CC) ./source/all/markercore/edgedrawer.all.cpp $(linux_CFLAGS) -o ./objects/all/markercore/edgedrawer.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/markercore/edgedrawer.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/edgedrawer.win.all.o $(win_DEFFS) 
 #end
