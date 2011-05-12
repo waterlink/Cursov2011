@@ -22,43 +22,110 @@ file::~file(){}
 bool file::wopen(){
 
 	if (isopened())
-		freopen(path.c_str(), "w", id);
-	else id = fopen(path.c_str(), "w");
+		freopen(path.c_str(), "w", id), ofid.close(), ofid.open(path.c_str());
+	else id = fopen(path.c_str(), "w"), ofid.open(path.c_str());
+	mode = "out";
 	return opened = id != 0;
 
 }
 bool file::ropen(){
 
 	if (isopened())
-		freopen(path.c_str(), "r", id);
-	else id = fopen(path.c_str(), "r");
+		freopen(path.c_str(), "r", id), ifid.close(), ifid.open(path.c_str());
+	else id = fopen(path.c_str(), "r"), ifid.open(path.c_str());
+	mode = "in";
 	return opened = id != 0;
 
 }
 bool file::aopen(){
 
 	if (isopened())
-		freopen(path.c_str(), "a", id);
-	else id = fopen(path.c_str(), "a");
+		freopen(path.c_str(), "a", id), ofid.close(), ofid.open(path.c_str(), ostream::app);
+	else id = fopen(path.c_str(), "a"), ofid.open(path.c_str(), ostream::app);
+	mode = "out";
 	return opened = id != 0;
 
 }
 void file::flush(){
 
-	if (isopened())
+	if (isopened()){
 		fflush(id);
+		// TODO: code this flush up
+		//if (mode == "in") ifid.flush();
+		//if (mode == "out") ofid.flush();
+	}
 
 }
 void file::close(){
 
-	if (isopened())
+	if (isopened()){
 		fclose(id);
+		if (mode == "in") ifid.close();
+		if (mode == "out") ofid.close();
+	}
 	opened = false;
 
 }
 bool file::isopened(){
 
 	return opened;
+
+}
+int file::nextint(){
+
+       int x = 0;
+       if (mode == "in")
+               fscanf(id, "%d", &x);
+       return x;
+
+}
+void file::nextint(int x){
+
+       if (mode == "out")
+               fprintf(id, " %d ", x);
+
+}
+double file::nextdouble(){
+
+       double x = 0;
+       if (mode == "in")
+               fscanf(id, "%lf", &x);
+       return x;
+
+}
+void file::nextdouble(double x){
+
+       if (mode == "out")
+               fprintf(id, " %lf ", x);
+
+}
+
+string file::nextline(){
+
+       string res = "";
+       if (mode == "in")
+               getline(ifid, res);
+       return res;
+
+}
+string file::nextword(){
+
+       string res = "";
+       if (mode == "out")
+               ifid >> res;
+       return res;
+
+}
+void file::nextline(string s){
+
+       if (mode == "out")
+               ofid << s << endl;
+
+}
+void file::nextword(string s){
+
+       if (mode == "out")
+               ofid << " " << s << " ";
 
 }
 

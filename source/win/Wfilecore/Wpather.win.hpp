@@ -22,12 +22,12 @@
 #include "../../all/filecore/pather.all.hpp"
 
 class
-Wpather{
+Wpather: public pather{
 
 public:
 
-	pather();
-	~pather();
+	Wpather();
+	~Wpather();
 
 	string decode(string path);
 

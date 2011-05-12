@@ -29,19 +29,22 @@
 	- make this all mess for linux (l-mark)
 	- complete all todo's (T-mark)
 3) filecore
-	- filesystem
-	- file
-	- pather
+  OK	- filesystem
+  TOK	- file
+  WOK	- pather
 	- map loading
 4) mapcore
-	- work with filecore to read chosen map from file
-	- integer coordinate system (or real ?)
-	- absolute coordinate system (problem with determining start point)
+  TOK	- work with filecore to read chosen map from file
+		created only test class, i don't know format still
+  int	- integer coordinate system (or real ?)
+  Tabs	- absolute coordinate system (problem with determining start point)
 		call NP-area strategy, which determines area template (a piece of a map, rectangle or circular ?),
 		searches this template in our map, and
 		if there more than one matches, ask user to choose one.
+			still it'll be just asking of user
 5) fogcore
-	- exploration of map
+  TOK	- exploration of map
+		made this in test map class as 0-value - fogged position 
 6) markercore
 	- start point
 	- target

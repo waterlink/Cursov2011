@@ -1,0 +1,3 @@
+[class mapcore] - class mapcore, contains a map, loads and saves it, abstract
+[class test_simplemap] - class mapcore, realization, for test purposes
+#end

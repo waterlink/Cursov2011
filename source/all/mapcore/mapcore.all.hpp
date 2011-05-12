@@ -11,26 +11,29 @@
 
 //
 //	header file
-//	class pather
+//	class mapcore
 //	interface
-//	class for managing paths
+//	class mapcore, contains a map, loads and saves it, abstract
 //
 
-#ifndef pather_hpp
-#define pather_hpp
+#ifndef map_hpp
+#define map_hpp
 
 #include <string>
 
 using namespace std;
 
 class
-pather{
+mapcore{
 
 public:
 
-	virtual ~pather(){}
-
-	virtual string decode(string path) = 0;
+	virtual ~mapcore(){}
+	virtual void choose(string name) = 0;
+	virtual void load() = 0;
+	virtual void save() = 0;
+	virtual int getvalue(int i, int j) = 0;
+	virtual void setvalue(int i, int j, int v) = 0;
 
 protected:
 
