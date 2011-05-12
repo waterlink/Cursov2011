@@ -52,13 +52,14 @@
   AOK	- edge
   TOK	- multitarget
   OK	- properties of markers and edges
+	- markermap
 7) scenariocore
-	- vector of commands i think
-	- load
-	- save
-	- prepare (start point)
-	- run
-	- cancel (??? maybe ???)
+  OK	- vector of commands i think
+  OK	- load
+  OK	- save
+  TOK	- prepare (start point)
+  OK	- run
+  T?	- cancel (??? maybe ???)
 8) strategycore
 	- optimalstrategy for targets
 		use Markelov's module to determine the best way for each edge

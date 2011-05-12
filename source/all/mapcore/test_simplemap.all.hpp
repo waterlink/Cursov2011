@@ -34,7 +34,7 @@ test_simplemap: public mapcore{
 public:
 
 	test_simplemap(pather * decoder);
-	~test_simplemap(){}
+	~test_simplemap();
 	void choose(string name);
 	void load();
 	void save();

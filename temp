@@ -1,6 +1,4 @@
-[class marker] - class marker, abstract
-[class edge] - class edge, abstract, connects two markers, oriented
-[class startpoint] - class startpoint - realization of marker
-[class target] - class target - realization of marker
-[class multitarget] - class for gamilton-way
+target= all 
+module= mapcore 
+ 
 #end

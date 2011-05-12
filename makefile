@@ -5,9 +5,9 @@ linux_LDFLAGS= -Wl,--allow-multiple-definition
 linux_LIBRARIES= 
 linux_DEFFS= -DLINUX_target 
  
-linux_spec_SOURCES= ./source/linux/main/*.linux.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/all/utilcore/*.all.cpp ./source/all/maincore/*.all.cpp ./source/all/filecore/*.all.cpp ./source/all/mapcore/*.all.cpp ./source/all/markercore/*.all.cpp 
-linux_spec_HEADERS= ./source/linux/main/*.linux.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/all/utilcore/*.all.hpp ./source/all/maincore/*.all.hpp ./source/all/filecore/*.all.hpp ./source/all/mapcore/*.all.hpp ./source/all/markercore/*.all.hpp 
-linux_spec_OBJECTS= ./objects/linux/main/*.linux.o ./objects/all/robocore/*.linux.all.o ./objects/all/guicore/*.linux.all.o ./objects/all/utilcore/*.linux.all.o ./objects/all/maincore/*.linux.all.o ./objects/all/filecore/*.linux.all.o ./objects/all/mapcore/*.linux.all.o ./objects/all/markercore/*.linux.all.o 
+linux_spec_SOURCES= ./source/linux/main/*.linux.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/all/utilcore/*.all.cpp ./source/all/maincore/*.all.cpp ./source/all/filecore/*.all.cpp ./source/all/mapcore/*.all.cpp ./source/all/markercore/*.all.cpp ./source/all/scenariocore/*.all.cpp 
+linux_spec_HEADERS= ./source/linux/main/*.linux.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/all/utilcore/*.all.hpp ./source/all/maincore/*.all.hpp ./source/all/filecore/*.all.hpp ./source/all/mapcore/*.all.hpp ./source/all/markercore/*.all.hpp ./source/all/scenariocore/*.all.hpp 
+linux_spec_OBJECTS= ./objects/linux/main/*.linux.o ./objects/all/robocore/*.linux.all.o ./objects/all/guicore/*.linux.all.o ./objects/all/utilcore/*.linux.all.o ./objects/all/maincore/*.linux.all.o ./objects/all/filecore/*.linux.all.o ./objects/all/mapcore/*.linux.all.o ./objects/all/markercore/*.linux.all.o ./objects/all/scenariocore/*.linux.all.o 
  
 win_CC=i586-mingw32msvc-g++ 
 win_RC=i586-mingw32msvc-windres 
@@ -16,10 +16,10 @@ win_LDFLAGS= -mwindows -Wl,--allow-multiple-definition
 win_DEFFS= -DWIN_target 
 win_LIBRARIES= -lwinspool -lcomctl32 
  
-win_spec_SOURCES= ./source/win/main/*.win.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/win/Wguicore/*.win.cpp ./source/all/utilcore/*.all.cpp ./source/all/maincore/*.all.cpp ./source/all/filecore/*.all.cpp ./source/win/Wfilecore/*.win.cpp ./source/all/mapcore/*.all.cpp ./source/all/markercore/*.all.cpp 
-win_spec_HEADERS= ./source/win/main/*.win.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/win/Wguicore/*.win.hpp ./source/all/utilcore/*.all.hpp ./source/all/maincore/*.all.hpp ./source/all/filecore/*.all.hpp ./source/win/Wfilecore/*.win.hpp ./source/all/mapcore/*.all.hpp ./source/all/markercore/*.all.hpp 
+win_spec_SOURCES= ./source/win/main/*.win.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/win/Wguicore/*.win.cpp ./source/all/utilcore/*.all.cpp ./source/all/maincore/*.all.cpp ./source/all/filecore/*.all.cpp ./source/win/Wfilecore/*.win.cpp ./source/all/mapcore/*.all.cpp ./source/all/markercore/*.all.cpp ./source/all/scenariocore/*.all.cpp 
+win_spec_HEADERS= ./source/win/main/*.win.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/win/Wguicore/*.win.hpp ./source/all/utilcore/*.all.hpp ./source/all/maincore/*.all.hpp ./source/all/filecore/*.all.hpp ./source/win/Wfilecore/*.win.hpp ./source/all/mapcore/*.all.hpp ./source/all/markercore/*.all.hpp ./source/all/scenariocore/*.all.hpp 
 win_spec_RESOURCES= 
-win_spec_OBJECTS= ./objects/win/main/*.win.o ./objects/all/robocore/*.win.all.o ./objects/all/guicore/*.win.all.o ./objects/win/Wguicore/*.win.o ./objects/all/utilcore/*.win.all.o ./objects/all/maincore/*.win.all.o ./objects/all/filecore/*.win.all.o ./objects/win/Wfilecore/*.win.o ./objects/all/mapcore/*.win.all.o ./objects/all/markercore/*.win.all.o 
+win_spec_OBJECTS= ./objects/win/main/*.win.o ./objects/all/robocore/*.win.all.o ./objects/all/guicore/*.win.all.o ./objects/win/Wguicore/*.win.o ./objects/all/utilcore/*.win.all.o ./objects/all/maincore/*.win.all.o ./objects/all/filecore/*.win.all.o ./objects/win/Wfilecore/*.win.o ./objects/all/mapcore/*.win.all.o ./objects/all/markercore/*.win.all.o ./objects/all/scenariocore/*.win.all.o 
  
 LIBRARIES= 
  
@@ -406,4 +406,18 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/markercore/multitarget.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/multitarget.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/scenariocore/scenario.linux.all.o: ./source/all/scenariocore/scenario.all.cpp ./source/all/scenariocore/scenario.all.hpp 
+	$(linux_CC) ./source/all/scenariocore/scenario.all.cpp $(linux_CFLAGS) -o ./objects/all/scenariocore/scenario.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/scenariocore/scenario.all.cpp $(win_CFLAGS) -o ./objects/all/scenariocore/scenario.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/scenariocore/command.linux.all.o: ./source/all/scenariocore/command.all.cpp ./source/all/scenariocore/command.all.hpp 
+	$(linux_CC) ./source/all/scenariocore/command.all.cpp $(linux_CFLAGS) -o ./objects/all/scenariocore/command.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/scenariocore/command.all.cpp $(win_CFLAGS) -o ./objects/all/scenariocore/command.win.all.o $(win_DEFFS) 
 #end

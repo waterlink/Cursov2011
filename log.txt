@@ -22,3 +22,6 @@
 [class file] - class that identifies a file
 [class mapcore] - class mapcore, contains a map, loads and saves it, abstract
 [class target] - class target - realization of marker
+[class izprog] - interface for z0rch's program
+[class mapcore] - class mapcore, contains a map, loads and saves it, abstract
+[class test_simplemap] - class mapcore, realization, for test purposes

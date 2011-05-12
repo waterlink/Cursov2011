@@ -1,0 +1,3 @@
+[class scenario] - class for managing commands
+[class command] - class command for robot
+#end

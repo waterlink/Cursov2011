@@ -23,6 +23,13 @@ test_simplemap::test_simplemap(pather * decoder){
 	fs->cd("/map");
 
 }
+test_simplemap::~test_simplemap(){
+
+	mapfile->close();
+	delete mapfile;
+	delete fs;
+
+}
 void test_simplemap::choose(string name){
 
 	mapfile = fs->getfile(name);
@@ -51,6 +58,7 @@ void test_simplemap::save(){
 
 	mapfile->nextint(w);
 	mapfile->nextint(h);
+	mapfile->nextline("");
 	for (int i = 0; i < h; i++)
 		for (int j = 0; j < w; ++j)
 			mapfile->nextint(M[make_pair(i, j)]);
