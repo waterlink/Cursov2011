@@ -20,3 +20,4 @@
 [class filesystem] - class for managing filesystem
 [class file] - class that identifies a file
 [class file] - class that identifies a file
+[class mapcore] - class mapcore, contains a map, loads and saves it, abstract

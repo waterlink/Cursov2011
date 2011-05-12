@@ -8,4 +8,5 @@
 [module all/filecore] - this module allows file managing
 [module win/Wfilecore] - filesystem specification for windows
 [module all/mapcore] - module for managing maps
+[module all/markercore] - module for marker managing
 #end
