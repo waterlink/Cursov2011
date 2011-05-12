@@ -385,4 +385,25 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/markercore/edge.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/edge.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/markercore/startpoint.linux.all.o: ./source/all/markercore/startpoint.all.cpp ./source/all/markercore/startpoint.all.hpp 
+	$(linux_CC) ./source/all/markercore/startpoint.all.cpp $(linux_CFLAGS) -o ./objects/all/markercore/startpoint.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/markercore/startpoint.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/startpoint.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/markercore/target.linux.all.o: ./source/all/markercore/target.all.cpp ./source/all/markercore/target.all.hpp 
+	$(linux_CC) ./source/all/markercore/target.all.cpp $(linux_CFLAGS) -o ./objects/all/markercore/target.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/markercore/target.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/target.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/markercore/multitarget.linux.all.o: ./source/all/markercore/multitarget.all.cpp ./source/all/markercore/multitarget.all.hpp 
+	$(linux_CC) ./source/all/markercore/multitarget.all.cpp $(linux_CFLAGS) -o ./objects/all/markercore/multitarget.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/markercore/multitarget.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/multitarget.win.all.o $(win_DEFFS) 
 #end

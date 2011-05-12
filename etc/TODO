@@ -46,12 +46,12 @@
   TOK	- exploration of map
 		made this in test map class as 0-value - fogged position 
 6) markercore
-  A	- marker
-	- start point
-	- target
-  A	- edge
-	- multitarget
-	- properties of markers and edges
+  AOK	- marker
+  TOK	- start point
+  TOK	- target
+  AOK	- edge
+  TOK	- multitarget
+  OK	- properties of markers and edges
 7) scenariocore
 	- vector of commands i think
 	- load
