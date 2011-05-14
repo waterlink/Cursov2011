@@ -1,0 +1,15 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=[single file] g++ compile for gdb
+# Languages=cpp
+# Applicability=all
+# Output=output-panel
+# Input=nothing
+# Save-files=nothing
+
+cdir=$GEDIT_CURRENT_DOCUMENT_DIR
+cpath=$GEDIT_CURRENT_DOCUMENT_PATH
+xpath=`echo $GEDIT_CURRENT_DOCUMENT_NAME | sed s/"\.cpp"/".elf"/g | sed s/"\.c"/".elf"/g`
+g++ $cpath -o $cdir/$xpath -g -O0
+$cdir/$xpath
+echo here

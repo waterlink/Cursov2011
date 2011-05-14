@@ -16,6 +16,8 @@
 
 #include "mapmanager.all.hpp"
 
+#include <cstdio>
+
 #include "../guicore/messager.all.hpp"
 #include "../markercore/markerdrawer.all.hpp"
 #include "../markercore/edgedrawer.all.hpp"
@@ -23,6 +25,10 @@
 #include "../utilcore/stringtokenizer.all.hpp"
 
 #include "../markercore/target.all.hpp"
+#include "../markercore/startpoint.all.hpp"
+#include "../markercore/multitarget.all.hpp"
+
+#include "../markercore/simpleedge.all.hpp"
 
 class viewconnection: public messager{ public: viewconnection(){} ~viewconnection(){}
 
@@ -36,15 +42,61 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 
 		tokenizer * token = new stringtokenizer(&message);
 
-			if (token->getparam("message") == "mousedown"){
+			if (token->getparam("message") == "mousedown" 
+				&& token->getparam("button") == "left"){
 
 				// code this up
-				int x = token->getparam("x", 0);
-				int y = token->getparam("y", 0);
-				marker * mar = new target;
-				mar->setposition(x, y);
-				manager->addmarker(mar);
-				manager->redraweverything();
+				if (manager->extractmarkermanager()->getcurrentmarkertype() == "targetmode"){
+
+					manager->gotolasttarget();
+					if (manager->getcurrenttarget() == 0)
+						manager->choosestartpoint();
+					if (manager->getcurrenttarget()){
+
+						int x = token->getparam("x", 0);
+						int y = token->getparam("y", 0);
+						marker * mar = new target;
+						mar->setposition(x, y);
+						manager->addmarker(mar);
+						edge * edg = new simpleedge;
+						edg->setA(manager->getcurrenttarget());
+						edg->setB(mar);
+						manager->addedge(edg);
+						manager->redraweverything();
+
+					}
+
+				}
+				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "startpointmode"){
+
+					int x = token->getparam("x", 0);
+					int y = token->getparam("y", 0);
+					marker * mar = new startpoint;
+					mar->setposition(x, y);
+					manager->addmarker(mar);
+					manager->redraweverything();
+
+				}
+				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "multitargetmode"){
+
+					int x = token->getparam("x", 0);
+					int y = token->getparam("y", 0);
+					marker * mar = new multitarget;
+					mar->setposition(x, y);
+					manager->addmarker(mar);
+					manager->redraweverything();
+
+				}
+				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "freemode"){
+
+					fprintf(stderr, "mapcore--viewconnection::handler::fixme: freemode, stub\n");
+
+				}
+				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "selectmode"){
+
+					fprintf(stderr, "mapcore--viewconnection::handler::fixme: selectmode, stub\n");
+
+				}
 
 			}
 
@@ -138,5 +190,75 @@ pair < int, int > mapmanager::decodeposition(pair < int, int > pos){
 	return pos;
 
 }
+void mapmanager::connecttomarkermanager(markermanager * chosentype){
+
+	this->chosentype = chosentype;
+
+}
+markermanager * mapmanager::extractmarkermanager(){
+
+	return chosentype;
+
+}
+
+int mapmanager::getmapvalue(int i, int j){
+
+	return mapsource->getvalue(i, j);
+
+}
+void mapmanager::setmapvalue(int i, int j, int v){
+
+	mapsource->setvalue(i, j, v);
+
+}
+void mapmanager::gotolasttarget(){
+
+	marker * mar, * lmar = 0;
+	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
+
+		if (mar->gettype() == "target")
+			lmar = mar;
+
+	}
+
+	currenttarget = lmar;
+
+}
+
+void mapmanager::clearstartpoint(){
+
+	marker * mar;
+	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
+
+		if (mar->gettype() == "startpoint"){
+
+			delmarker(mar);
+			break;
+
+		}
+
+	}
+
+}
+
+void mapmanager::choosestartpoint(){
+
+	marker * mar, * lmar = 0;
+	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
+
+		if (mar->gettype() == "startpoint"){
+
+			lmar = mar;
+			break;
+
+		}
+
+	}
+
+	currenttarget = lmar;
+
+}
+
+marker * mapmanager::getcurrenttarget(){ return currenttarget; }
 
 //#end

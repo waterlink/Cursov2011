@@ -47,3 +47,14 @@
 [class logic] - class controlling main processes in program
 [class test_simplemap] - class mapcore, realization, for test purposes
 [class mainclass] - win version of main class, contains initialization, run method and finalization
+[class logic] - class controlling main processes in program
+[class mainclass] - win version of main class, contains initialization, run method and finalization
+[class Wview] - guicore view class for winapi
+[class mapmanager] - class to manage map, markermap and view it all
+[class logic] - class controlling main processes in program
+[class button] - gui button class
+[code main2] - main file, runs mainclass
+[class mapcore] - class mapcore, contains a map, loads and saves it, abstract
+[class mapcore] - class mapcore, contains a map, loads and saves it, abstract
+[class edge] - class edge, abstract, connects two markers, oriented
+[class logger] - class used to do logging into stderr

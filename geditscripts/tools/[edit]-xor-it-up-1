@@ -1,0 +1,11 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=[edit] xor it up 1
+# Shortcut=<Shift><Control>x
+# Languages=cpp
+# Applicability=all
+# Output=replace-selection
+# Input=selection
+# Save-files=nothing
+
+cat | ~/scripts/xor.elf

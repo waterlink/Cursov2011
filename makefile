@@ -448,4 +448,25 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/markercore/edgedrawer.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/edgedrawer.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/markercore/markermanager.linux.all.o: ./source/all/markercore/markermanager.all.cpp ./source/all/markercore/markermanager.all.hpp 
+	$(linux_CC) ./source/all/markercore/markermanager.all.cpp $(linux_CFLAGS) -o ./objects/all/markercore/markermanager.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/markercore/markermanager.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/markermanager.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/maincore/datamanager.linux.all.o: ./source/all/maincore/datamanager.all.cpp ./source/all/maincore/datamanager.all.hpp 
+	$(linux_CC) ./source/all/maincore/datamanager.all.cpp $(linux_CFLAGS) -o ./objects/all/maincore/datamanager.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/maincore/datamanager.all.cpp $(win_CFLAGS) -o ./objects/all/maincore/datamanager.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/markercore/simpleedge.linux.all.o: ./source/all/markercore/simpleedge.all.cpp ./source/all/markercore/simpleedge.all.hpp 
+	$(linux_CC) ./source/all/markercore/simpleedge.all.cpp $(linux_CFLAGS) -o ./objects/all/markercore/simpleedge.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/markercore/simpleedge.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/simpleedge.win.all.o $(win_DEFFS) 
 #end

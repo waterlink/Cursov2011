@@ -19,6 +19,7 @@
 #include <cstdio>
 
 #include "../utilcore/stringtokenizer.all.hpp"
+#include "../utilcore/settings.all.hpp"
 #include "../mapcore/mapcore.all.hpp"
 #include "../mapcore/test_simplemap.all.hpp"
 #include "../markercore/markermap.all.hpp"
@@ -26,6 +27,13 @@
 EHandler(click_btn1, {
 
 	printf("ehandler catched an event\n");
+
+})
+
+EHandler(modeactivate, {
+
+	//printf("modeactivate\n");
+	mainlogic->changetoolboxmode(sender);
 
 })
 
@@ -46,12 +54,22 @@ logic::logic(
 		menu * mfile_exit,
 		menu * mq_about,
 
-		pather * decoder
+		pather * decoder,
+
+		button * selectmode,
+		button * startpointmode,
+		button * targetmode,
+		button * multitargetmode,
+		button * freemode
 ){
 
 #define clean \
 		delete token; \
 		return;
+
+	settings::set("loglevel", 0);
+
+	mainlogic = this;
 
 	string message;
 	tokenizer * token = new stringtokenizer(&message);
@@ -96,12 +114,56 @@ logic::logic(
 	prop1->setsize(150, 350);
 
 	btn1->setsize(0, 0);
+	btn2->setsize(0, 0);
+	btn3->setsize(0, 0);
 
 	btn1->setactivate(click_btn1);
 
 	mapcore * M = new test_simplemap(decoder);
 	markermap * markers = new markermap();
 	manager = new mapmanager(M, markers, view1);
+	manager->connecttoview();
+	chosenmarkertype = new markermanager;
+	manager->connecttomarkermanager(chosenmarkertype);
+
+	/*button * selectmode
+	button * startpointmode
+	button * targetmode
+	button * multitargetmode
+	button * freemode*/
+
+	toolbox1->add(selectmode);
+	toolbox1->add(startpointmode);
+	toolbox1->add(targetmode);
+	toolbox1->add(multitargetmode);
+	toolbox1->add(freemode);
+
+	toolbox1->setactivecontrol(selectmode);
+
+	selectmode->setsize(20, 20);
+	selectmode->setposition(65, 10);
+	selectmode->setactivate(modeactivate);
+	selectmode->settext("");
+
+	startpointmode->setsize(20, 20);
+	startpointmode->setposition(65, 40);
+	startpointmode->setactivate(modeactivate);
+	startpointmode->settext("S");
+
+	targetmode->setsize(20, 20);
+	targetmode->setposition(65, 70);
+	targetmode->setactivate(modeactivate);
+	targetmode->settext("T");
+
+	multitargetmode->setsize(20, 20);
+	multitargetmode->setposition(65, 100);
+	multitargetmode->setactivate(modeactivate);
+	multitargetmode->settext("M");
+
+	freemode->setsize(20, 20);
+	freemode->setposition(65, 130);
+	freemode->setactivate(modeactivate);
+	freemode->settext("F");
 
 	clean;
 
@@ -112,6 +174,13 @@ logic::logic(
 int logic::run(){
 
 	return app->mainloop();
+
+}
+
+void logic::changetoolboxmode(component * pressed){
+
+	chosenmarkertype->setcurrentmarkertype(pressed->getname());
+	toolbox1->setactivecontrol(pressed);
 
 }
 

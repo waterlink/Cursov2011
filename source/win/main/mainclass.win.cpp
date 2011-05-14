@@ -172,7 +172,10 @@ mainclass::run(){
 	glbl_data->app->newmainform(glbl_data->form1);
 	//return glbl_data->app->mainloop();
 
-	logic * lgck = new logic(
+	Wform * frm = glbl_data->form1;
+	Wtoolbox * tbox = glbl_data->toolbox1;
+
+	mainlogic = new logic(
 					glbl_data->app,
 					glbl_data->form1,
 					glbl_data->btn1,
@@ -188,10 +191,16 @@ mainclass::run(){
 					glbl_data->mfile_exit,
 					glbl_data->mq_about,
 
-					new Wpather
+					new Wpather,
+
+					new Wbutton("selectmode", tbox),
+					new Wbutton("startpointmode", tbox),
+					new Wbutton("targetmode", tbox),
+					new Wbutton("multitargetmode", tbox),
+					new Wbutton("freemode", tbox)
 				);
 
-	return lgck->run();
+	return mainlogic->run();
 
 }
 

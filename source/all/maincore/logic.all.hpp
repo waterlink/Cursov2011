@@ -22,6 +22,7 @@
 #include "../guicore/guicore.all.hpp"
 #include "../mapcore/mapmanager.all.hpp"
 #include "../filecore/pather.all.hpp"
+#include "../markercore/markermanager.all.hpp"
 
 class
 logic{
@@ -45,10 +46,18 @@ public:
 			menu * mfile_exit,
 			menu * mq_about,
 
-			pather * decoder
+			pather * decoder,
+
+			button * selectmode,
+			button * startpointmode,
+			button * targetmode,
+			button * multitargetmode,
+			button * freemode
 	);
 
 	int run();
+
+	void changetoolboxmode(component * pressed);
 
 protected:
 
@@ -75,11 +84,19 @@ private:
 
 	pather * decoder;
 
+	button * selectmode;
+	button * startpointmode;
+	button * targetmode;
+	button * multitargetmode;
+	button * freemode;
+
 	//independent:
 
 	mapmanager * manager;
 
-};
+	markermanager * chosenmarkertype;
+
+} * mainlogic;
 
 #endif
 

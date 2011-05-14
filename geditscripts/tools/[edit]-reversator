@@ -1,0 +1,11 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=[edit] reversator
+# Shortcut=<Shift><Control>r
+# Languages=cpp
+# Applicability=all
+# Output=replace-selection
+# Input=selection
+# Save-files=nothing
+
+cat | ~/scripts/rev.elf

@@ -1,0 +1,50 @@
+#!/bin/sh
+# [Gedit Tool]
+# Name=New source
+# Shortcut=<Shift><Control>n
+# Applicability=all
+# Output=output-panel
+# Input=nothing
+# Save-files=nothing
+
+
+#copied from Configure command 
+#(it uses another bash, aaarghh)
+export configured="1";
+export currdir=`pwd`;
+hasscripts=`find "scripts"`;
+echo "$hasscripts" > ~/log.txt;
+echo "$currdir";
+while `test "$hasscripts" = ""`
+do
+	echo "going up";
+	cd ..;
+	currdir=`pwd`;
+	echo $currdir;
+	if `test "$currdir" = "/"`
+	then
+		echo "can't find project files";
+		configured="0";
+		break;
+	fi
+	hasscripts=`ls "./scripts/" | grep "sc_"`;
+done
+if `test "$configured" = "1"`
+then
+	echo "success: project dir = $currdir";
+else
+	echo "failed";
+fi
+export currdir="$currdir";
+export configured="$configured";
+
+# start of real script
+if [ "$configured" = "1" ]
+then
+	cd "$currdir"
+	pwd
+	./scripts/sc_createsource.sh class `zenity --entry --title "New source - gedit" --text "Class name"` "`zenity --entry --title "New source - gedit" --text "Description"`"
+else
+	echo "project isn't configured!!"
+fi
+

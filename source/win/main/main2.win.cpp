@@ -14,6 +14,8 @@
 //	main file, runs mainclass
 //
 
+#pragma comment (linker, "/STACK:16777216")
+
 #include "main2.win.hpp"
 
 int __stdcall

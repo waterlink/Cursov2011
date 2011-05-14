@@ -22,6 +22,8 @@
 #include "mapcore.all.hpp"
 #include "../markercore/markermap.all.hpp"
 #include "../guicore/view.all.hpp"
+#include "../markercore/markermap.all.hpp"
+#include "../markercore/markermanager.all.hpp"
 
 class
 mapmanager{
@@ -41,6 +43,17 @@ public:
 	virtual pair < int, int > decodeposition(marker * mar);
 	virtual pair < int, int > decodeposition(pair < int, int > pos);
 
+	virtual void connecttomarkermanager(markermanager * chosentype);
+	virtual markermanager * extractmarkermanager();
+
+	virtual int getmapvalue(int i, int j);
+	virtual void setmapvalue(int i, int j, int v);
+
+	virtual marker * getcurrenttarget();
+	virtual void gotolasttarget();
+	virtual void clearstartpoint();
+	virtual void choosestartpoint();
+
 protected:
 
 	
@@ -53,6 +66,10 @@ private:
 
 	marker * chosenmarker;
 	edge * chosenedge;
+
+	markermanager * chosentype;
+
+	marker * currenttarget;
 
 };
 

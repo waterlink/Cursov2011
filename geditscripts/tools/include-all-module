@@ -1,0 +1,73 @@
+#!/bin/sh
+# [Gedit Tool]
+# Input=selection
+# Save-files=nothing
+# Name=Include all module
+# Applicability=all
+# Output=replace-selection
+
+
+#copied from Configure command 
+#(it uses another bash, aaarghh)
+
+while :
+do
+
+export configured="1";
+export currdir=`pwd`;
+hasscripts=`find "scripts"`;
+echo "$hasscripts" > ~/log.txt;
+echo "$currdir";
+while `test "$hasscripts" = ""`
+do
+	#echo "going up";
+	cd ..;
+	currdir=`pwd`;
+	#echo $currdir;
+	if `test "$currdir" = "/"`
+	then
+		#echo "can't find project files";
+		configured="0";
+		break;
+	fi
+	hasscripts=`ls "./scripts/" | grep "sc_"`;
+done
+if `test "$configured" = "1"`
+then
+	echo "success: project dir = $currdir";
+else
+	echo "failed";
+fi
+export currdir="$currdir";
+export configured="$configured";
+
+break;
+done > log.txt 2> log2.txt
+
+read way
+
+# start of real script
+if [ "$configured" = "1" ]
+then
+	cd "$currdir"
+	pwd > log.txt
+	target=`./scripts/sc_getvalue.sh "./config/source_config" "target"`
+	module=`./scripts/sc_getvalue.sh "./config/source_config" "module"`
+	target=`echo ${target}`
+	module=`echo ${module}`
+	cat "./source/${target}/${module}/list" | while :
+	do
+	
+		read instr
+		a3=`echo "$instr" | grep "#end"`
+		if [ "$a3" != "" ]
+		then
+			break
+		fi
+		classname="`echo "${instr}" | sed s/"\[[A-Za-z_]* "//g | sed s/"\([A-Za-z_]*\).*"/"\1"/g`"
+		echo "#include \"${way}/${classname}.${target}.hpp\""
+	
+	done
+else
+	echo "project isn't configured!!" > log2.txt
+fi

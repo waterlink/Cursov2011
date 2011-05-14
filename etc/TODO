@@ -20,8 +20,15 @@
   WOK	- menu
   WOK	- button
   TOK	- bitbutton
-  WOK	- toolbox
-  WOK	- view
+  WOK	- toolbox	
+		- now toolbox showing 5 buttons to change marker mode
+			- select mode ()
+			- start point mode (S)
+			- target mode (T)
+			- multitarget mode (M)
+			- free mode (F)
+  TWOK	- view
+		- code bit copy primitive
   WOK	- status
 ######	- popup, don't need now
   TWOK	- properties
@@ -43,6 +50,9 @@
 		if there more than one matches, ask user to choose one.
 			still it'll be just asking of user
   TOK	- mapmanager
+	   T	- selectmode
+	   T	- freemode
+	   T	- show map (here might be some problems, need to add bits functionallity for view)
 5) fogcore - no module for now, this functionallity would be refactored later to this module
   TOK	- exploration of map
 		made this in test map class as 0-value - fogged position 
@@ -83,4 +93,5 @@
 10) maincore
   TOK	- logic
 		main program logic
+	- datamanager
 

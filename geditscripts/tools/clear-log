@@ -1,0 +1,9 @@
+#!/bin/sh
+# [Gedit Tool]
+# Input=nothing
+# Save-files=nothing
+# Name=Clear log
+# Applicability=all
+# Output=output-panel
+
+clear

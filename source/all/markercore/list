@@ -6,4 +6,6 @@
 [class markermap] - class for managing markers
 [class markerdrawer] - class, makes primitive for desired marker
 [class edgedrawer] - class, creates primitive for edges
+[class markermanager] - class for managing markers, eg current selected marker type
+[class simpleedge] - class edge simple realization
 #end

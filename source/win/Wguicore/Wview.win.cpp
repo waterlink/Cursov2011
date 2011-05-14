@@ -30,6 +30,7 @@ Wview::~Wview(){}
 
 void Wview::draw(string primitive){
 
+	fprintf(stderr, "Wguicore--Wview::draw::debug: primitive: %s\n", primitive.c_str());
 	drawqueue.push_back(primitive);
 
 }
@@ -79,6 +80,8 @@ int Wview::dispatch(string message){
 
 				string next = *iter;
 				tokenizer * primitive = new stringtokenizer(&next);
+
+				fprintf(stderr, "Wguicore--Wview::dispatch::debug: primitive is: %s\n", next.c_str());
 
 				string ptype = primitive->getparam("primitive");
 				int x = primitive->getparam("x", 0);
