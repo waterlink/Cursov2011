@@ -68,7 +68,7 @@ int stringtokenizer::getparam(string param, int){
 	string S = getparam(param);
 	char * buff = new char[S.size() + 10];
 	strcpy(buff, S.c_str());
-	int x = LONG_MAX;
+	int x = tokenizer::unknowint;
 	sscanf(buff, "%d", &x);
 	return x;
 

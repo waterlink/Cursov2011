@@ -16,6 +16,8 @@
 
 #include "tokenizer.all.hpp"
 
+int tokenizer::unknowint = LONG_MAX;
+
 tokenizer::~tokenizer(){}
 
 //#end

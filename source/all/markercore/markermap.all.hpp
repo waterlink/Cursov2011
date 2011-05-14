@@ -47,6 +47,8 @@ public:
 	virtual edge * catnextedge();
 	virtual edge * catlastedge();
 
+	virtual void clear();
+
 protected:
 
 	

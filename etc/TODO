@@ -53,6 +53,7 @@
 	   T	- selectmode
 	   T	- freemode
 	   T	- show map (here might be some problems, need to add bits functionallity for view)
+	   OK	- done edge adding, and startpoint/target <-> target|multitarget relating
 5) fogcore - no module for now, this functionallity would be refactored later to this module
   TOK	- exploration of map
 		made this in test map class as 0-value - fogged position 
@@ -93,5 +94,5 @@
 10) maincore
   TOK	- logic
 		main program logic
-	- datamanager
+  OK	- datamanager
 

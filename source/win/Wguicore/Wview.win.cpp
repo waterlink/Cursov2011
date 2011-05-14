@@ -20,6 +20,8 @@
 #include "Wform.win.hpp"
 #include <windows.h>
 
+#include "../../all/utilcore/logger.all.hpp"
+
 Wview::Wview(string name, form * parent){
 
 	this->name = name;
@@ -93,12 +95,14 @@ int Wview::dispatch(string message){
 				int cg = primitive->getparam("gcolor", 0);
 				int cb = primitive->getparam("bcolor", 0);
 				int th = primitive->getparam("thickness", 0);
+				if (th == tokenizer::unknowint)
+					th = 0;
 
 				brush.lbStyle = BS_SOLID;
 				brush.lbColor = RGB(cr, cg, cb);
 				hbrush = CreateBrushIndirect(&brush);
 				SelectObject(hdc, hbrush);
-				hpen = CreatePen(PS_NULL, th, RGB(cr, cg, cb));
+				hpen = CreatePen(PS_SOLID, th, RGB(cr, cg, cb));
 				SelectObject(hdc, hpen);
 
 				if (ptype == "rectangle")
@@ -111,6 +115,7 @@ int Wview::dispatch(string message){
 					Ellipse(hdc, x - r / 2, y - r / 2, x + r / 2, y + r / 2);
 				if (ptype == "line"){
 
+					new logger(0, "trying to paint line\n");
 					MoveToEx(hdc, x, y, NULL);
 					LineTo(hdc, x + w, y + h);
 

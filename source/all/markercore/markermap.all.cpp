@@ -26,16 +26,24 @@ void markermap::delmarker(marker * mar){
 
 	set < marker * >::iterator it = markers.lower_bound(mar);
 	if (it != markers.end())
-		if (*it == mar)
+		if (*it == mar){
+
+			delete *it;
 			markers.erase(it);
+
+		}
 
 }
 void markermap::deledge(edge * edg){
 
 	set < edge * >::iterator it = edges.lower_bound(edg);
 	if (it != edges.end())
-		if (*it == edg)
+		if (*it == edg){
+
+			delete *it;
 			edges.erase(it);
+
+		}
 
 }
 
@@ -62,5 +70,17 @@ edge * markermap::catnextedge(){
 
 }
 edge * markermap::catlastedge(){ return 0; }
+
+void markermap::clear(){
+
+	for (set < marker * >::iterator it = markers.begin(); it != markers.end(); ++it)
+		delete *it;
+	markers.clear();
+
+	for (set < edge * >::iterator it = edges.begin(); it != edges.end(); ++it)
+		delete *it;
+	edges.clear();
+
+}
 
 //#end

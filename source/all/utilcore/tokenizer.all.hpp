@@ -20,6 +20,7 @@
 #define tokenizer_hpp
 
 #include <string>
+#include <climits>
 
 using namespace std;
 
@@ -33,6 +34,8 @@ public:
 	virtual void setparam(string param, int value) = 0;
 	virtual string getparam(string param) = 0;
 	virtual int getparam(string param, int) = 0;	// int added just for distinguishing
+
+	static int unknowint;
 
 protected:
 

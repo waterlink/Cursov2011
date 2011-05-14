@@ -54,6 +54,8 @@ public:
 	virtual void clearstartpoint();
 	virtual void choosestartpoint();
 
+	virtual void clear();
+
 protected:
 
 	

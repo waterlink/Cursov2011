@@ -34,7 +34,7 @@ void simpleedge::setB(marker * B){ this->B = B; }
 int simpleedge::determine(){
 
 	new logger(1, "markercore--simpleedge::fixme: stub, rand\n");
-	return rand() % 4;
+	return 0;
 
 }
 

@@ -30,6 +30,8 @@
 
 #include "../markercore/simpleedge.all.hpp"
 
+#include "../utilcore/logger.all.hpp"
+
 class viewconnection: public messager{ public: viewconnection(){} ~viewconnection(){}
 
 	void setup(mapmanager * manager){
@@ -69,6 +71,8 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 				}
 				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "startpointmode"){
 
+					// TODO: here must be a dialog asking, is user really wants do that
+					manager->clear();
 					int x = token->getparam("x", 0);
 					int y = token->getparam("y", 0);
 					marker * mar = new startpoint;
@@ -79,12 +83,21 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 				}
 				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "multitargetmode"){
 
-					int x = token->getparam("x", 0);
-					int y = token->getparam("y", 0);
-					marker * mar = new multitarget;
-					mar->setposition(x, y);
-					manager->addmarker(mar);
-					manager->redraweverything();
+					manager->choosestartpoint();
+					if (manager->getcurrenttarget()){
+
+						int x = token->getparam("x", 0);
+						int y = token->getparam("y", 0);
+						marker * mar = new multitarget;
+						mar->setposition(x, y);
+						manager->addmarker(mar);
+						edge * edg = new simpleedge;
+						edg->setA(manager->getcurrenttarget());
+						edg->setB(mar);
+						manager->addedge(edg);
+						manager->redraweverything();
+
+					}
 
 				}
 				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "freemode"){
@@ -260,5 +273,40 @@ void mapmanager::choosestartpoint(){
 }
 
 marker * mapmanager::getcurrenttarget(){ return currenttarget; }
+
+void mapmanager::clear(){ 
+
+	edge * edg;
+	for (markersource->catedge(); (edg = markersource->catnextedge()) != markersource->catlastedge(); ){
+
+		string prim = edgedrawer::draw(edg, decodeposition(edg->getA()), decodeposition(edg->getB()));
+		viewdestination->undraw(prim);
+		//viewdestination->draw(prim);
+
+	}
+
+	marker * mar;
+	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
+
+		string prim = markerdrawer::draw(mar, decodeposition(mar));
+		viewdestination->undraw(prim);
+		//viewdestination->draw(prim);
+
+	}
+
+	if (chosenmarker){
+
+		// code this up
+
+	}
+	else if (chosenedge){
+
+		// code this up
+
+	}
+
+	markersource->clear(); 
+
+}
 
 //#end

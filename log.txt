@@ -58,3 +58,8 @@
 [class mapcore] - class mapcore, contains a map, loads and saves it, abstract
 [class edge] - class edge, abstract, connects two markers, oriented
 [class logger] - class used to do logging into stderr
+[class tokenizer] - this class allows to work with strings, as they are datastructures with unknown signature (param:value param:value ...)
+[class stringtokenizer] - tokenizer realization for strings
+[class tokenizer] - this class allows to work with strings, as they are datastructures with unknown signature (param:value param:value ...)
+[class edgedrawer] - class, creates primitive for edges
+[class markermap] - class for managing markers
