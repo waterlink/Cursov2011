@@ -62,6 +62,13 @@ string edgedrawer::draw(edge * edg, pair < int, int > Adecodedcoords, pair < int
 		token->setparam("bcolor", 0);
 
 	}
+	else if (edg->determine() == 4){
+
+		token->setparam("rcolor", 0);
+		token->setparam("gcolor", 0);
+		token->setparam("bcolor", 255);
+
+	}
 
 	ret;
 

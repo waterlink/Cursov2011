@@ -63,3 +63,14 @@
 [class tokenizer] - this class allows to work with strings, as they are datastructures with unknown signature (param:value param:value ...)
 [class edgedrawer] - class, creates primitive for edges
 [class markermap] - class for managing markers
+[class izprog] - interface for z0rch's program
+[class marker] - class marker, abstract
+[class target] - class target - realization of marker
+[class startpoint] - class startpoint - realization of marker
+[class multitarget] - class for gamilton-way
+[class directionoffset] - class for managing current direction of robot
+[class mapmanager] - class to manage map, markermap and view it all
+[class edge] - class edge, abstract, connects two markers, oriented
+[class simpleedge] - class edge simple realization
+[class edgedrawer] - class, creates primitive for edges
+[class simpleedge] - class edge simple realization

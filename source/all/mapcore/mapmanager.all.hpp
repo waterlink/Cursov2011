@@ -53,6 +53,7 @@ public:
 	virtual void gotolasttarget();
 	virtual void clearstartpoint();
 	virtual void choosestartpoint();
+	virtual void clearoffset();
 
 	virtual void clear();
 

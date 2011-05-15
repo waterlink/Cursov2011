@@ -21,6 +21,7 @@
 #include "idmaster.win.hpp"
 #include "hwndmaster.win.hpp"
 #include "../../all/utilcore/stringtokenizer.all.hpp"
+#include "../../all/utilcore/logger.all.hpp"
 
 Wtoolbox::Wtoolbox(){}
 Wtoolbox::Wtoolbox(string name, Wform * parent){
@@ -68,7 +69,9 @@ Wtoolbox::Wtoolbox(string name, Wform * parent){
 
 	}
 
-	fprintf(stderr, "Wguicore--Wtoolbox::Wtoolbox::debug: handle is %d\n", hWnd);
+	char logbuf[200];
+	sprintf(logbuf, "Wguicore--Wtoolbox::Wtoolbox::debug: handle is %d\n", hWnd);
+	new logger(10, logbuf);
 
 	sethandle(hWnd);
 	hwndmaster::newform(hwnd, (Wform *)this);

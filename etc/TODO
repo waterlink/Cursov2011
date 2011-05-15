@@ -66,6 +66,7 @@
   TOK	- multitarget
   OK	- properties of markers and edges
   OK	- markermap
+	- directionoffset
 7) scenariocore
   OK	- vector of commands i think
   OK	- load

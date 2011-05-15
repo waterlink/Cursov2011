@@ -11,27 +11,20 @@
 
 //
 //	source file
-//	class target - realization of marker
+//	class for managing current direction of robot
 //
 
-#include "target.all.hpp"
+#include "directionoffset.all.hpp"
 
 #include "../utilcore/stringtokenizer.all.hpp"
 
-void target::setposition(int x, int y){
+directionoffset::directionoffset(){}
+directionoffset::~directionoffset(){}
 
-	position = make_pair(x, y);
+void directionoffset::setposition(int x, int y){ position = make_pair(x, y); }
+pair < int, int > directionoffset::getposition(){ return position; }
 
-}
-pair < int, int > target::getposition(){
-
-	return position;
-
-}
-
-//	#refactor
-
-string target::getoption(string param){
+string directionoffset::getoption(string param){
 
 	tokenizer * token = new stringtokenizer(&(options[param]));
 	string res = token->getparam(param);
@@ -39,7 +32,7 @@ string target::getoption(string param){
 	return res;
 
 }
-int target::getoption(string param, int){
+int directionoffset::getoption(string param, int){
 
 	tokenizer * token = new stringtokenizer(&(options[param]));
 	int res = token->getparam(param, 0);
@@ -47,14 +40,14 @@ int target::getoption(string param, int){
 	return res;
 
 }
-void target::setoption(string param, string value){
+void directionoffset::setoption(string param, string value){
 
 	tokenizer * token = new stringtokenizer(&(options[param]));
 	token->setparam(param, value);
 	delete token;
 
 }
-void target::setoption(string param, int value){
+void directionoffset::setoption(string param, int value){
 
 	tokenizer * token = new stringtokenizer(&(options[param]));
 	token->setparam(param, value);
@@ -62,8 +55,6 @@ void target::setoption(string param, int value){
 
 }
 
-//	#refactorend
-
-string target::gettype(){ return "target"; }
+string directionoffset::gettype(){ return "directionoffset"; }
 
 //#end

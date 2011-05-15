@@ -24,9 +24,6 @@
 Wbutton::Wbutton(string name, ihandled * parent){ 
 
 	this->name = name;
-	if (parent == NULL)
-		fprintf(stderr, "Wguicore--Wbutton::Wbutton::debug: parent handle = 0\n");
-	fprintf(stderr, "Wguicore--Wbutton::Wbutton::debug: parent handle = %d\n", parent->gethandle());
 	hwnd = CreateWindow(
 				"button",
 				name.c_str(),
@@ -44,14 +41,10 @@ Wbutton::Wbutton(string name, ihandled * parent){
 Wbutton::~Wbutton(){}
 int Wbutton::dispatch(string message){
 
-	// TODO: here is winapi dispatching
-	// TODO: use of tokenizer
-
 #define clean \
 		delete token; \
 		return 0;
 
-	fprintf(stderr, "Wguicore--Wbutton::dispatch::fixme: stub, message: %s\n", message.c_str());
 	tokenizer * token = new stringtokenizer(&message);
 	if (token->getparam("message") == "activate") if (onactivate){
 

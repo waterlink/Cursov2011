@@ -37,6 +37,7 @@ public:
 	// 1 - red (forbidden)
 	// 2 - yellow (non-optimal way)
 	// 3 - green (optimal way)
+	// 4 - blue (robot offset)
 	int determine();
 
 protected:

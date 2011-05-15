@@ -31,6 +31,8 @@
 #include "../../all/utilcore/stringtokenizer.all.hpp"
 #include "../../all/maincore/logic.all.hpp"
 
+#include "../../all/utilcore/logger.all.hpp"
+
 HINSTANCE mainclass::Inst = 0;
 
 HINSTANCE mainclass::getInst(){ return Inst; }
@@ -38,7 +40,7 @@ HINSTANCE mainclass::getInst(){ return Inst; }
 class btn1_onclick: public messager{ public: btn1_onclick(){} ~btn1_onclick(){}
 	void operator ()(component * sender, string message){
 
-		fprintf(stdout, "main--btn1click::fixme: stub, catched!!\n");
+		
 
 	}
 } * btn1click = new btn1_onclick();
@@ -46,7 +48,7 @@ class btn1_onclick: public messager{ public: btn1_onclick(){} ~btn1_onclick(){}
 class btn2_3_onclick: public messager{ public: btn2_3_onclick(){} ~btn2_3_onclick(){}
 	void operator ()(component * sender, string message){
 
-		fprintf(stdout, "main--btn1click::fixme: stub, catched!!\n");
+		
 
 		glbl_data->toolbox1->setactivecontrol(sender);
 
@@ -86,7 +88,9 @@ mainclass::init(
 			int CmdShow
 		){
 
-	fprintf(stderr, "main--mainclass::init::debug: Inst = %d, CmdShow = %d\n", Inst, CmdShow);
+	char logbuf[200];
+	sprintf(logbuf, "main--mainclass::init::debug: Inst = %d, CmdShow = %d\n", Inst, CmdShow);
+	new logger(10, logbuf);
 
 	this->Inst = Inst;
 	this->CmdParam = CmdParam;
@@ -99,7 +103,7 @@ mainclass::~mainclass(){}
 int
 mainclass::run(){
 
-	MessageBox (NULL, TEXT ("mainclass: Hello, Windowman!"), TEXT ("HelloMsg"), 0);
+	MessageBox (NULL, TEXT ("Hello, dear user! To proceed press OK as fast as you can"), TEXT ("Robot behavior designer"), 0);
 
 	glbl_data->app = new Wclient("app");
 	glbl_data->form1 = new Wform("form1");

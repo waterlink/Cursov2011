@@ -32,7 +32,6 @@ Wview::~Wview(){}
 
 void Wview::draw(string primitive){
 
-	fprintf(stderr, "Wguicore--Wview::draw::debug: primitive: %s\n", primitive.c_str());
 	drawqueue.push_back(primitive);
 
 }
@@ -50,13 +49,9 @@ void Wview::undraw(string primitive){
 // component:
 int Wview::dispatch(string message){
 
-	// TODO: code this up
-
 #define clean \
 		delete token; \
 		return 0;
-
-	fprintf(stderr, "Wguicore--Wview::dispatch::debug: message is: %s\n", message.c_str());
 
 	tokenizer * token = new stringtokenizer(&message);
 	if (token->getparam("message") == "paint"){
@@ -82,8 +77,6 @@ int Wview::dispatch(string message){
 
 				string next = *iter;
 				tokenizer * primitive = new stringtokenizer(&next);
-
-				fprintf(stderr, "Wguicore--Wview::dispatch::debug: primitive is: %s\n", next.c_str());
 
 				string ptype = primitive->getparam("primitive");
 				int x = primitive->getparam("x", 0);
@@ -138,14 +131,9 @@ int Wview::dispatch(string message){
 		if (onmouseup)
 			(*onmouseup)(this, message);
 	}
-	else if (token->getparam("message") == "mousemove"){
-		//fprintf(stderr, "Wguicore--Wview::dispatch::debug: trying to trigger onmousemove\n");
-		if (onmousemove){
-			//fprintf(stderr, "Wguicore--Wview::dispatch::debug: onmousemove triggered\n");
+	else if (token->getparam("message") == "mousemove")
+		if (onmousemove)
 			(*onmousemove)(this, message);
-
-		}
-	}
 
 	clean;
 

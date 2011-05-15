@@ -27,6 +27,7 @@
 #include "../markercore/target.all.hpp"
 #include "../markercore/startpoint.all.hpp"
 #include "../markercore/multitarget.all.hpp"
+#include "../markercore/directionoffset.all.hpp"
 
 #include "../markercore/simpleedge.all.hpp"
 
@@ -102,12 +103,40 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 				}
 				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "freemode"){
 
-					fprintf(stderr, "mapcore--viewconnection::handler::fixme: freemode, stub\n");
+					//fprintf(stderr, "mapcore--viewconnection::handler::fixme: freemode, stub\n");
+					new logger(4, "mapcore--viewconnection::handler::fixme: freemode, stub\n");
 
 				}
 				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "selectmode"){
 
-					fprintf(stderr, "mapcore--viewconnection::handler::fixme: selectmode, stub\n");
+					//fprintf(stderr, "mapcore--viewconnection::handler::fixme: selectmode, stub\n");
+					new logger(4, "mapcore--viewconnection::handler::fixme: selectmode, stub\n");
+
+				}
+
+			}
+			else if (token->getparam("message") == "mousedown" 
+				&& token->getparam("button") == "right"){
+
+				if (manager->extractmarkermanager()->getcurrentmarkertype() == "startpointmode"){
+
+					// TODO: here must be a dialog asking, is user really wants do that
+					manager->clearoffset();
+					manager->choosestartpoint();
+					if (manager->getcurrenttarget()){
+					
+						int x = token->getparam("x", 0);
+						int y = token->getparam("y", 0);
+						marker * mar = new directionoffset;
+						mar->setposition(x, y);
+						manager->addmarker(mar);
+						edge * edg = new simpleedge;
+						edg->setA(manager->getcurrenttarget());
+						edg->setB(mar);
+						manager->addedge(edg);
+						manager->redraweverything();
+
+					}
 
 				}
 
@@ -306,6 +335,22 @@ void mapmanager::clear(){
 	}
 
 	markersource->clear(); 
+
+}
+
+void mapmanager::clearoffset(){
+
+	marker * mar;
+	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
+
+		if (mar->gettype() == "directionoffset"){
+
+			delmarker(mar);
+			break;
+
+		}
+
+	}
 
 }
 

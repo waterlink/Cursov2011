@@ -134,8 +134,6 @@ bool Wproperties::addproperty(string name, string value, string type){
 	}
 	else if (type == "string" || type == "int"){
 
-		fprintf(stderr, "Wguicore--Wproperties::addproperty::debug: here!\n");
-
 		int num = maxnum++;
 
 		props[name] = make_pair(type, value);
@@ -155,13 +153,11 @@ bool Wproperties::addproperty(string name, string value, string type){
 							hwnd, 0,
 							mainclass::getInst(), 0
 						);
-		fprintf(stderr, "Wguicore--Wproperties::addproperty::debug: handle: %d\n", handles[name + "___value"]);
 		char buf[100];
 		strcpy(buf, value.c_str());
 		//SendMessage(handles[name + "___value"], WM_SETTEXT, 0, (LPARAM)buf);
 		//SetWindowText(handles[name + "___value"], value.c_str());
 
-		fprintf(stderr, "Wguicore--Wproperties::addproperty::debug: here!\n");
 		return true;
 
 	}

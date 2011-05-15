@@ -25,6 +25,8 @@
 #include "../../all/utilcore/stringtokenizer.all.hpp"
 #include "hwndmaster.win.hpp"
 
+#include "../../all/utilcore/logger.all.hpp"
+
 using namespace std;
 
 Wform::Wform(){}
@@ -35,8 +37,6 @@ Wform::Wform(string name){
 	HWND hWnd; 
 	WNDCLASS WndClass; 
 	HINSTANCE hInst = mainclass::getInst();
-
-	fprintf(stderr, "Wguicore--Wform::Wform::debug: Inst = %d\n", hInst);
 
 	WndClass.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
 	WndClass.lpfnWndProc = (WNDPROC)wndproc;
@@ -86,8 +86,6 @@ Wform::~Wform(){
 // Wform methods
 void Wform::show(){
 
-	// TODO: make this work with winapi
-	/*fprintf(stderr, "Wguicore--Wform::show::fixme: stub\n");*/
 	ShowWindow(hwnd, 10);
 	UpdateWindow(hwnd);
 	visible = true;
@@ -96,7 +94,8 @@ void Wform::show(){
 void Wform::close(){
 
 	// TODO: make this work with winapi
-	fprintf(stderr, "Wguicore--Wform::close::fixme: stub\n");
+	//fprintf(stderr, "Wguicore--Wform::close::fixme: stub\n");
+	new logger(4, "Wguicore--Wform::close::fixme: stub\n");
 	visible = false;
 
 }
@@ -133,15 +132,10 @@ int Wform::dispatch(string message){
 		delete token2; \
 		return 0;
 
-	// TODO: make this work with winapi
-	// TODO: use tokenizer here
-	fprintf(stderr, "Wguicore--Wform::dispatch::fixme: stub\nMessage is: %s\n", message.c_str());
-
 	// here we have a paint, mousecapture
 	string msg = message;
 	tokenizer * token = new stringtokenizer(&message);
 	tokenizer * token2 = new stringtokenizer(&msg);
-	fprintf(stderr, "Wguicore--Wform::dispatch::debug: created tokenizers\n");
 	if (token->getparam("message") == "paint"){
 
 		for (map < string, component * >::iterator iter = controls.begin(); iter != controls.end(); ++iter)
@@ -152,17 +146,12 @@ int Wform::dispatch(string message){
 		token->getparam("message") == "mouseup" ||
 		token->getparam("message") == "mousemove"){
 
-		fprintf(stderr, "Wguicore--Wform::dispatch::debug: entered into mousecapture dispatching\n");
-
 		for (map < string, component * >::iterator iter = controls.begin(); iter != controls.end(); ++iter){
 
 			sizeble * control = dynamic_cast < sizeble * >(iter->second);
-			fprintf(stderr, "Wguicore--Wform::dispatch::debug control is: %d\n", control);
 			if (control == NULL) continue;
-			fprintf(stderr, "Wguicore--Wform::dispatch::debug: control->sizeble_markup: %d\n", (int)(control->sizeble_markup));
 			if (1){
 
-				fprintf(stderr, "Wguicore--Wform::dispatch::debug: found sizeble control: %s\n", iter->second->getname().c_str());
 				pair < int, int > size = control->getsize();
 				pair < int, int > pos = control->getposition();
 				int x = token->getparam("x", 0);
@@ -172,7 +161,6 @@ int Wform::dispatch(string message){
 
 					token2->setparam("x", x - pos.first);
 					token2->setparam("y", y - pos.second);
-					cerr << "Wguicore--Wform::dispatch::debug: msg is " << msg << endl;
 					iter->second->dispatch(msg);
 
 				}

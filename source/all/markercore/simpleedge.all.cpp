@@ -31,9 +31,11 @@ void simpleedge::setB(marker * B){ this->B = B; }
 // 1 - red (forbidden)
 // 2 - yellow (non-optimal way)
 // 3 - green (optimal way)
+// 4 - blue (robot offset)
 int simpleedge::determine(){
 
 	new logger(1, "markercore--simpleedge::fixme: stub, rand\n");
+	if (getB()->gettype() == "directionoffset") return 4;
 	return 0;
 
 }

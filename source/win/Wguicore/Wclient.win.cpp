@@ -27,6 +27,8 @@
 #include "Wmenu.win.hpp"
 #include "../main/mainclass.win.hpp"
 
+#include "../../all/utilcore/logger.all.hpp"
+
 #include <windows.h>
 
 map < int, component * > test_pIC;
@@ -52,7 +54,7 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 	char buff[30];
 	tokenizer * msgtoken = new stringtokenizer(&msg);
 	int x, y;
-	fprintf(stderr, "Wguicore--wndproc::debug: here, form: %d\n", currform);
+
 	currform = hwndmaster::byhandle(hWnd);
 	if (currform == NULL) return DefWindowProc(hWnd, Message, wParam, lParam);
 
@@ -181,9 +183,7 @@ int processmessage(
 	HWND hWnd = pfrm->gethandle();
 	currform = pfrm;
 	int flag = 1;
-	fprintf(stderr, "Wguicore--processmessage::debug: here!\n");
 	int val = GetMessage(&Msg, NULL, 0, 0);
-	fprintf(stderr, "Wguicore--processmessage::debug: here!\n");
 	controlhandles = pIC;
 	if (val == -1){
 
@@ -281,11 +281,7 @@ int Wclient::mainloop(){
 
 	*/
 	int rescode = 0;
-	cerr << "Wguicore--Wclient::mainloop::debug: mainform: " << mainform << endl;
 	while (processmessage(this, (Wform *)(forms[mainform]), idmaster::getmap(), NULL, rescode)){
-
-		/*fprintf(stderr, "Wguicore--Wclient::mainloop::fixme: stub\n");
-		dispatch("");*/
 
 	}
 	return rescode;
@@ -310,10 +306,7 @@ void Wclient::newmainform(form * container){
 
 	// setup our main form
 	string cname = container->getname();
-	cerr << "Wguicore--Wclient::newmainform::debug: cname: " << cname << endl;
 	mainform = cname;
-	cerr << "Wguicore--Wclient::newmainform::debug: mainform: " << mainform << endl;
-	fprintf(stderr, "Wguicore--Wclient::newmainform::debug: forms[mainform]: %d\n", forms[mainform]);
 
 	// check if exists
 	if (forms[mainform] != NULL)
@@ -321,31 +314,28 @@ void Wclient::newmainform(form * container){
 
 	// add our main form
 	forms[mainform] = container;
-	fprintf(stderr, "Wguicore--Wclient::newmainform::debug: forms[mainform]: %d\n", forms[mainform]);
 
-	fprintf(stderr, "Wguicore--Wclient::newmainform::debug: start show of form\n");
 	// show main form
 	container->show();
-	fprintf(stderr, "Wguicore--Wclient::newmainform::debug: end show of form\n");
 
 }
 
 // component methods
 int Wclient::dispatch(string message){
 
-	// TODO: make this work with winapi
-	// TODO: use tokenizer here
-	fprintf(stderr, "Wguicore--Wclient::dispatch::fixme: stub\nMessage is: %s\n", message.c_str());
+	// TODO: maybe it must be not empty :)
 
 }
 void Wclient::setparent(component * parent){
 
-	fprintf(stderr, "Wguicore--Wclient::setparent::warning can't change parent of application, ignoring\n");
+	//fprintf(stderr, "Wguicore--Wclient::setparent::warning can't change parent of application, ignoring\n");
+	new logger(5, "Wguicore--Wclient::setparent::warning can't change parent of application, ignoring\n");
 
 }
 component * Wclient::getparent(){
 
-	fprintf(stderr, "Wguicore--Wclient::getparent::warning can't get parent of application, returning NULL\n");
+	//fprintf(stderr, "Wguicore--Wclient::getparent::warning can't get parent of application, returning NULL\n");
+	new logger(5, "Wguicore--Wclient::getparent::warning can't get parent of application, returning NULL\n");
 	return NULL;
 
 }

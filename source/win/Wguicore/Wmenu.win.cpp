@@ -82,10 +82,6 @@ void Wmenu::add(menu * submenu){
 // component methods
 int Wmenu::dispatch(string message){
 
-	// TODO: here is winapi dispatching
-	// TODO: use of tokenizer
-	fprintf(stderr, "Wguicore--Wmenu::dispatch::fixme: stub, message: %s\n", message.c_str());
-
 #define clean \
 		delete token; \
 		return 0;
