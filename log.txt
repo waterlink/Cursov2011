@@ -74,3 +74,8 @@
 [class simpleedge] - class edge simple realization
 [class edgedrawer] - class, creates primitive for edges
 [class simpleedge] - class edge simple realization
+[class mapmanager] - class to manage map, markermap and view it all
+[class logger] - class used to do logging into stderr
+[class Wview] - guicore view class for winapi
+[class markermanager] - class for managing markers, eg current selected marker type
+[class markermap] - class for managing markers

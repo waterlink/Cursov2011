@@ -76,6 +76,10 @@ int Wview::dispatch(string message){
 			for (list < string >::iterator iter = drawqueue.begin(); iter != drawqueue.end(); ++iter){
 
 				string next = *iter;
+
+				string buflog = "Wguicore--Wview::dispatch(paint)::debug: primitive is: " + next + "\n";
+				new logger(10, buflog.c_str());
+
 				tokenizer * primitive = new stringtokenizer(&next);
 
 				string ptype = primitive->getparam("primitive");
@@ -88,8 +92,15 @@ int Wview::dispatch(string message){
 				int cg = primitive->getparam("gcolor", 0);
 				int cb = primitive->getparam("bcolor", 0);
 				int th = primitive->getparam("thickness", 0);
+
 				if (th == tokenizer::unknowint)
 					th = 0;
+				if (cr == tokenizer::unknowint)
+					cr = 0;
+				if (cg == tokenizer::unknowint)
+					cg = 0;
+				if (cb == tokenizer::unknowint)
+					cb = 0;
 
 				brush.lbStyle = BS_SOLID;
 				brush.lbColor = RGB(cr, cg, cb);
@@ -108,7 +119,7 @@ int Wview::dispatch(string message){
 					Ellipse(hdc, x - r / 2, y - r / 2, x + r / 2, y + r / 2);
 				if (ptype == "line"){
 
-					new logger(0, "trying to paint line\n");
+					new logger(10, "Wguicore--Wview::dispatch(paint)::debug: trying to paint line\n");
 					MoveToEx(hdc, x, y, NULL);
 					LineTo(hdc, x + w, y + h);
 

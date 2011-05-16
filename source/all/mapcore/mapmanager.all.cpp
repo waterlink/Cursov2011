@@ -121,8 +121,14 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 				if (manager->extractmarkermanager()->getcurrentmarkertype() == "startpointmode"){
 
 					// TODO: here must be a dialog asking, is user really wants do that
+
+					new logger(10, "mapcore--viewconnection::handler::debug: changing offset marker\n");
+
 					manager->clearoffset();
 					manager->choosestartpoint();
+
+					new logger(10, "mapcore--viewconnection::handler::debug: chosen a start point\n");
+
 					if (manager->getcurrenttarget()){
 					
 						int x = token->getparam("x", 0);
@@ -136,7 +142,11 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 						manager->addedge(edg);
 						manager->redraweverything();
 
+						new logger(10, "mapcore--viewconnection::handler::debug: redraw is done\n");
+
 					}
+
+					new logger(10, "mapcore--viewconnection::handler::debug: offset added succesfully\n");
 
 				}
 
@@ -146,7 +156,10 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 
 	}
 
-private: mapmanager * manager;
+private: 
+
+	mapmanager * manager;
+
 };
 
 /*EHandler(viewconnection, {
@@ -195,6 +208,8 @@ void mapmanager::redraweverything(){
 
 	}
 
+	new logger(10, "mapcore--mapmanager::redraweverything::debug: edges deleted\n");
+
 	marker * mar;
 	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
 
@@ -203,6 +218,8 @@ void mapmanager::redraweverything(){
 		viewdestination->draw(prim);
 
 	}
+
+	new logger(10, "mapcore--mapmanager::redraweverything::debug: markers deleted\n");
 
 	if (chosenmarker){
 
@@ -217,9 +234,21 @@ void mapmanager::redraweverything(){
 
 }
 void mapmanager::addmarker(marker * mar){ markersource->addmarker(mar); }
-void mapmanager::delmarker(marker * mar){ markersource->delmarker(mar); }
+void mapmanager::delmarker(marker * mar){ 
+
+	string prim = markerdrawer::draw(mar, decodeposition(mar));
+	viewdestination->undraw(prim);
+	markersource->delmarker(mar); 
+
+}
 void mapmanager::addedge(edge * edg){ markersource->addedge(edg); }
-void mapmanager::deledge(edge * edg){ markersource->deledge(edg); }
+void mapmanager::deledge(edge * edg){ 
+
+	string prim = edgedrawer::draw(edg, decodeposition(edg->getA()), decodeposition(edg->getB()));
+	viewdestination->undraw(prim);
+	markersource->deledge(edg); 
+
+}
 pair < int, int > mapmanager::decodeposition(marker * mar){
 
 	// stub
@@ -340,12 +369,26 @@ void mapmanager::clear(){
 
 void mapmanager::clearoffset(){
 
+
+	edge * edg;
+	for (markersource->catedge(); (edg = markersource->catnextedge()) != markersource->catlastedge(); )
+		if (edg->determine() == 4)
+			break;
+
+	if (edg != markersource->catlastedge())
+		deledge(edg);
+
 	marker * mar;
 	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
 
 		if (mar->gettype() == "directionoffset"){
 
+			new logger(10, "mapcore--mapmanager::clearoffset::debug: deleting marker...");
+
 			delmarker(mar);
+
+			new logger(10, "done\n");
+
 			break;
 
 		}

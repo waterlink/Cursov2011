@@ -21,6 +21,9 @@
 logger::logger(int level, string message){
 
 	int maxlevel = settings::get("loglevel", 0);
+	if (level == 0 && !(maxlevel >= level))
+		fprintf(stderr, "utilcore--logger::logger::log_fatal: level: %d, maxlevel: %d, message: %s\n", 
+				level, maxlevel, message.c_str());
 	if (maxlevel >= level){
 
 		fprintf(stderr, message.c_str());
