@@ -70,4 +70,27 @@ string markerdrawer::draw(marker * mar, pair < int, int > decodedcoords){
 
 }
 
+string markerdrawer::drawchosen(pair < int, int > decodedcoords){
+
+#define ret \
+		delete token; \
+		return res;
+
+	string res = "";
+	tokenizer * token = new stringtokenizer(&res);
+
+	token->setparam("primitive", "circle");
+	token->setparam("x", decodedcoords.first);
+	token->setparam("y", decodedcoords.second);
+	token->setparam("r", 20);
+	token->setparam("rcolor", 50);
+	token->setparam("gcolor", 100);
+	token->setparam("bcolor", 150);
+
+	ret;
+
+#undef ret
+
+}
+
 //#end

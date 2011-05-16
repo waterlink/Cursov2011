@@ -1,3 +1,4 @@
 [class logic] - class controlling main processes in program
 [class datamanager] - class for managing huge datastructures
+[class vectored] - class array realization
 #end

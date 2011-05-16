@@ -79,3 +79,7 @@
 [class Wview] - guicore view class for winapi
 [class markermanager] - class for managing markers, eg current selected marker type
 [class markermap] - class for managing markers
+[class mapmanager] - class to manage map, markermap and view it all
+[class markerdrawer] - class, makes primitive for desired marker
+[class datamanager] - class for managing huge datastructures
+[class datamanager] - class for managing huge datastructures

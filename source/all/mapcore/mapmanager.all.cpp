@@ -17,6 +17,7 @@
 #include "mapmanager.all.hpp"
 
 #include <cstdio>
+#include <cmath>
 
 #include "../guicore/messager.all.hpp"
 #include "../markercore/markerdrawer.all.hpp"
@@ -32,6 +33,8 @@
 #include "../markercore/simpleedge.all.hpp"
 
 #include "../utilcore/logger.all.hpp"
+
+//	#refactor
 
 class viewconnection: public messager{ public: viewconnection(){} ~viewconnection(){}
 
@@ -110,7 +113,12 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "selectmode"){
 
 					//fprintf(stderr, "mapcore--viewconnection::handler::fixme: selectmode, stub\n");
-					new logger(4, "mapcore--viewconnection::handler::fixme: selectmode, stub\n");
+					new logger(0, "mapcore--viewconnection::handler::fixme: selectmode, stub\n");
+
+					int x = token->getparam("x", 0);
+					int y = token->getparam("y", 0);
+					manager->setchosenmarker(manager->findnearest(make_pair(x, y)));
+					manager->redraweverything();
 
 				}
 
@@ -162,27 +170,16 @@ private:
 
 };
 
-/*EHandler(viewconnection, {
-
-	// sender'n'message
-	tokenizer * token = new stringtokenizer(&message);
-
-		if (token->getparam("message") == "mousedown"){
-
-			// code this up
-			redraweverything();
-
-		}
-
-	delete token;
-
-})*/
+//	#refactorend
 
 mapmanager::mapmanager(mapcore * mapsource, markermap * markersource, view * viewdestination){
 
 	this->mapsource = mapsource;
 	this->markersource = markersource;
 	this->viewdestination = viewdestination;
+
+	chosenmarker = NULL;
+	chosenedge = NULL;
 
 }
 mapmanager::~mapmanager(){}
@@ -198,6 +195,20 @@ void mapmanager::connecttoview(){
 
 }
 void mapmanager::redraweverything(){
+
+	if (chosenmarker){
+
+		// code this up
+		string prim = markerdrawer::drawchosen(decodeposition(chosenmarker));
+		viewdestination->undraw(prim);
+		viewdestination->draw(prim);
+
+	}
+	else if (chosenedge){
+
+		// code this up in future
+
+	}
 
 	edge * edg;
 	for (markersource->catedge(); (edg = markersource->catnextedge()) != markersource->catlastedge(); ){
@@ -220,17 +231,6 @@ void mapmanager::redraweverything(){
 	}
 
 	new logger(10, "mapcore--mapmanager::redraweverything::debug: markers deleted\n");
-
-	if (chosenmarker){
-
-		// code this up
-
-	}
-	else if (chosenedge){
-
-		// code this up
-
-	}
 
 }
 void mapmanager::addmarker(marker * mar){ markersource->addmarker(mar); }
@@ -394,6 +394,64 @@ void mapmanager::clearoffset(){
 		}
 
 	}
+
+}
+
+void mapmanager::setchosenmarker(marker * mar){ 
+
+	if (chosenmarker){
+
+		string prim = markerdrawer::drawchosen(decodeposition(chosenmarker));
+		viewdestination->undraw(prim);
+
+	}
+	chosenmarker = mar;
+
+}
+marker * mapmanager::getchosenmarker(){ 
+
+	// for future
+	if (chosenedge){
+
+		//string prim = edgedrawer::drawchosen(decodeposition(mar));
+		//viewdestination->undraw(prim);
+
+	}
+	return chosenmarker; 
+
+}
+
+// for future purposes
+void mapmanager::setchosenedge(edge * edg){ chosenedge = edg; }
+edge * mapmanager::getchosenedge(){ return chosenedge; }
+
+marker * mapmanager::findnearest(pair < int, int > pos){
+
+	// TODO: code this up
+	pair < int, int > decodedpos = decodeposition(pos);
+
+	double bestdistance = 1e9;
+	marker * found = NULL;
+
+	marker * mar;
+	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
+
+		double x1 = decodedpos.first;
+		double y1 = decodedpos.second;
+		double x2 = mar->getposition().first - x1;
+		double y2 = mar->getposition().second - y1;
+
+		double dist = sqrt(x2 * x2 + y2 * y2);
+		if (dist < bestdistance){
+
+			bestdistance = dist;
+			found = mar;
+
+		}
+
+	}
+
+	return found;
 
 }
 

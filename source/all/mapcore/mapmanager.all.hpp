@@ -25,6 +25,8 @@
 #include "../markercore/markermap.all.hpp"
 #include "../markercore/markermanager.all.hpp"
 
+//	#refactor
+
 class
 mapmanager{
 
@@ -57,6 +59,15 @@ public:
 
 	virtual void clear();
 
+	virtual void setchosenmarker(marker * mar);
+	virtual marker * getchosenmarker();
+
+	// for future purposes
+	virtual void setchosenedge(edge * edg);
+	virtual edge * getchosenedge();
+
+	virtual marker * findnearest(pair < int, int > pos);
+
 protected:
 
 	
@@ -68,13 +79,15 @@ private:
 	view * viewdestination;
 
 	marker * chosenmarker;
-	edge * chosenedge;
+	edge * chosenedge;		// for future purposes
 
 	markermanager * chosentype;
 
 	marker * currenttarget;
 
 };
+
+//	#refactorend
 
 #endif
 

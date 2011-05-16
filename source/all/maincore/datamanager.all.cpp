@@ -16,20 +16,20 @@
 
 #include "datamanager.all.hpp"
 
-map < int, void * > datamanager::byid;
-map < void *, int > datamanager::bydata;
+map < int, array * > datamanager::byid;
+map < array *, int > datamanager::bydata;
 
-void * datamanager::getbyid(int id){
+array * datamanager::getbyid(int id){
 
 	return byid[id];
 
 }
-int datamanager::getbydata(void * data){
+int datamanager::getbydata(array * data){
 
 	return bydata[data];
 
 }
-void datamanager::add(int id, void * data){
+void datamanager::add(int id, array * data){
 
 	byid[id] = data;
 	bydata[data] = id;

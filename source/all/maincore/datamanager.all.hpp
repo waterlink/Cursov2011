@@ -24,13 +24,24 @@
 using namespace std;
 
 class
+array{
+
+public:
+
+	virtual ~array(){}
+	virtual int get(int index) = 0;
+	virtual void set(int index, int value) = 0;
+
+};
+
+class
 datamanager{
 
 public:
 
-	static void * getbyid(int id);
-	static int getbydata(void * data);
-	static void add(int id, void * data);
+	static array * getbyid(int id);
+	static int getbydata(array * data);
+	static void add(int id, array * data);
 
 protected:
 
@@ -38,8 +49,8 @@ protected:
 
 private:
 
-	static map < int, void * > byid;
-	static map < void *, int > bydata;
+	static map < int, array * > byid;
+	static map < array *, int > bydata;
 
 };
 

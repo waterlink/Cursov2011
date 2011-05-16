@@ -28,7 +28,7 @@
 			- multitarget mode (M)
 			- free mode (F)
   TWOK	- view
-		- code bit copy primitive
+		- code bit copy primitive ( copy from datamanager using vectored array realization, needs a sizex & sizey )
   WOK	- status
 ######	- popup, don't need now
   TWOK	- properties
@@ -50,7 +50,7 @@
 		if there more than one matches, ask user to choose one.
 			still it'll be just asking of user
   TOK	- mapmanager
-	   T	- selectmode
+	   OK	- selectmode
 	   T	- freemode
 	   T	- show map (here might be some problems, need to add bits functionallity for view)
 	   OK	- done edge adding, and startpoint/target <-> target|multitarget relating
@@ -68,6 +68,10 @@
   OK	- properties of markers and edges
   OK	- markermap
   OK	- directionoffset
+	- propertymanager
+		- beep
+		- light (intensivity or not ?)
+		- delegates to guicore/properties
 7) scenariocore
   OK	- vector of commands i think
   OK	- load

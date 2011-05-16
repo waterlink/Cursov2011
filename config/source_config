@@ -1,4 +1,4 @@
 target= all 
-module= markercore 
+module= maincore 
  
 #end

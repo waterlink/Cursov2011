@@ -78,7 +78,7 @@ int Wview::dispatch(string message){
 				string next = *iter;
 
 				string buflog = "Wguicore--Wview::dispatch(paint)::debug: primitive is: " + next + "\n";
-				new logger(10, buflog.c_str());
+				new logger(0, buflog.c_str());
 
 				tokenizer * primitive = new stringtokenizer(&next);
 

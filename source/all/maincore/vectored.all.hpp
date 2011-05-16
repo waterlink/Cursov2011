@@ -11,27 +11,30 @@
 
 //
 //	header file
-//	class markerdrawer
+//	class vectored
 //	interface
-//	class, makes primitive for desired marker
+//	class array realization
 //
 
-#ifndef markerdrawer_hpp
-#define markerdrawer_hpp
+#ifndef vectored_hpp
+#define vectored_hpp
 
-#include "marker.all.hpp"
+#include "datamanager.all.hpp"
 
-#include <string>
+#include <vector>
 
 using namespace std;
 
 class
-markerdrawer{
+vectored: public array{
 
 public:
 
-	static string draw(marker * mar, pair < int, int > decodedcoords);
-	static string drawchosen(pair < int, int > decodedcoords);
+	vectored(){}
+	~vectored(){}
+
+	int get(int index);
+	void set(int index, int value);
 
 protected:
 
@@ -39,7 +42,7 @@ protected:
 
 private:
 
-	
+	vector < int > V;
 
 };
 

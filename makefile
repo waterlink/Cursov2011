@@ -483,4 +483,11 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/robocore/izprogex.all.cpp $(win_CFLAGS) -o ./objects/all/robocore/izprogex.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/maincore/vectored.linux.all.o: ./source/all/maincore/vectored.all.cpp ./source/all/maincore/vectored.all.hpp 
+	$(linux_CC) ./source/all/maincore/vectored.all.cpp $(linux_CFLAGS) -o ./objects/all/maincore/vectored.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/maincore/vectored.all.cpp $(win_CFLAGS) -o ./objects/all/maincore/vectored.win.all.o $(win_DEFFS) 
 #end
