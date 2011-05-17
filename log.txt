@@ -102,3 +102,14 @@
 [class logic] - class controlling main processes in program
 [class Wview] - guicore view class for winapi
 [class file] - class that identifies a file
+[class propertymanager] - class for managing properties of marker and its property window
+[class properties] - gui property table class
+[class marker] - class marker, abstract
+[class logic] - class controlling main processes in program
+[class mapmanager] - class to manage map, markermap and view it all
+[class Wclient] - gui class client for winapi
+[class client] - main gui class, represents an application at all
+[class logic] - class controlling main processes in program
+[class Wview] - guicore view class for winapi
+[class Wproperties] - gui class properties for winapi
+[class mapmanager] - class to manage map, markermap and view it all

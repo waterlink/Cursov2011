@@ -24,6 +24,7 @@ class mapmanager;
 #include "mapcore.all.hpp"
 #include "../markercore/markermap.all.hpp"
 #include "../guicore/view.all.hpp"
+#include "../guicore/client.all.hpp"
 #include "../markercore/markermap.all.hpp"
 #include "../markercore/markermanager.all.hpp"
 #include "mapsync.all.hpp"
@@ -57,6 +58,7 @@ public:
 
 	virtual marker * getcurrenttarget();
 	virtual void gotolasttarget();
+	virtual void setlasttarget(marker * mar);
 	virtual void clearstartpoint();
 	virtual void choosestartpoint();
 	virtual void clearoffset();
@@ -74,6 +76,10 @@ public:
 
 	virtual void setuppropertymanager(propertymanager * propertydestination);
 	virtual void propertynotify();
+	virtual void propertybacknotify();
+
+	virtual void setapp(client * app);
+	virtual void appupdate();
 
 protected:
 
@@ -87,6 +93,7 @@ private:
 
 	marker * chosenmarker;
 	edge * chosenedge;		// for future purposes
+	marker * lasttarget;
 
 	markermanager * chosentype;
 
@@ -95,6 +102,8 @@ private:
 	mapsync * bitsync;
 
 	propertymanager * propertydestination;
+
+	client * app;
 
 };
 

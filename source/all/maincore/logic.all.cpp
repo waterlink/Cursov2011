@@ -26,6 +26,7 @@
 #include "datamanager.all.hpp"
 #include "vectored.all.hpp"
 #include "../filecore/test_file.all.hpp"
+#include "../markercore/propertymanager.all.hpp"
 
 EHandler(click_btn1, {
 
@@ -133,6 +134,8 @@ logic::logic(
 	manager->connecttoview();
 	chosenmarkertype = new markermanager;
 	manager->connecttomarkermanager(chosenmarkertype);
+	manager->setuppropertymanager(new propertymanager(prop1));
+	manager->setapp(app);
 
 	/*button * selectmode
 	button * startpointmode
@@ -189,6 +192,7 @@ void logic::changetoolboxmode(component * pressed){
 
 	chosenmarkertype->setcurrentmarkertype(pressed->getname());
 	toolbox1->setactivecontrol(pressed);
+	app->update();
 
 }
 

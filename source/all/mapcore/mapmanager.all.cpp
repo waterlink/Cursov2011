@@ -72,6 +72,7 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 						edg->setA(manager->getcurrenttarget());
 						edg->setB(mar);
 						manager->addedge(edg);
+						manager->setlasttarget(mar);
 						manager->redraweverything();
 
 					}
@@ -86,6 +87,7 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 					marker * mar = new startpoint;
 					mar->setposition(x, y);
 					manager->addmarker(mar);
+					manager->setlasttarget(mar);
 					manager->redraweverything();
 
 				}
@@ -117,14 +119,23 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "selectmode"){
 
 					//fprintf(stderr, "mapcore--viewconnection::handler::fixme: selectmode, stub\n");
-					new logger(0, "mapcore--viewconnection::handler::fixme: selectmode, stub\n");
+					new logger(10, "mapcore--viewconnection::handler::fixme: selectmode, stub\n");
 
+					manager->propertybacknotify();
+					new logger(10, "mapcore--viewconnection::handler::debug: back notify done\n");
 					int x = token->getparam("x", 0);
 					int y = token->getparam("y", 0);
 					manager->setchosenmarker(manager->findnearest(make_pair(x, y)));
+					new logger(10, "mapcore--viewconnection::handler::debug: chosen marker done\n");
+					manager->propertynotify();
+					new logger(10, "mapcore--viewconnection::handler::debug: notify done\n");
 					manager->redraweverything();
 
+					new logger(10, "mapcore--viewconnection::handler::debug: select done\n");
+
 				}
+
+				manager->appupdate();
 
 			}
 			else if (token->getparam("message") == "mousedown" 
@@ -161,6 +172,8 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 					new logger(10, "mapcore--viewconnection::handler::debug: offset added succesfully\n");
 
 				}
+
+				manager->appupdate();
 
 			}
 
@@ -296,15 +309,21 @@ void mapmanager::setmapvalue(int i, int j, int v){
 }
 void mapmanager::gotolasttarget(){
 
-	marker * mar, * lmar = 0;
+	/*marker * mar, * lmar = 0;
 	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
 
 		if (mar->gettype() == "target")
 			lmar = mar;
 
-	}
+	}*/
 
-	currenttarget = lmar;
+	currenttarget = lasttarget;
+
+}
+
+void mapmanager::setlasttarget(marker * mar){
+
+	lasttarget = mar;
 
 }
 
@@ -346,6 +365,13 @@ marker * mapmanager::getcurrenttarget(){ return currenttarget; }
 
 void mapmanager::clear(){ 
 
+	if (chosenmarker){
+
+		string prim = markerdrawer::drawchosen(decodeposition(chosenmarker));
+		viewdestination->undraw(prim);
+
+	}
+
 	edge * edg;
 	for (markersource->catedge(); (edg = markersource->catnextedge()) != markersource->catlastedge(); ){
 
@@ -367,11 +393,13 @@ void mapmanager::clear(){
 	if (chosenmarker){
 
 		// code this up
+		chosenmarker = NULL;
 
 	}
 	else if (chosenedge){
 
 		// code this up
+		chosenedge = NULL;
 
 	}
 
@@ -446,7 +474,8 @@ marker * mapmanager::findnearest(pair < int, int > pos){
 	marker * found = NULL;
 
 	marker * mar;
-	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
+	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); )
+		if (mar->gettype() != "directionoffset"){
 
 		double x1 = decodedpos.first;
 		double y1 = decodedpos.second;
@@ -473,8 +502,15 @@ void mapmanager::setuppropertymanager(propertymanager * propertydestination){
 }
 void mapmanager::propertynotify(){
 
-	if (propertydestination) propertydestination->notification(this);
+	if (propertydestination) if (getchosenmarker()) propertydestination->notification(this);
 
 }
+void mapmanager::propertybacknotify(){
+
+	if (propertydestination) if (getchosenmarker()) propertydestination->updatenotification(this);
+
+}
+void mapmanager::setapp(client * app){ this->app = app; }
+void mapmanager::appupdate(){ if (app) app->update(); }
 
 //#end

@@ -32,6 +32,7 @@ public:
 	propertymanager(properties * props);
 	virtual ~propertymanager();
 	virtual void notification(mapmanager * sender);
+	virtual void updatenotification(mapmanager * sender);
 
 protected:
 

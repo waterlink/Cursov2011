@@ -43,6 +43,8 @@ public:
 	component * getparent();
 	string getname();
 
+	void update();
+
 protected:
 
 	

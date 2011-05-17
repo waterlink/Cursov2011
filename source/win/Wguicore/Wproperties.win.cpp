@@ -185,7 +185,10 @@ string Wproperties::getproperty(string name){
 	char buf[110];
 	if (type == "bool"){
 
-		GetWindowText(handles[name], buf, 100);
+		//GetWindowText(handles[name], buf, 100);
+		if (Button_GetCheck(handles[name]) == BST_CHECKED)
+			return "true";
+		else return "false";
 
 	}
 	else if (type == "string" || type == "int"){

@@ -35,6 +35,16 @@ map < int, component * > test_pIC;
 map < int, component * > * controlhandles;
 Wform * currform;
 
+void Wclient::update(){ 
+
+	//SendMessage(dynamic_cast < Wform * >(forms[mainform])->gethandle(), WM_PAINT, NULL, NULL); 
+	Wform * frm = dynamic_cast < Wform * >(forms[mainform]);
+	HWND handle = frm->gethandle();
+	//UpdateWindow(handle);
+	SendMessage(handle, WM_SIZE, 0, 0);
+
+}
+
 int processmessage(
 			Wclient *, 
 			Wform *, 
@@ -48,7 +58,7 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 
 #define clean \
 		delete msgtoken; \
-		return 0;
+		return DefWindowProc(hWnd, Message, wParam, lParam);
 
 	string msg;
 	char buff[30];

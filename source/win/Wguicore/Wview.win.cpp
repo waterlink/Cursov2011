@@ -146,6 +146,9 @@ int Wview::dispatch(string message){
 				}
 				
 				delete primitive;
+
+				DeleteObject(hpen);
+				DeleteObject(hbrush);
 				
 			}
 
