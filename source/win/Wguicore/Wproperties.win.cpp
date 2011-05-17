@@ -165,6 +165,20 @@ bool Wproperties::addproperty(string name, string value, string type){
 	return false;
 
 }
+void Wproperties::clearproperty(){
+
+	for (map < string, HWND >::iterator iter = handles.begin(); iter != handles.end(); ++iter){
+
+		DestroyWindow(iter->second);
+
+	}
+
+	handles.clear();
+	props.clear();
+	nums.clear();
+	maxnum = 0;
+
+}
 string Wproperties::getproperty(string name){
 
 	string type = props[name].first;
@@ -188,6 +202,7 @@ string Wproperties::getproperty(string name){
 bool Wproperties::delproperty(string name){
 
 	// TODO: code this up (when it'll really need, it will be soon)s
+	
 
 }
 

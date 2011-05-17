@@ -41,6 +41,8 @@ public:
 	string getproperty(string name);
 	bool delproperty(string name);
 
+	void clearproperty();
+
 	// form methods
 	void show();
 	void close();

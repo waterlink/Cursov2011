@@ -72,6 +72,8 @@ int Wview::dispatch(string message){
 			PAINTSTRUCT ps;
 			HDC hdc = BeginPaint(hwnd, &ps);
 
+			HDC hcdc = CreateCompatibleDC(hdc);
+
 			HBRUSH hbrush;
 			HPEN hpen;
 			LOGBRUSH brush;
@@ -111,6 +113,9 @@ int Wview::dispatch(string message){
 				hpen = CreatePen(PS_SOLID, th, RGB(cr, cg, cb));
 				SelectObject(hdc, hpen);
 
+				SelectObject(hcdc, hbrush);
+				SelectObject(hcdc, hpen);
+
 				if (ptype == "rectangle")
 					Rectangle(hdc, x, y, x + w, y + h);
 				if (ptype == "point")
@@ -134,11 +139,17 @@ int Wview::dispatch(string message){
 						for (int j = 0; j < w; ++j)
 							SetPixel(hdc, i, j, pixeldrawer::draw(datamanager::getbyid(x)->get(i * w + j)));
 
+					// some kind of bug here
+					BitBlt(hdc, 0, 0, w, h, hcdc, 0, 0, SRCCOPY);
+					StretchBlt(hcdc, 0, 0, w, h, hdc, 0, 0, getsize().first, getsize().second, SRCCOPY);
+
 				}
 				
 				delete primitive;
 				
 			}
+
+			DeleteDC(hcdc);
 
 			EndPaint(hwnd, &ps);
 

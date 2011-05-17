@@ -19,12 +19,15 @@
 #ifndef mapmanager_hpp
 #define mapmanager_hpp
 
+class mapmanager;
+
 #include "mapcore.all.hpp"
 #include "../markercore/markermap.all.hpp"
 #include "../guicore/view.all.hpp"
 #include "../markercore/markermap.all.hpp"
 #include "../markercore/markermanager.all.hpp"
 #include "mapsync.all.hpp"
+#include "../markercore/propertymanager.all.hpp"
 
 //	#refactor
 
@@ -69,6 +72,9 @@ public:
 
 	virtual marker * findnearest(pair < int, int > pos);
 
+	virtual void setuppropertymanager(propertymanager * propertydestination);
+	virtual void propertynotify();
+
 protected:
 
 	
@@ -87,6 +93,8 @@ private:
 	marker * currenttarget;
 
 	mapsync * bitsync;
+
+	propertymanager * propertydestination;
 
 };
 

@@ -23,7 +23,7 @@ file::file(string path){
 	this->path = path; 
 	opened = false;
 
-	new logger(0, "filecore--file::file::debug: path is " + path + "\n");
+	new logger(10, "filecore--file::file::debug: path is " + path + "\n");
 
 }
 file::~file(){}
@@ -45,7 +45,7 @@ bool file::ropen(){
 	mode = "in";
 	char logbuf[200]; 
 	sprintf(logbuf, "filecore--file::ropen::debug: id = %d\n", id);
-	new logger(0, logbuf);
+	new logger(10, logbuf);
 	return opened = id != 0;
 
 }
@@ -88,7 +88,7 @@ int file::nextint(){
 	int x = 0;
 	if (mode == "in"){
 
-		new logger(0, "filecore--file::nextint::debug: trying to scan\n");
+		new logger(10, "filecore--file::nextint::debug: trying to scan\n");
 		fscanf(id, "%d", &x);
 
 	}

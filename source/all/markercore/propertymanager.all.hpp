@@ -19,12 +19,19 @@
 #ifndef propertymanager_hpp
 #define propertymanager_hpp
 
+class propertymanager;
+
+#include "../guicore/properties.all.hpp"
+#include "../mapcore/mapmanager.all.hpp"
+
 class
 propertymanager{
 
 public:
 
-	
+	propertymanager(properties * props);
+	virtual ~propertymanager();
+	virtual void notification(mapmanager * sender);
 
 protected:
 
@@ -32,7 +39,8 @@ protected:
 
 private:
 
-	
+	properties * props;
+	marker * chosen;
 
 };
 

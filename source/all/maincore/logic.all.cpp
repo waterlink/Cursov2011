@@ -117,18 +117,13 @@ logic::logic(
 
 	prop1->setposition(form1->getsize().first - 150, form1->getsize().second - 350);
 	prop1->setsize(150, 350);
+	prop1->clearproperty();
 
 	btn1->setsize(0, 0);
 	btn2->setsize(0, 0);
 	btn3->setsize(0, 0);
 
 	btn1->setactivate(click_btn1);
-
-	char ch;
-	int x;
-	FILE * fm = fopen(".\\map\\testmap", "r");
-	for (; fscanf(fm, "%d", &x) > 0; ) printf(" %d ", x);
-	fclose(fm);
 
 	mapcore * M = new test_simplemap(decoder);
 	M->choose("testmap");

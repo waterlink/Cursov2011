@@ -466,5 +466,15 @@ marker * mapmanager::findnearest(pair < int, int > pos){
 	return found;
 
 }
+void mapmanager::setuppropertymanager(propertymanager * propertydestination){
+
+	this->propertydestination = propertydestination;
+
+}
+void mapmanager::propertynotify(){
+
+	if (propertydestination) propertydestination->notification(this);
+
+}
 
 //#end

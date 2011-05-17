@@ -1,13 +1,4 @@
-[class marker] - class marker, abstract
-[class edge] - class edge, abstract, connects two markers, oriented
-[class startpoint] - class startpoint - realization of marker
-[class target] - class target - realization of marker
-[class multitarget] - class for gamilton-way
-[class markermap] - class for managing markers
-[class markerdrawer] - class, makes primitive for desired marker
-[class edgedrawer] - class, creates primitive for edges
-[class markermanager] - class for managing markers, eg current selected marker type
-[class simpleedge] - class edge simple realization
-[class directionoffset] - class for managing current direction of robot
-[class propertymanager] - class for managing properties of marker and its property window
+target= all 
+module= filecore 
+ 
 #end

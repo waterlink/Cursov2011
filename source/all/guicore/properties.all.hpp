@@ -43,6 +43,8 @@ public:
 	virtual bool
 	delproperty(string name) = 0;
 
+	virtual void clearproperty() = 0;
+
 protected:
 
 	
