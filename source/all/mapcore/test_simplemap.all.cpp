@@ -16,6 +16,8 @@
 
 #include "test_simplemap.all.hpp"
 
+#include "../utilcore/logger.all.hpp"
+
 test_simplemap::test_simplemap(pather * decoder){
 
 	fs = new filesystem;
@@ -38,11 +40,17 @@ void test_simplemap::choose(string name){
 void test_simplemap::load(){
 
 	mapfile->ropen();
+	if (mapfile->isopened() == false)
+		new logger(0, "mapcore--test_simplemap::load::warning: file is not opened\n");
 	int w = mapfile->nextint();
 	int h = mapfile->nextint();
 	for (int i = 0; i < h; i++)
 		for (int j = 0; j < w; ++j)
 			M[make_pair(i, j)] = mapfile->nextint();
+
+	char logbuf[200];
+	sprintf(logbuf, "mapcore--test_simplemap::load::debug: map size = %d, w = %d, h = %d\n", M.size(), w, h);
+	new logger(0, logbuf);
 
 }
 void test_simplemap::save(){
@@ -74,5 +82,20 @@ void test_simplemap::setvalue(int i, int j, int v){
 	M[make_pair(i, j)] = v;
 
 }
+pair < int, int > test_simplemap::getsize(){
+
+	int w = 0, h = 0;
+	for (map < pair < int, int >, int >::iterator iter = M.begin(); iter != M.end(); ++iter){
+
+		if (iter->first.first > h) h = iter->first.first;
+		if (iter->first.second > w) w = iter->first.second;
+
+	}
+	++h, ++w;
+
+	return make_pair(w, h);
+
+}
+file * test_simplemap::getfile(){ return mapfile; }
 
 //#end

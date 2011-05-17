@@ -23,6 +23,8 @@
 
 using namespace std;
 
+#include "../filecore/file.all.hpp"
+
 class
 mapcore{
 
@@ -34,6 +36,8 @@ public:
 	virtual void save() = 0;
 	virtual int getvalue(int i, int j) = 0;
 	virtual void setvalue(int i, int j, int v) = 0;
+	virtual pair < int, int > getsize() = 0;
+	virtual file * getfile() = 0;
 
 protected:
 

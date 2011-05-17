@@ -34,6 +34,10 @@
 
 #include "../utilcore/logger.all.hpp"
 
+#include "../maincore/datamanager.all.hpp"
+
+#include "pixeldrawer.all.hpp"
+
 //	#refactor
 
 class viewconnection: public messager{ public: viewconnection(){} ~viewconnection(){}
@@ -181,6 +185,8 @@ mapmanager::mapmanager(mapcore * mapsource, markermap * markersource, view * vie
 	chosenmarker = NULL;
 	chosenedge = NULL;
 
+	bitsync = new mapsync(mapsource, datamanager::getbyid(0));
+
 }
 mapmanager::~mapmanager(){}
 
@@ -195,6 +201,12 @@ void mapmanager::connecttoview(){
 
 }
 void mapmanager::redraweverything(){
+
+	pair < int, int > size = mapsource->getsize();
+	string bits = pixeldrawer::drawall(0, size.first, size.second);
+	viewdestination->undraw(bits);
+	bitsync->bsync();
+	viewdestination->draw(bits);
 
 	if (chosenmarker){
 

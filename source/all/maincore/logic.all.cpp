@@ -23,6 +23,9 @@
 #include "../mapcore/mapcore.all.hpp"
 #include "../mapcore/test_simplemap.all.hpp"
 #include "../markercore/markermap.all.hpp"
+#include "datamanager.all.hpp"
+#include "vectored.all.hpp"
+#include "../filecore/test_file.all.hpp"
 
 EHandler(click_btn1, {
 
@@ -68,6 +71,8 @@ logic::logic(
 		return;
 
 	settings::set("loglevel", 0);
+
+	datamanager::add(0, new vectored);
 
 	mainlogic = this;
 
@@ -119,7 +124,15 @@ logic::logic(
 
 	btn1->setactivate(click_btn1);
 
+	char ch;
+	int x;
+	FILE * fm = fopen(".\\map\\testmap", "r");
+	for (; fscanf(fm, "%d", &x) > 0; ) printf(" %d ", x);
+	fclose(fm);
+
 	mapcore * M = new test_simplemap(decoder);
+	M->choose("testmap");
+	M->load();
 	markermap * markers = new markermap();
 	manager = new mapmanager(M, markers, view1);
 	manager->connecttoview();

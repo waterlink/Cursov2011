@@ -9,4 +9,5 @@
 [class markermanager] - class for managing markers, eg current selected marker type
 [class simpleedge] - class edge simple realization
 [class directionoffset] - class for managing current direction of robot
+[class propertymanager] - class for managing properties of marker and its property window
 #end

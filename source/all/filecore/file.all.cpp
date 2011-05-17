@@ -16,7 +16,16 @@
 
 #include "file.all.hpp"
 
-file::file(string path){ this->path = path; }
+#include "../utilcore/logger.all.hpp"
+
+file::file(string path){ 
+
+	this->path = path; 
+	opened = false;
+
+	new logger(0, "filecore--file::file::debug: path is " + path + "\n");
+
+}
 file::~file(){}
 
 bool file::wopen(){
@@ -31,9 +40,12 @@ bool file::wopen(){
 bool file::ropen(){
 
 	if (isopened())
-		freopen(path.c_str(), "r", id), ifid.close(), ifid.open(path.c_str());
-	else id = fopen(path.c_str(), "r"), ifid.open(path.c_str());
+		freopen(path.c_str(), "r", id);//, ifid.close(), ifid.open(path.c_str());
+	else id = fopen(path.c_str(), "r");//, ifid.open(path.c_str());
 	mode = "in";
+	char logbuf[200]; 
+	sprintf(logbuf, "filecore--file::ropen::debug: id = %d\n", id);
+	new logger(0, logbuf);
 	return opened = id != 0;
 
 }
@@ -73,10 +85,14 @@ bool file::isopened(){
 }
 int file::nextint(){
 
-       int x = 0;
-       if (mode == "in")
-               fscanf(id, "%d", &x);
-       return x;
+	int x = 0;
+	if (mode == "in"){
+
+		new logger(0, "filecore--file::nextint::debug: trying to scan\n");
+		fscanf(id, "%d", &x);
+
+	}
+	return x;
 
 }
 void file::nextint(int x){
@@ -126,6 +142,14 @@ void file::nextword(string s){
 
        if (mode == "out")
                ofid << " " << s << " ";
+
+}
+char file::catchar(){
+
+	char ch;
+	if (mode == "in")
+		fscanf(id, "%c", &ch);
+	return ch;
 
 }
 

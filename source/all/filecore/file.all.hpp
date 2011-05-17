@@ -51,6 +51,8 @@ public:
 	virtual void nextline(string s);
 	virtual void nextword(string s);
 
+	virtual char catchar();
+
 
 protected:
 

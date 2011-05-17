@@ -28,7 +28,7 @@
 			- multitarget mode (M)
 			- free mode (F)
   TWOK	- view
-		- code bit copy primitive ( copy from datamanager using vectored array realization, needs a sizex & sizey )
+	OK	- code bit copy primitive ( copy from datamanager using vectored array realization, needs a sizex & sizey )
   WOK	- status
 ######	- popup, don't need now
   TWOK	- properties
@@ -52,9 +52,12 @@
   TOK	- mapmanager
 	   OK	- selectmode
 	   T	- freemode
-	   T	- show map (here might be some problems, need to add bits functionallity for view)
+	   TOK	- show map (here might be some problems, need to add bits functionallity for view)
 	   OK	- done edge adding, and startpoint/target <-> target|multitarget relating
 	   OK	- done offset setup
+	   T	- make a decoding of coords relatively to map size
+  TOK	- mapsync
+		- make a map stretching
 5) fogcore - no module for now, this functionallity would be refactored later to this module
   TOK	- exploration of map
 		made this in test map class as 0-value - fogged position 
@@ -71,6 +74,8 @@
 	- propertymanager
 		- beep
 		- light (intensivity or not ?)
+		- coords
+		- name ?
 		- delegates to guicore/properties
 7) scenariocore
   OK	- vector of commands i think

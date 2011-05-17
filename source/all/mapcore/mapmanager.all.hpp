@@ -24,6 +24,7 @@
 #include "../guicore/view.all.hpp"
 #include "../markercore/markermap.all.hpp"
 #include "../markercore/markermanager.all.hpp"
+#include "mapsync.all.hpp"
 
 //	#refactor
 
@@ -84,6 +85,8 @@ private:
 	markermanager * chosentype;
 
 	marker * currenttarget;
+
+	mapsync * bitsync;
 
 };
 

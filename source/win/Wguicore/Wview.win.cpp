@@ -21,6 +21,8 @@
 #include <windows.h>
 
 #include "../../all/utilcore/logger.all.hpp"
+#include "../../all/mapcore/pixeldrawer.all.hpp"
+#include "../../all/maincore/datamanager.all.hpp"
 
 Wview::Wview(string name, form * parent){
 
@@ -122,6 +124,15 @@ int Wview::dispatch(string message){
 					new logger(10, "Wguicore--Wview::dispatch(paint)::debug: trying to paint line\n");
 					MoveToEx(hdc, x, y, NULL);
 					LineTo(hdc, x + w, y + h);
+
+				}
+				if (ptype == "pixel")
+					SetPixel(hdc, x, y, RGB(cr, cg, cb));
+				if (ptype == "bits"){
+
+					for (int i = 0; i < h; i++)
+						for (int j = 0; j < w; ++j)
+							SetPixel(hdc, i, j, pixeldrawer::draw(datamanager::getbyid(x)->get(i * w + j)));
 
 				}
 				

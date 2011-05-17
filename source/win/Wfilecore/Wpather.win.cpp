@@ -21,13 +21,11 @@ Wpather::~Wpather(){}
 
 string Wpather::decode(string path){
 
-	string res = "";
-	for (unsigned int i = 0; i < res.size(); i += 1)
+	string res = ".";
+	for (unsigned int i = 0; i < path.size(); i += 1)
 		if (path[i] == '/')
 			res.push_back('\\');
 		else res.push_back(path[i]);
-	if (res[0] == '\\')
-		res[0] = '.';
 
 	return res;
 

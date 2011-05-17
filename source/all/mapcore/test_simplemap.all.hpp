@@ -40,6 +40,8 @@ public:
 	void save();
 	int getvalue(int i, int j);
 	void setvalue(int i, int j, int v);
+	pair < int, int > getsize();
+	file * getfile();
 
 protected:
 

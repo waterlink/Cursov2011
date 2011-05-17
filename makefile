@@ -490,4 +490,32 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/maincore/vectored.all.cpp $(win_CFLAGS) -o ./objects/all/maincore/vectored.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/mapcore/mapsync.linux.all.o: ./source/all/mapcore/mapsync.all.cpp ./source/all/mapcore/mapsync.all.hpp 
+	$(linux_CC) ./source/all/mapcore/mapsync.all.cpp $(linux_CFLAGS) -o ./objects/all/mapcore/mapsync.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/mapcore/mapsync.all.cpp $(win_CFLAGS) -o ./objects/all/mapcore/mapsync.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/mapcore/pixeldrawer.linux.all.o: ./source/all/mapcore/pixeldrawer.all.cpp ./source/all/mapcore/pixeldrawer.all.hpp 
+	$(linux_CC) ./source/all/mapcore/pixeldrawer.all.cpp $(linux_CFLAGS) -o ./objects/all/mapcore/pixeldrawer.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/mapcore/pixeldrawer.all.cpp $(win_CFLAGS) -o ./objects/all/mapcore/pixeldrawer.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/filecore/test_file.linux.all.o: ./source/all/filecore/test_file.all.cpp ./source/all/filecore/test_file.all.hpp 
+	$(linux_CC) ./source/all/filecore/test_file.all.cpp $(linux_CFLAGS) -o ./objects/all/filecore/test_file.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/filecore/test_file.all.cpp $(win_CFLAGS) -o ./objects/all/filecore/test_file.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/markercore/propertymanager.linux.all.o: ./source/all/markercore/propertymanager.all.cpp ./source/all/markercore/propertymanager.all.hpp 
+	$(linux_CC) ./source/all/markercore/propertymanager.all.cpp $(linux_CFLAGS) -o ./objects/all/markercore/propertymanager.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/markercore/propertymanager.all.cpp $(win_CFLAGS) -o ./objects/all/markercore/propertymanager.win.all.o $(win_DEFFS) 
 #end

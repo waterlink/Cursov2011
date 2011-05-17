@@ -1,4 +1,5 @@
 [class filesystem] - class for managing filesystem
 [class file] - class that identifies a file
 [class pather] - class for managing paths
+[class test_file] - class for testing file functionality
 #end
