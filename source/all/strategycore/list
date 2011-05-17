@@ -1,0 +1,3 @@
+[class strategycore] - interface for all algos
+[class targetoptimal] - optimal strategy for targets
+#end

@@ -2,6 +2,25 @@
    OK	- create interface for z0rch's program and for BTExecutor.java
    OK	- create test classes, that emulates robot
 	- code both emulators to be really emulators of something ;)
+		- test development mode (hidden hot-key or something like that)
+		- world
+			emulator of the world, this is a real map at all, only robot have an access to it, and test initializer
+		- robot
+			emulator of robot, interacts with a robocore and world
+			- connects with a btexecutor emulator, answers on his questions, and moves, as it asks virtually
+			- log every command, and a result of it, and a state of a robot at the end of completition of command
+		- viewer
+			visual (text or gui ?) emulator of robot's log, it knows all real map
+		- btexecutor
+			connects to robot and sends a commands to him, gets a result of it
+		- zprog
+			connects with btexecutor, only sends commands, but moving in coordinates
+		- mprog
+			loads a map (it could be not 100 % the same as real map, so this is a main trick)
+			gets two coords
+			determines is it possible to get from A to B
+			if so, returns the best way
+   OK	- improg - Markelov's module interface
 2) guicore	{winapi for WIN_target} and {opengl or qt for LINUX_target}
 	- messaging system
 	  TWOK	1) component, form - abstracts, {winapi partially, there still some todo's in code}
@@ -12,7 +31,7 @@
 				m	activate, 
 				m	select, 
 				p	enable, 
-				p	size&position, 
+				pm	size&position, 
 				m	mouse, 
 				m	paint
 			)
@@ -37,9 +56,11 @@
 	- complete all todo's (T-mark)
 3) filecore
   OK	- filesystem
-  TOK	- file
+  OK	- file
+		seems to be working perfect
   WOK	- pather
   TOK	- map loading
+		loads only a test format, i don't know a real format
 4) mapcore
   TOK	- work with filecore to read chosen map from file
 		created only test class, i don't know format still
@@ -51,11 +72,14 @@
 			still it'll be just asking of user
   TOK	- mapmanager
 	   OK	- selectmode
-	   T	- freemode
+	   F	- freemode
+			changed todo-mark to future-mark
 	   TOK	- show map (here might be some problems, need to add bits functionallity for view)
+			- so, i can't stretch this fucking map ? is ***Blt is only for bitmaps?
 	   OK	- done edge adding, and startpoint/target <-> target|multitarget relating
 	   OK	- done offset setup
 	   T	- make a decoding of coords relatively to map size
+			- just a stub, don't changing coords at all
   TOK	- mapsync
 		- make a map stretching
 5) fogcore - no module for now, this functionallity would be refactored later to this module
@@ -64,30 +88,42 @@
 6) markercore
   AOK	- marker
   TOK	- start point
+		- need to make startpoint be fully in charge of strategy type
+		- targets and multitargets must not cross in one scenario
   TOK	- target
+		- conflicts with multitarget
   AOK	- edge
-		code a real edge
+	  OK	code a real edge
+	  OK	- simpleedge is done - always gray for now, just for test purposes
   TOK	- multitarget
+		- conflicts with target
   OK	- properties of markers and edges
   OK	- markermap
   OK	- directionoffset
-	- propertymanager
-		- beep
-		- light (intensivity or not ?)
-		- coords
-		- name ?
-		- delegates to guicore/properties
-7) scenariocore
+  OKF	- propertymanager
+	  OK	- beep
+	  OKF	- light (intensivity is for future and under question)
+	  F	- coords
+	  F	- name ?
+	  OK	- delegates to guicore/properties
+	- realedge
+		it must be done with color determining, this could be done after refactoring in strategycore
+7) scenariocore	-	wtf?? i've forgotten that thing )), ok, i'll apply it to strategies, when they'll be fine
   OK	- vector of commands i think
   OK	- load
   OK	- save
-  TOK	- prepare (start point)
+  FOK	- prepare (start point)
+		- autodetect position is very hard problem, it wasn't so hard by a first sight
   OK	- run
   T?	- cancel (??? maybe ???)
 8) strategycore
-	- optimalstrategy for targets
+  OK	- strategy interface
+  TOK	- optimalstrategy for targets
 		use Markelov's module to determine the best way for each edge
 		use z0rch's module to control the robot
+		- need to do through scenariocore and with properties applied
+		- there must be marking of edges
+		- refactor function go into two: waycalc and go
 	- non-optimalstrategy for targets
 		use Manhetton-way, as a way
 		use z0rch's module to control the robot
@@ -108,4 +144,5 @@
   TOK	- logic
 		main program logic
   OK	- datamanager
+  OK	- vectored - array for datamanager
 

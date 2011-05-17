@@ -31,7 +31,7 @@ void propertymanager::notification(mapmanager * sender){
 	props->clearproperty();
 	props->addproperty("beep", /*"true"*/ chosen->getoption("beep"), "bool");
 	props->addproperty("light", /*"true"*/ chosen->getoption("light"), "bool");
-	if (chosen->gettype() != "startpoint") 
+	if (chosen->gettype() == "startpoint") 
 		props->addproperty("optimal", /*"true"*/ chosen->getoption("optimal"), "bool");
 
 }
@@ -40,7 +40,7 @@ void propertymanager::updatenotification(mapmanager * sender){
 	chosen = sender->getchosenmarker();
 	chosen->setoption("beep", props->getproperty("beep"));
 	chosen->setoption("light", props->getproperty("light"));
-	if (chosen->gettype() != "startpoint") 
+	if (chosen->gettype() == "startpoint") 
 		chosen->setoption("optimal", props->getproperty("optimal"));
 
 }

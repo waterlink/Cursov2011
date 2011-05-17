@@ -10,4 +10,5 @@
 [module all/mapcore] - module for managing maps
 [module all/markercore] - module for marker managing
 [module all/scenariocore] - module for managing scenaries
+[module all/strategycore] - subsystem, controlling alog-behavior of robot
 #end
