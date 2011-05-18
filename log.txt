@@ -117,3 +117,6 @@
 [class mapmanager] - class to manage map, markermap and view it all
 [class mapmanager] - class to manage map, markermap and view it all
 [class izprog] - interface for z0rch's program
+[class Wview] - guicore view class for winapi
+[class Wclient] - gui class client for winapi
+[class Wform] - gui class form for winapi

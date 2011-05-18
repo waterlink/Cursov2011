@@ -172,10 +172,22 @@ int Wform::dispatch(string message){
 	}
 	if (token->getparam("message") == "resize"){
 
-		size.first = token->getparam("width", 0);
-		size.second = token->getparam("height", 0);
-		for (map < string, component * >::iterator iter = controls.begin(); iter != controls.end(); ++iter)
-			iter->second->dispatch(message);
+		RECT rect;
+		GetClientRect(hwnd, &rect);
+		InvalidateRect(hwnd, &rect, true);
+		PAINTSTRUCT ps;
+		HDC hdc = BeginPaint(hwnd, &ps);
+		EndPaint(hwnd, &ps);
+
+		if (token->getparam("width", 0) == 0 && token->getparam("height", 0) == 0);
+		else {
+
+			size.first = token->getparam("width", 0);
+			size.second = token->getparam("height", 0);
+			for (map < string, component * >::iterator iter = controls.begin(); iter != controls.end(); ++iter)
+				iter->second->dispatch(message);
+
+		}
 
 	}
 

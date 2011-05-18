@@ -64,6 +64,7 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 	char buff[30];
 	tokenizer * msgtoken = new stringtokenizer(&msg);
 	int x, y;
+	RECT rect;
 
 	currform = hwndmaster::byhandle(hWnd);
 	if (currform == NULL) return DefWindowProc(hWnd, Message, wParam, lParam);
@@ -77,6 +78,7 @@ long WINAPI wndproc(HWND hWnd, UINT Message, UINT wParam, LONG lParam){
 			clean;
 
 		case WM_SIZE:
+			printf("size\n");
 			SendMessage(hWnd, WM_PAINT, NULL, NULL);
 			msgtoken->setparam("message", "resize");
 			msgtoken->setparam("width", LOWORD(lParam));

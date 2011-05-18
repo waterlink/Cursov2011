@@ -68,11 +68,15 @@ int Wview::dispatch(string message){
 			rect.top = position.second;
 			rect.right = rect.left + size.first;
 			rect.bottom = rect.top + size.second;
-			InvalidateRect(hwnd, &rect, true);
+			InvalidateRect(hwnd, &rect, false);
 			PAINTSTRUCT ps;
 			HDC hdc = BeginPaint(hwnd, &ps);
 
 			HDC hcdc = CreateCompatibleDC(hdc);
+
+			HDC backbuffer = CreateCompatibleDC(hdc);
+			HBITMAP buffer = CreateCompatibleBitmap(hdc, size.first, size.second);
+			SelectObject(backbuffer, buffer);
 
 			HBRUSH hbrush;
 			HPEN hpen;
@@ -109,39 +113,42 @@ int Wview::dispatch(string message){
 				brush.lbStyle = BS_SOLID;
 				brush.lbColor = RGB(cr, cg, cb);
 				hbrush = CreateBrushIndirect(&brush);
-				SelectObject(hdc, hbrush);
+				SelectObject(backbuffer, hbrush);
 				hpen = CreatePen(PS_SOLID, th, RGB(cr, cg, cb));
-				SelectObject(hdc, hpen);
+				SelectObject(backbuffer, hpen);
 
 				SelectObject(hcdc, hbrush);
 				SelectObject(hcdc, hpen);
 
 				if (ptype == "rectangle")
-					Rectangle(hdc, x, y, x + w, y + h);
+					Rectangle(backbuffer, x, y, x + w, y + h);
 				if (ptype == "point")
-					SetPixel(hdc, x, y, RGB(cr, cg, cb));
+					SetPixel(backbuffer, x, y, RGB(cr, cg, cb));
 				if (ptype == "ellipse")
-					Ellipse(hdc, x, y, x + w, y + h);
+					Ellipse(backbuffer, x, y, x + w, y + h);
 				if (ptype == "circle")
-					Ellipse(hdc, x - r / 2, y - r / 2, x + r / 2, y + r / 2);
+					Ellipse(backbuffer, x - r / 2, y - r / 2, x + r / 2, y + r / 2);
 				if (ptype == "line"){
 
 					new logger(10, "Wguicore--Wview::dispatch(paint)::debug: trying to paint line\n");
-					MoveToEx(hdc, x, y, NULL);
-					LineTo(hdc, x + w, y + h);
+					MoveToEx(backbuffer, x, y, NULL);
+					LineTo(backbuffer, x + w, y + h);
 
 				}
 				if (ptype == "pixel")
-					SetPixel(hdc, x, y, RGB(cr, cg, cb));
+					SetPixel(backbuffer, x, y, RGB(cr, cg, cb));
 				if (ptype == "bits"){
 
+					HBITMAP hbm = CreateCompatibleBitmap(hdc, w, h);
+					SelectObject(hcdc, hbm);
 					for (int i = 0; i < h; i++)
 						for (int j = 0; j < w; ++j)
-							SetPixel(hdc, i, j, pixeldrawer::draw(datamanager::getbyid(x)->get(i * w + j)));
+							SetPixel(hcdc, i, j, pixeldrawer::draw(datamanager::getbyid(x)->get(i * w + j)));
 
 					// some kind of bug here
-					BitBlt(hdc, 0, 0, w, h, hcdc, 0, 0, SRCCOPY);
-					StretchBlt(hcdc, 0, 0, w, h, hdc, 0, 0, getsize().first, getsize().second, SRCCOPY);
+					StretchBlt(backbuffer, 0, 0, getsize().first, getsize().second, hcdc, 0, 0, w, h, SRCCOPY);
+
+					DeleteObject(hbm);
 
 				}
 				
@@ -152,7 +159,10 @@ int Wview::dispatch(string message){
 				
 			}
 
+			BitBlt(hdc, 0, 0, size.first, size.second, backbuffer, 0, 0, SRCCOPY);
+
 			DeleteDC(hcdc);
+			DeleteDC(backbuffer);
 
 			EndPaint(hwnd, &ps);
 
