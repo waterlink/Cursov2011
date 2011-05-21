@@ -3,11 +3,11 @@
    OK	- create test classes, that emulates robot
 	- code both emulators to be really emulators of something ;)
 		- test development mode (hidden hot-key or something like that)
-		- world
+	  OK	- world
 			emulator of the world, this is a real map at all, only robot have an access to it, and test initializer
-		- robot
+	  TOK	- robot
 			emulator of robot, interacts with a robocore and world
-			- connects with a btexecutor emulator, answers on his questions, and moves, as it asks virtually
+			- connects with a btexecutor emulator, answers on his questions, and moves, as it asks, virtually
 			- log every command, and a result of it, and a state of a robot at the end of completition of command
 		- viewer
 			visual (text or gui ?) emulator of robot's log, it knows all real map
@@ -46,7 +46,7 @@
 			- target mode (T)
 			- multitarget mode (M)
 			- free mode (F)
-  TWOK	- view
+  WOK	- view - seems to be working, maybe needs some refactor and documentation
 	OK	- code bit copy primitive ( copy from datamanager using vectored array realization, needs a sizex & sizey )
   WOK	- status
 ######	- popup, don't need now
@@ -70,16 +70,17 @@
 		searches this template in our map, and
 		if there more than one matches, ask user to choose one.
 			still it'll be just asking of user
-  TOK	- mapmanager
+  FOK	- mapmanager
 	   OK	- selectmode
 	   F	- freemode
 			changed todo-mark to future-mark
-	   TOK	- show map (here might be some problems, need to add bits functionallity for view)
+	   OK	- show map (here might be some problems, need to add bits functionallity for view)
 			- so, i can't stretch this fucking map ? is ***Blt is only for bitmaps?
+				- done, problem was with a compatible dc, compatible bitmap must be chosen first
 	   OK	- done edge adding, and startpoint/target <-> target|multitarget relating
 	   OK	- done offset setup
-	   T	- make a decoding of coords relatively to map size
-			- just a stub, don't changing coords at all
+	   OK	- make a decoding of coords relatively to map size
+			- done
   TOK	- mapsync
 		- make a map stretching
 5) fogcore - no module for now, this functionallity would be refactored later to this module
@@ -89,20 +90,20 @@
   AOK	- marker
   TOK	- start point
 		- need to make startpoint be fully in charge of strategy type
-		- targets and multitargets must not cross in one scenario
-  TOK	- target
-		- conflicts with multitarget
+	  OK	- targets and multitargets must not cross in one scenario
+  OK	- target
+	  OK	- conflicts with multitarget
   AOK	- edge
 	  OK	code a real edge
 	  OK	- simpleedge is done - always gray for now, just for test purposes
-  TOK	- multitarget
-		- conflicts with target
+  OK	- multitarget
+	  OK	- conflicts with target
   OK	- properties of markers and edges
   OK	- markermap
   OK	- directionoffset
-  OKF	- propertymanager
+  OKF?	- propertymanager
 	  OK	- beep
-	  OKF	- light (intensivity is for future and under question)
+	  OKF?	- light (intensivity is for future and under question)
 	  F	- coords
 	  F	- name ?
 	  OK	- delegates to guicore/properties
@@ -116,30 +117,32 @@
 		- autodetect position is very hard problem, it wasn't so hard by a first sight
   OK	- run
   T?	- cancel (??? maybe ???)
+  TOK	- command class
 8) strategycore
   OK	- strategy interface
-  TOK	- optimalstrategy for targets
+  FOK	- optimalstrategy for targets
 		use Markelov's module to determine the best way for each edge
 		use z0rch's module to control the robot
-		- need to do through scenariocore and with properties applied
-		- there must be marking of edges
-		- refactor function go into two: waycalc and go
-	- non-optimalstrategy for targets
+	  F	- need to do through scenariocore and with properties applied
+	  OK	- there must be marking of edges
+	  OK	- refactor function go into two: waycalc and go
+  F	- non-optimalstrategy for targets
 		use Manhetton-way, as a way
 		use z0rch's module to control the robot
-	- optimalstrategy for multitargets
+  T	- optimalstrategy for multitargets
 		use Gamilton-way algo to determine best way
 		use z0rch's module to control the robot
-	- non-optimalstrategy for multitargets
+  T	- non-optimalstrategy for multitargets
 		use geometrical greed algo
 		use z0rch's module to control the robot
-	- NP area template determinant
+  F	- NP area template determinant
 		dfs, i think, using BTExecutor to control robot, algo mine
 9) utilcore
   OK	- string tokenizer
   OK	- logger
 		- it's reasonable to make a message specification for each function, or function part, eg
 			Wguicore--Wview::dispatch(paint)::debug: - is specification
+	- mather
 10) maincore
   TOK	- logic
 		main program logic

@@ -36,7 +36,12 @@ int simpleedge::determine(){
 
 	new logger(1, "markercore--simpleedge::fixme: stub, rand\n");
 	if (getB()->gettype() == "directionoffset") return 4;
-	return 0;
+	return color;
+
+}
+void simpleedge::setcolor(int color){
+
+	this->color = color;
 
 }
 

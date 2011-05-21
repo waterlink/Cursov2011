@@ -39,6 +39,7 @@ public:
 	// 3 - green (optimal way)
 	// 4 - blue (robot offset)
 	int determine();
+	void setcolor(int color);
 
 protected:
 
@@ -47,6 +48,7 @@ protected:
 private:
 
 	marker * A, * B;
+	int color;
 
 };
 

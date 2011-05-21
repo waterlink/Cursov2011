@@ -31,6 +31,7 @@ public:
 	targetoptimal();
 	~targetoptimal();
 	void setupmarkersource(markermap * markersource);
+	bool status();
 	bool go();
 
 	virtual void setupmprog(improg * mprog);
@@ -47,6 +48,14 @@ private:
 	improg * mprog;
 	string mapname;
 	izprog * zprog;
+
+	vector < pair < int, int > > way;
+	vector < marker * > markers;
+	map < marker *, int > mark;
+	vector < edge * > edges;
+	marker * offset;
+	int start;
+	vector < marker * > marks;
 
 };
 

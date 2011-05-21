@@ -11,4 +11,5 @@
 [module all/markercore] - module for marker managing
 [module all/scenariocore] - module for managing scenaries
 [module all/strategycore] - subsystem, controlling alog-behavior of robot
+[module all/testcore] - module for development testing purposes
 #end

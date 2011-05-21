@@ -3,4 +3,5 @@
 [class stringtokenizer] - tokenizer realization for strings
 [class logger] - class used to do logging into stderr
 [class settings] - class for managing current settings of an application
+[class mather] - class for managing mathematics
 #end

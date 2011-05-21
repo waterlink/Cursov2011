@@ -45,6 +45,7 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 	void setup(mapmanager * manager){
 
 		this->manager = manager;
+		pathmode = "waiting";
 
 	}
 
@@ -58,13 +59,20 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 				// code this up
 				if (manager->extractmarkermanager()->getcurrentmarkertype() == "targetmode"){
 
+					if (pathmode != "startpoint" && pathmode != "target")
+						return;
 					manager->gotolasttarget();
 					if (manager->getcurrenttarget() == 0)
 						manager->choosestartpoint();
 					if (manager->getcurrenttarget()){
 
+						pathmode = "target";
 						int x = token->getparam("x", 0);
 						int y = token->getparam("y", 0);
+						pair < int, int > pos = make_pair(x, y);
+						pos = manager->decodeposition(pos);
+						x = pos.first;
+						y = pos.second;
 						marker * mar = new target;
 						mar->setposition(x, y);
 						manager->addmarker(mar);
@@ -81,9 +89,14 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "startpointmode"){
 
 					// TODO: here must be a dialog asking, is user really wants do that
+					pathmode = "startpoint";
 					manager->clear();
 					int x = token->getparam("x", 0);
 					int y = token->getparam("y", 0);
+					pair < int, int > pos = make_pair(x, y);
+					pos = manager->decodeposition(pos);
+					x = pos.first;
+					y = pos.second;
 					marker * mar = new startpoint;
 					mar->setposition(x, y);
 					manager->addmarker(mar);
@@ -93,11 +106,18 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 				}
 				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "multitargetmode"){
 
+					if (pathmode != "startpoint" && pathmode != "multitarget")
+						return;
 					manager->choosestartpoint();
 					if (manager->getcurrenttarget()){
 
+						pathmode = "multitarget";
 						int x = token->getparam("x", 0);
 						int y = token->getparam("y", 0);
+						pair < int, int > pos = make_pair(x, y);
+						pos = manager->decodeposition(pos);
+						x = pos.first;
+						y = pos.second;
 						marker * mar = new multitarget;
 						mar->setposition(x, y);
 						manager->addmarker(mar);
@@ -114,6 +134,9 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 
 					//fprintf(stderr, "mapcore--viewconnection::handler::fixme: freemode, stub\n");
 					new logger(4, "mapcore--viewconnection::handler::fixme: freemode, stub\n");
+
+					if (pathmode != "startpoint" && pathmode != "free")
+						return;
 
 				}
 				else if (manager->extractmarkermanager()->getcurrentmarkertype() == "selectmode"){
@@ -145,6 +168,8 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 
 					// TODO: here must be a dialog asking, is user really wants do that
 
+					if (pathmode == "waiting") return;
+
 					new logger(10, "mapcore--viewconnection::handler::debug: changing offset marker\n");
 
 					manager->clearoffset();
@@ -156,6 +181,10 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 					
 						int x = token->getparam("x", 0);
 						int y = token->getparam("y", 0);
+						pair < int, int > pos = make_pair(x, y);
+						pos = manager->decodeposition(pos);
+						x = pos.first;
+						y = pos.second;
 						marker * mar = new directionoffset;
 						mar->setposition(x, y);
 						manager->addmarker(mar);
@@ -184,6 +213,7 @@ class viewconnection: public messager{ public: viewconnection(){} ~viewconnectio
 private: 
 
 	mapmanager * manager;
+	string pathmode;
 
 };
 
@@ -277,13 +307,31 @@ void mapmanager::deledge(edge * edg){
 pair < int, int > mapmanager::decodeposition(marker * mar){
 
 	// stub
-	return mar->getposition();
+	//return mar->getposition();
+	int x = mar->getposition().first;
+	int y = mar->getposition().second;
+	int wv = viewdestination->getsize().first;
+	int hv = viewdestination->getsize().second;
+	int wm = mapsource->getsize().first;
+	int hm = mapsource->getsize().second;
+	int rx = x * wv / wm;
+	int ry = y * hv / hm;
+	return make_pair(rx, ry);
 
 }
 pair < int, int > mapmanager::decodeposition(pair < int, int > pos){
 
 	// stub
-	return pos;
+	//return pos;
+	int x = pos.first;
+	int y = pos.second;
+	int wv = viewdestination->getsize().first;
+	int hv = viewdestination->getsize().second;
+	int wm = mapsource->getsize().first;
+	int hm = mapsource->getsize().second;
+	int rx = x * wm / wv;
+	int ry = y * hm / hv;
+	return make_pair(rx, ry);
 
 }
 void mapmanager::connecttomarkermanager(markermanager * chosentype){

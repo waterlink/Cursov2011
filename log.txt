@@ -120,3 +120,16 @@
 [class Wview] - guicore view class for winapi
 [class Wclient] - gui class client for winapi
 [class Wform] - gui class form for winapi
+[class mapmanager] - class to manage map, markermap and view it all
+[class targetoptimal] - optimal strategy for targets
+[class strategycore] - interface for all algos
+[class scenario] - class for managing commands
+[class command] - class command for robot
+[class edge] - class edge, abstract, connects two markers, oriented
+[class simpleedge] - class edge simple realization
+[class izprog] - interface for z0rch's program
+[class propertymanager] - class for managing properties of marker and its property window
+[class edge] - class edge, abstract, connects two markers, oriented
+[class world] - world emulator
+[class test_simplemap] - class mapcore, realization, for test purposes
+[class ibtexec] - interface for BTExecutor external module

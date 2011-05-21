@@ -37,6 +37,7 @@ public:
 	// 2 - yellow (non-optimal way)
 	// 3 - green (optimal way)
 	virtual int determine() = 0;
+	virtual void setcolor(int color) = 0;
 
 protected:
 

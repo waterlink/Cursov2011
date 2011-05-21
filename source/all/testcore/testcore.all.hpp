@@ -11,25 +11,20 @@
 
 //
 //	header file
-//	class strategycore
+//	class testcore
 //	interface
-//	interface for all algos
+//	test development subsystem facade
 //
 
-#ifndef strategycore_hpp
-#define strategycore_hpp
-
-#include "../markercore/markermap.all.hpp"
+#ifndef testcore_hpp
+#define testcore_hpp
 
 class
-strategycore{
+testcore{
 
 public:
 
-	virtual ~strategycore(){}
-	virtual void setupmarkersource(markermap * markersource) = 0;
-	virtual bool status() = 0;
-	virtual bool go() = 0;
+	
 
 protected:
 
