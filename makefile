@@ -567,4 +567,11 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/utilcore/mather.all.cpp $(win_CFLAGS) -o ./objects/all/utilcore/mather.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/testcore/btexecutor.linux.all.o: ./source/all/testcore/btexecutor.all.cpp ./source/all/testcore/btexecutor.all.hpp 
+	$(linux_CC) ./source/all/testcore/btexecutor.all.cpp $(linux_CFLAGS) -o ./objects/all/testcore/btexecutor.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/testcore/btexecutor.all.cpp $(win_CFLAGS) -o ./objects/all/testcore/btexecutor.win.all.o $(win_DEFFS) 
 #end

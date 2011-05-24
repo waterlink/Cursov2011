@@ -1,4 +1,4 @@
 target= all 
-module= utilcore 
+module= testcore 
  
 #end

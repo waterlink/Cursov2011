@@ -16,9 +16,31 @@
 
 #include "world.all.hpp"
 
-world::world(pather * decoder){ m = new test_simplemap(decoder); }
+world::world(pather * decoder){ 
+
+	m = new test_simplemap(decoder); 
+	m->choose("testmap");
+
+}
 world::~world(){ delete m; }
-int world::get(int x, int y){ m->getvalue(x, y); }
-void world::set(int x, int y, int v){ m->setvalue(x, y, v); }
+int world::get(int x, int y){
+
+	pair < int, int > size = m->getsize();
+	if (x < 0 || x >= size.first ||
+	    y < 0 || y >= size.second)
+		return 0;
+	int X = m->getvalue(x, y);
+	if (X == -1) return 0;
+	return 1;
+
+}
+void world::set(int x, int y, int v){ 
+
+	int X = 0;
+	if (v == 1) X = -1;
+	else X = 1;
+	m->setvalue(x, y, X);
+
+}
 
 //#end

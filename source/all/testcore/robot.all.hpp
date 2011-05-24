@@ -36,6 +36,7 @@ public:
 	virtual void slight(bool f);
 	virtual void beep();
 	virtual void update();
+	virtual bool test();
 
 protected:
 
@@ -45,9 +46,13 @@ private:
 
 	double rd0, rd1;
 	bool light;
+	bool touch;
+
 	world * w;
+
 	double x, y;
 	double lx, ly;
+
 	double t;
 
 };

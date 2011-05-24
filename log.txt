@@ -133,3 +133,13 @@
 [class world] - world emulator
 [class test_simplemap] - class mapcore, realization, for test purposes
 [class ibtexec] - interface for BTExecutor external module
+[class robot] - robot emulator
+[class world] - world emulator
+[class mather] - class for managing mathematics
+[class world] - world emulator
+[class test_simplemap] - class mapcore, realization, for test purposes
+[class ibtexec] - interface for BTExecutor external module
+[class mather] - class for managing mathematics
+[class mather] - class for managing mathematics
+[class testcore] - test development subsystem facade
+[class robot] - robot emulator

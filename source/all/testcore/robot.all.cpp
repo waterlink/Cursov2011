@@ -24,7 +24,6 @@
 #include "../utilcore/logger.all.hpp"
 #include "../utilcore/mather.all.hpp"
 
-#define eps 1e-9
 #define maxspeed 1.5
 #define sizex 1.0
 #define sizey 1.0
@@ -32,7 +31,7 @@
 /*
 		lxy
 	-------------------  1.0 - sizex
-		 ^
+	X0	 ^	 3X
 |	 |-------|-------|
 |	 |	 |	 |
 |	r|0	 |	1|r
@@ -40,35 +39,85 @@
 |	r|0	 xy	1|r
 |	 |		 |
 |	 |---------------|
-
+	X1		 2X
 1.0 - sizey
 
 */
 
-robot::robot(world * w){ this->w = w; }
+robot::robot(world * w){ 
+
+	this->w = w; 
+	t = 1.0 * clock() / CLOCKS_PER_SEC;
+
+}
 robot::~robot(){}
-double robot::grd0(){ return rd0; }
-double robot::grd1(){ return rd1; }
-void robot::srd(double v0, double v1){ rd0 = v0, rd1 = v1; }
+double robot::grd0(){ 
+
+	return rd0; 
+
+}
+double robot::grd1(){ 
+
+	update();
+	return rd1; 
+
+}
+void robot::srd(double v0, double v1){ 
+
+	update();
+	rd0 = v0, rd1 = v1; 
+
+}
 bool robot::gtouch(){
 
 	// TODO: code this function, it must interact with world object somehow
+	update();
+	return touch;
 
 }
 double robot::gsight(){
 
 	// TODO: code this function, it must interact with world object somehow
+	update();
+	double dx = lx - x;
+	double dy = ly - y;
+
+	int xflag = 1;
+	if (dy > dx) xflag = 0;
+
+	for (int i = 0; ; ++i){
+
+		double ddx = dx * i;
+		double ddy = dy * i;
+		if (xflag)
+			ddx = i, ddy /= dx;
+		else
+			ddx /= dy, ddy = i;
+
+		int nx = (int)(x + ddx);
+		int ny = (int)(y + ddy);
+
+		if (w->get(nx, ny)){
+
+			return mather::distex(make_pair(x, y), make_pair(1.0 * nx, 1.0 * ny));	// return dist here
+			break;	// and break
+
+		}
+
+	}
 
 }
 void robot::slight(bool f){
 
-	if (f) new logger(1, "testcore--robot::slight::test: light enabled\n");
-	else new logger(1, "testcore--robot::slight::test: light disabled\n");
+	update();
+	if (f) new logger(1, "testcore--robot::slight::test: message:light_enabled \n");
+	else new logger(1, "testcore--robot::slight::test: message:light_disabled \n");
 
 }
 void robot::beep(){
 
-	new logger(1, "testcore--robot::beep::test: beep\n");
+	update();
+	new logger(1, "testcore--robot::beep::test: message:beep \n");
 
 }
 void robot::update(){
@@ -78,9 +127,14 @@ void robot::update(){
 	double nt = 1.0 * clock() / CLOCKS_PER_SEC;
 	double dt = nt - t;
 
-	if (fabs(rd0 - rd1) > eps && fabs(rd0) > eps && fabs(rd1) > eps){
+	t = nt;
 
-		new logger(1, "testcore--robot::update::test: breaked\n");
+	double oldx = x, oldy = y; 
+	double oldlx = lx, oldly = ly;
+
+	if (fabs(rd0 - rd1) > mather::epsilon() && fabs(rd0) > mather::epsilon() && fabs(rd1) > mather::epsilon()){
+
+		new logger(1, "testcore--robot::update::test: message:breaked \n");
 		return;
 
 	}
@@ -90,7 +144,10 @@ void robot::update(){
 	if (rd0 > rd1){
 
 		double l = rd * dt;
-		double a = sizex / sizex;
+
+		pair < double, double > xylxy = make_pair(lx - x, ly - y);
+		double R = mather::dist(xylxy);
+		double a = l / R;
 		
 		// get normale to lxy and fit it to rd1 coords, they are spin center now
 		pair < double, double > lxyN = mather::rotateex(make_pair(lx, ly), -pi / 2.0, make_pair(x, y));
@@ -107,7 +164,10 @@ void robot::update(){
 	else if (rd1 > rd0){
 
 		double l = rd * dt;
-		double a = sizex / sizex;
+
+		pair < double, double > xylxy = make_pair(lx - x, ly - y);
+		double R = mather::dist(xylxy);
+		double a = l / R;
 		
 		// get normale to lxy and fit it to rd1 coords, they are spin center now
 		pair < double, double > lxyN = mather::rotateex(make_pair(lx, ly), pi / 2.0, make_pair(x, y));
@@ -133,6 +193,86 @@ void robot::update(){
 		ly = ly + xylxy.second / mather::dist(xylxy) * s;
 
 	}
+
+	char logbuf[50];
+	sprintf(
+		logbuf, 
+		"testcore--robot::update::test: message:moved x:%d y:%d lx:%d ly:%d t:%d \n", 
+		(int)x, (int)y, (int)lx, (int)ly, (int)t
+	);
+	new logger(1, logbuf);
+
+	if (!test()){
+
+		x = oldx, y = oldy;
+		lx = oldlx, ly = oldly;
+		rd0 = rd1 = 0.0;
+		touch = true;
+		new logger(1, "testcore--robot::update::test: message:touched \n");
+
+	}
+	else { 
+
+		touch = false;
+
+	}
+
+}
+
+bool robot::test(){
+
+	double pi = acos(-1.0);
+	// get lxy rotated by 45 grads X0..3
+	pair < double, double > X0 = mather::normalizeex(
+		mather::rotateex(make_pair(lx, ly), 1.0 * pi / 4.0, make_pair(x, y)),
+		mather::dist(make_pair(sizex / 2.0, sizey / 2.0)),
+		make_pair(x, y)
+	);
+	pair < double, double > X1 = mather::normalizeex(
+		mather::rotateex(make_pair(lx, ly), 3.0 * pi / 4.0, make_pair(x, y)),
+		mather::dist(make_pair(sizex / 2.0, sizey / 2.0)),
+		make_pair(x, y)
+	);
+	pair < double, double > X2 = mather::normalizeex(
+		mather::rotateex(make_pair(lx, ly), 5.0 * pi / 4.0, make_pair(x, y)),
+		mather::dist(make_pair(sizex / 2.0, sizey / 2.0)),
+		make_pair(x, y)
+	);
+	pair < double, double > X3 = mather::normalizeex(
+		mather::rotateex(make_pair(lx, ly), 7.0 * pi / 4.0, make_pair(x, y)),
+		mather::dist(make_pair(sizex / 2.0, sizey / 2.0)),
+		make_pair(x, y)
+	);
+
+	double 	xmin = min(X0.first, X1.first);
+		xmin = min(xmin, X2.first);
+		xmin = min(xmin, X3.first);
+
+	double 	ymin = min(X0.second, X1.second);
+		ymin = min(ymin, X2.second);
+		ymin = min(ymin, X3.second);
+
+	double 	xmax = max(X0.first, X1.first);
+		xmax = max(xmax, X2.first);
+		xmax = max(xmax, X3.first);
+
+	double 	ymax = max(X0.second, X1.second);
+		ymax = max(ymax, X2.second);
+		ymax = max(ymax, X3.second);
+
+	int x1 = (int)xmin;
+	int y1 = (int)ymin;
+	int x2 = (int)(xmax - mather::epsilon() + 1.0);
+	int y2 = (int)(ymax - mather::epsilon() + 1.0);
+
+	bool res = true;
+
+	for (int i = x1; i <= x2; ++i)
+		for (int j = y1; j <= y2; ++j)
+			if (w->get(i, j))
+				res = false;
+
+	return res;
 
 }
 

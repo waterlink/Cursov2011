@@ -1,4 +1,5 @@
 [class testcore] - test development subsystem facade
 [class world] - world emulator
 [class robot] - robot emulator
+[class btexecutor] - emulator class for btexecutor
 #end

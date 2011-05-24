@@ -5,13 +5,17 @@
 		- test development mode (hidden hot-key or something like that)
 	  OK	- world
 			emulator of the world, this is a real map at all, only robot have an access to it, and test initializer
-	  TOK	- robot
+	  OK	- robot
 			emulator of robot, interacts with a robocore and world
+			  OK	- move
+			  OK	- beep
+			  OK	- light
+			  OK	- obstacles
 			- connects with a btexecutor emulator, answers on his questions, and moves, as it asks, virtually
 			- log every command, and a result of it, and a state of a robot at the end of completition of command
-		- viewer
+	  T	- viewer
 			visual (text or gui ?) emulator of robot's log, it knows all real map
-		- btexecutor
+	  OK	- btexecutor
 			connects to robot and sends a commands to him, gets a result of it
 		- zprog
 			connects with btexecutor, only sends commands, but moving in coordinates

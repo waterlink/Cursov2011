@@ -18,6 +18,8 @@
 
 #include <cmath>
 
+#define eps 1e-9
+
 pair < double, double > mather::rotate(pair < double, double > X, double a){
 
 	double x = X.first;
@@ -41,5 +43,22 @@ double mather::distex(pair < double, double > X, pair < double, double > Y){
 	return mather::dist(make_pair(X.first - Y.first, X.second - Y.second));
 
 }
+pair < double, double > mather::normalize(pair < double, double > X, double D){
+
+	pair < double, double > res;
+	res.first = X.first * D / mather::dist(X);
+	res.second = X.second * D / mather::dist(X);
+	return res;
+
+}
+pair < double, double > mather::normalizeex(pair < double, double > X, double D, pair < double, double > X0){
+
+	pair < double, double > Y = mather::normalize(make_pair(X.first - X0.first, X.second - X0.second), D);
+	Y.first += X0.first;
+	Y.second += X0.second;
+	return Y;
+
+}
+double mather::epsilon(){ return eps; }
 
 //#end
