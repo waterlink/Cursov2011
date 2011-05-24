@@ -86,7 +86,7 @@ int Wview::dispatch(string message){
 				string next = *iter;
 
 				string buflog = "Wguicore--Wview::dispatch(paint)::debug: primitive is: " + next + "\n";
-				new logger(0, buflog.c_str());
+				new logger(10, buflog.c_str());
 
 				tokenizer * primitive = new stringtokenizer(&next);
 
@@ -145,7 +145,6 @@ int Wview::dispatch(string message){
 						for (int j = 0; j < w; ++j)
 							SetPixel(hcdc, i, j, pixeldrawer::draw(datamanager::getbyid(x)->get(i * w + j)));
 
-					// some kind of bug here
 					StretchBlt(backbuffer, 0, 0, getsize().first, getsize().second, hcdc, 0, 0, w, h, SRCCOPY);
 
 					DeleteObject(hbm);

@@ -3,27 +3,27 @@
    OK	- create test classes, that emulates robot
 	- code both emulators to be really emulators of something ;)
 		- test development mode (hidden hot-key or something like that)
-	  OK	- world
-			emulator of the world, this is a real map at all, only robot have an access to it, and test initializer
-	  OK	- robot
-			emulator of robot, interacts with a robocore and world
-			  OK	- move
-			  OK	- beep
-			  OK	- light
-			  OK	- obstacles
-			- connects with a btexecutor emulator, answers on his questions, and moves, as it asks, virtually
-			- log every command, and a result of it, and a state of a robot at the end of completition of command
-	  T	- viewer
-			visual (text or gui ?) emulator of robot's log, it knows all real map
-	  OK	- btexecutor
-			connects to robot and sends a commands to him, gets a result of it
-		- zprog
-			connects with btexecutor, only sends commands, but moving in coordinates
-		- mprog
-			loads a map (it could be not 100 % the same as real map, so this is a main trick)
-			gets two coords
-			determines is it possible to get from A to B
-			if so, returns the best way
+		  OK	- world
+				emulator of the world, this is a real map at all, only robot have an access to it, and test initializer
+		  OK	- robot
+				emulator of robot, interacts with a robocore and world
+				  OK	- move
+				  OK	- beep
+				  OK	- light
+				  OK	- obstacles
+			  OK	- connects with a btexecutor emulator, answers on his questions, and moves, as it asks, virtually
+			  OK	- log every command, and a result of it, and a state of a robot at the end of completition of command
+		  T	- viewer
+				visual (text or gui ?) emulator of robot's log, it knows all real map
+		  OK	- btexecutor
+				connects to robot and sends a commands to him, gets a result of it
+		  OK	- zprog
+				connects with btexecutor, only sends commands, but moving in coordinates
+		  OK	- mprog
+				loads a map (it could be not 100 % the same as real map, so this is a main trick)
+				gets two coords
+				determines is it possible to get from A to B
+				if so, returns the best way
    OK	- improg - Markelov's module interface
 2) guicore	{winapi for WIN_target} and {opengl or qt for LINUX_target}
 	- messaging system
@@ -52,6 +52,7 @@
 			- free mode (F)
   WOK	- view - seems to be working, maybe needs some refactor and documentation
 	OK	- code bit copy primitive ( copy from datamanager using vectored array realization, needs a sizex & sizey )
+		- found some bug, after coding another module, i don't know what is it, but, when using toolbox map changing colors
   WOK	- status
 ######	- popup, don't need now
   TWOK	- properties
@@ -85,8 +86,9 @@
 	   OK	- done offset setup
 	   OK	- make a decoding of coords relatively to map size
 			- done
-  TOK	- mapsync
+  OK	- mapsync
 		- make a map stretching
+		seems to be done
 5) fogcore - no module for now, this functionallity would be refactored later to this module
   TOK	- exploration of map
 		made this in test map class as 0-value - fogged position 
@@ -143,13 +145,27 @@
 		dfs, i think, using BTExecutor to control robot, algo mine
 9) utilcore
   OK	- string tokenizer
-  OK	- logger
+  FOK	- logger
 		- it's reasonable to make a message specification for each function, or function part, eg
 			Wguicore--Wview::dispatch(paint)::debug: - is specification
-	- mather
+  OK	- mather
 10) maincore
   TOK	- logic
 		main program logic
+		- modify menu:
+		  OK	- file
+				- load map
+				- save map ? (reasonable only with fogcore completed)
+			  OK	- exit
+			- scenario
+				- load scenario
+				- save scenario
+				- run scenario
+			- test
+				- test run
+		  OK	- help
+				- instruction
+			  OK	- about
   OK	- datamanager
   OK	- vectored - array for datamanager
 

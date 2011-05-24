@@ -31,28 +31,31 @@ public:
 
 	logic();
 	logic(
-			client * app,
-			form * form1,
-			button * btn1,
-			view * view1,
-			toolbox * toolbox1,
-			button * btn2,
-			button * btn3,
-			status * stat1,
-			properties * prop1,
-			menu * mmain,
-			menu * mfile,
-			menu * mq,
-			menu * mfile_exit,
-			menu * mq_about,
+		client * app,
+		form * form1,
+		button * btn1,
+		view * view1,
+		toolbox * toolbox1,
+		button * btn2,
+		button * btn3,
+		status * stat1,
+		properties * prop1,
+		menu * mmain,
+		menu * mfile,
+		menu * mq,
+		menu * mfile_exit,
+		menu * mq_about,
 
-			pather * decoder,
+		pather * decoder,
 
-			button * selectmode,
-			button * startpointmode,
-			button * targetmode,
-			button * multitargetmode,
-			button * freemode
+		button * selectmode,
+		button * startpointmode,
+		button * targetmode,
+		button * multitargetmode,
+		button * freemode,
+
+		menu * mtest,
+		menu * mtestrun
 	);
 
 	int run();
@@ -89,6 +92,9 @@ private:
 	button * targetmode;
 	button * multitargetmode;
 	button * freemode;
+
+	menu * mtest;
+	menu * mtestrun;
 
 	//independent:
 

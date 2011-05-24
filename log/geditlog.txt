@@ -1,3 +1,3 @@
 
-(gedit:10054): EggSMClient-WARNING **: Failed to connect to the session manager: None of the authentication protocols specified are supported
+(gedit:12869): EggSMClient-WARNING **: Failed to connect to the session manager: None of the authentication protocols specified are supported
 

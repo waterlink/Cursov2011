@@ -141,12 +141,23 @@ void robot::update(){
 
 	double rd = max(rd0, rd1) * maxspeed / 100.0;
 
-	if (rd0 > rd1){
+	if (fabs(rd0 - rd1) < mather::epsilon()) {
+
+		double s = 2.0 * rd * dt;
+		pair < double, double > xylxy = make_pair(lx - x, ly - y);
+
+		x = x + xylxy.first / mather::dist(xylxy) * s;
+		y = y + xylxy.second / mather::dist(xylxy) * s;
+
+		lx = lx + xylxy.first / mather::dist(xylxy) * s;
+		ly = ly + xylxy.second / mather::dist(xylxy) * s;
+
+	}
+	else if (rd0 > rd1){
 
 		double l = rd * dt;
 
-		pair < double, double > xylxy = make_pair(lx - x, ly - y);
-		double R = mather::dist(xylxy);
+		double R = sizex;
 		double a = l / R;
 		
 		// get normale to lxy and fit it to rd1 coords, they are spin center now
@@ -165,8 +176,7 @@ void robot::update(){
 
 		double l = rd * dt;
 
-		pair < double, double > xylxy = make_pair(lx - x, ly - y);
-		double R = mather::dist(xylxy);
+		double R = sizex;
 		double a = l / R;
 		
 		// get normale to lxy and fit it to rd1 coords, they are spin center now
@@ -179,18 +189,6 @@ void robot::update(){
 
 		x = xy.first, y = xy.second;
 		lx = lxy.first, ly = lxy.second;
-
-	}
-	else {
-
-		double s = rd * dt;
-		pair < double, double > xylxy = make_pair(lx - x, ly - y);
-
-		x = x + xylxy.first / mather::dist(xylxy) * s;
-		y = y + xylxy.second / mather::dist(xylxy) * s;
-
-		lx = lx + xylxy.first / mather::dist(xylxy) * s;
-		ly = ly + xylxy.second / mather::dist(xylxy) * s;
 
 	}
 
@@ -273,6 +271,17 @@ bool robot::test(){
 				res = false;
 
 	return res;
+
+}
+double robot::getmaxspeed(){
+
+	return maxspeed;
+
+}
+
+pair < double, double > robot::getsize(){
+
+	return make_pair(sizex, sizey);
 
 }
 

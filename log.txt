@@ -143,3 +143,17 @@
 [class mather] - class for managing mathematics
 [class testcore] - test development subsystem facade
 [class robot] - robot emulator
+[class izprog] - interface for z0rch's program
+[class robot] - robot emulator
+[class btexecutor] - emulator class for btexecutor
+[class mather] - class for managing mathematics
+[class improg] - interface for connecting with Markelov's module
+[class filesystem] - class for managing filesystem
+[class test_simplemap] - class mapcore, realization, for test purposes
+[class test_simplemap] - class mapcore, realization, for test purposes
+[class Wview] - guicore view class for winapi
+[class Wclient] - gui class client for winapi
+[class mainclass] - win version of main class, contains initialization, run method and finalization
+[class logic] - class controlling main processes in program
+[class logic] - class controlling main processes in program
+[class Wview] - guicore view class for winapi

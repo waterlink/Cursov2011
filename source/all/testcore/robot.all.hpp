@@ -38,6 +38,9 @@ public:
 	virtual void update();
 	virtual bool test();
 
+	virtual double getmaxspeed();
+	virtual pair < double, double > getsize();
+
 protected:
 
 	

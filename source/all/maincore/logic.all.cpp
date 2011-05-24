@@ -64,7 +64,10 @@ logic::logic(
 		button * startpointmode,
 		button * targetmode,
 		button * multitargetmode,
-		button * freemode
+		button * freemode,
+
+		menu * mtest,
+		menu * mtestrun
 ){
 
 #define clean \

@@ -121,15 +121,23 @@ mainclass::run(){
 	glbl_data->mfile_exit = new Wmenu("mfile_exit", false);
 	glbl_data->mq_about = new Wmenu("mq_about", false);
 
+	Wmenu * mtest = new Wmenu("mtest", true);
+	Wmenu * mtestrun = new Wmenu("mtestrun", false);
+
 	glbl_data->mfile->settext("&File");
 	glbl_data->mq->settext("&Help");
 	glbl_data->mfile_exit->settext("&Exit");
 	glbl_data->mq_about->settext("&About");
 
+	mtest->settext("&Test");
+	mtestrun->settext("&Run");
+
 	glbl_data->mmain->add(glbl_data->mfile);
 	glbl_data->mmain->add(glbl_data->mq);
+	glbl_data->mmain->add(mtest);
 	glbl_data->mfile->add(glbl_data->mfile_exit);
 	glbl_data->mq->add(glbl_data->mq_about);
+	mtest->add(mtestrun);
 
 	glbl_data->mmain->setparent(glbl_data->form1);
 
@@ -201,7 +209,10 @@ mainclass::run(){
 					new Wbutton("startpointmode", tbox),
 					new Wbutton("targetmode", tbox),
 					new Wbutton("multitargetmode", tbox),
-					new Wbutton("freemode", tbox)
+					new Wbutton("freemode", tbox),
+
+					mtest,
+					mtestrun
 				);
 
 	return mainlogic->run();

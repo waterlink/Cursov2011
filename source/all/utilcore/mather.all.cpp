@@ -60,5 +60,6 @@ pair < double, double > mather::normalizeex(pair < double, double > X, double D,
 
 }
 double mather::epsilon(){ return eps; }
+double mather::pi(){ return acos(-1.0); }
 
 //#end

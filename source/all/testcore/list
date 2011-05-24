@@ -2,4 +2,6 @@
 [class world] - world emulator
 [class robot] - robot emulator
 [class btexecutor] - emulator class for btexecutor
+[class zprog] - emulator class for z0rch's module
+[class mprog] - emulator class for makelov's module
 #end

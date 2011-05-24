@@ -574,4 +574,18 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/testcore/btexecutor.all.cpp $(win_CFLAGS) -o ./objects/all/testcore/btexecutor.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/testcore/zprog.linux.all.o: ./source/all/testcore/zprog.all.cpp ./source/all/testcore/zprog.all.hpp 
+	$(linux_CC) ./source/all/testcore/zprog.all.cpp $(linux_CFLAGS) -o ./objects/all/testcore/zprog.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/testcore/zprog.all.cpp $(win_CFLAGS) -o ./objects/all/testcore/zprog.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/all/testcore/mprog.linux.all.o: ./source/all/testcore/mprog.all.cpp ./source/all/testcore/mprog.all.hpp 
+	$(linux_CC) ./source/all/testcore/mprog.all.cpp $(linux_CFLAGS) -o ./objects/all/testcore/mprog.linux.all.o $(linux_DEFFS) 
+#tab 
+ 
+	$(win_CC) ./source/all/testcore/mprog.all.cpp $(win_CFLAGS) -o ./objects/all/testcore/mprog.win.all.o $(win_DEFFS) 
 #end

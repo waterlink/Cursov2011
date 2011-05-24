@@ -35,6 +35,7 @@ public:
 	static pair < double, double > normalize(pair < double, double > X, double D);
 	static pair < double, double > normalizeex(pair < double, double > X, double D, pair < double, double > X0);
 	static double epsilon();
+	static double pi();
 
 protected:
 
