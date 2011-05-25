@@ -124,6 +124,7 @@ _______________________________________________
 */
 void zprog::realrelmove(int dx, int dy){
 
+	double mullifier = 100.0;
 	double rotspeed = 0.3;
 	double gospeed = 0.5;
 	double maxspeed = robo->getmaxspeed();
@@ -145,7 +146,9 @@ void zprog::realrelmove(int dx, int dy){
 		b = 2.0 * mather::pi() - b;
 
 	a -= b;
-	a = -a;
+	//a = -a;
+
+	printf("a-angle: %.3lf\n", a);
 
 	double R = sizex;
 	double l = R * fabs(a);
@@ -158,13 +161,13 @@ void zprog::realrelmove(int dx, int dy){
 
 	if (a < -mather::epsilon()){
 
-		btexec->setRD0power(rotspeed);
+		btexec->setRD0power(rotspeed * mullifier);
 		btexec->setRD1power(0.0);
 
 	}
 	else if (a > mather::epsilon()){
 
-		btexec->setRD1power(rotspeed);
+		btexec->setRD1power(rotspeed * mullifier);
 		btexec->setRD0power(0.0);
 
 	}
@@ -202,8 +205,8 @@ void zprog::realrelmove(int dx, int dy){
 
 	t = 1.0 * clock() / CLOCKS_PER_SEC;
 
-	btexec->setRD0power(gospeed);
-	btexec->setRD1power(gospeed);
+	btexec->setRD0power(gospeed * mullifier);
+	btexec->setRD1power(gospeed * mullifier);
 
 	while (1){
 

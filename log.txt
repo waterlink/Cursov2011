@@ -173,3 +173,4 @@
 [class mprog] - emulator class for makelov's module
 [class mapmanager] - class to manage map, markermap and view it all
 [class mapmanager] - class to manage map, markermap and view it all
+[class zprog] - emulator class for z0rch's module

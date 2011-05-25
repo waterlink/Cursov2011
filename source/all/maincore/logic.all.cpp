@@ -36,6 +36,8 @@
 
 #include "../strategycore/targetoptimal.all.hpp"
 
+#include "../utilcore/logger.all.hpp"
+
 EHandler(click_btn1, {
 
 	printf("ehandler catched an event\n");
@@ -67,6 +69,7 @@ EHandler(testrunactivate, {
 	str->setupmprog(mp);
 	str->setupzprog(zp);
 	str->setupmap("testmap");
+	new logger(0, "maincore--testrunactivate::handler::debug: strategy setup done\n");
 	if (str->status())
 		str->go();
 

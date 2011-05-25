@@ -24,7 +24,7 @@
 #include "../utilcore/logger.all.hpp"
 #include "../utilcore/mather.all.hpp"
 
-#define maxspeed 1.5
+#define maxspeed 15.0
 #define sizex 1.0
 #define sizey 1.0
 
@@ -165,10 +165,10 @@ void robot::update(){
 		double r1x = (lxyN.first - x) / mather::distex(lxyN, make_pair(x, y)) * sizex / 2.0 + x;
 		double r1y = (lxyN.second - y) / mather::distex(lxyN, make_pair(x, y)) * sizex / 2.0 + y;
 
-		pair < double, double > xy = mather::rotateex(make_pair(x, y), -a, make_pair(r1x, r1y));
-		pair < double, double > lxy = mather::rotateex(make_pair(lx, ly), -a, make_pair(r1x, r1y));
+		//pair < double, double > xy = mather::rotateex(make_pair(x, y), -a, make_pair(r1x, r1y));
+		pair < double, double > lxy = mather::rotateex(make_pair(lx, ly), -a, make_pair(x, y));
 
-		x = xy.first, y = xy.second;
+		//x = xy.first, y = xy.second;
 		lx = lxy.first, ly = lxy.second;
 
 	}
@@ -184,10 +184,10 @@ void robot::update(){
 		double r0x = (lxyN.first - x) / mather::distex(lxyN, make_pair(x, y)) * sizex / 2.0 + x;
 		double r0y = (lxyN.second - y) / mather::distex(lxyN, make_pair(x, y)) * sizex / 2.0 + y;
 
-		pair < double, double > xy = mather::rotateex(make_pair(x, y), a, make_pair(r0x, r0y));
-		pair < double, double > lxy = mather::rotateex(make_pair(lx, ly), a, make_pair(r0x, r0y));
+		//pair < double, double > xy = mather::rotateex(make_pair(x, y), a, make_pair(r0x, r0y));
+		pair < double, double > lxy = mather::rotateex(make_pair(lx, ly), a, make_pair(x, y));
 
-		x = xy.first, y = xy.second;
+		//x = xy.first, y = xy.second;
 		lx = lxy.first, ly = lxy.second;
 
 	}
@@ -267,7 +267,7 @@ bool robot::test(){
 
 	for (int i = x1; i <= x2; ++i)
 		for (int j = y1; j <= y2; ++j)
-			if (w->get(i, j))
+			if (w->get(i, j) == 0)
 				res = false;
 
 	return res;

@@ -16,11 +16,14 @@
 
 #include "world.all.hpp"
 
+#include "../utilcore/logger.all.hpp"
+
 world::world(pather * decoder){ 
 
 	m = new test_simplemap(decoder); 
 	m->choose("testmap");
 	m->load();
+	new logger(0, "testcore--world::world::debug: initialization done\n");
 
 }
 world::~world(){ delete m; }
