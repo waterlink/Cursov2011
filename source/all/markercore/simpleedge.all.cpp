@@ -20,7 +20,7 @@
 
 #include <cstdlib>
 
-simpleedge::simpleedge(){}
+simpleedge::simpleedge(){ color = 0; }
 simpleedge::~simpleedge(){}
 marker * simpleedge::getA(){ return A; }
 marker * simpleedge::getB(){ return B; }

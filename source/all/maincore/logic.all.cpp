@@ -28,6 +28,14 @@
 #include "../filecore/test_file.all.hpp"
 #include "../markercore/propertymanager.all.hpp"
 
+#include "../testcore/zprog.all.hpp"
+#include "../testcore/mprog.all.hpp"
+#include "../testcore/robot.all.hpp"
+#include "../testcore/world.all.hpp"
+#include "../testcore/btexecutor.all.hpp"
+
+#include "../strategycore/targetoptimal.all.hpp"
+
 EHandler(click_btn1, {
 
 	printf("ehandler catched an event\n");
@@ -38,6 +46,29 @@ EHandler(modeactivate, {
 
 	//printf("modeactivate\n");
 	mainlogic->changetoolboxmode(sender);
+
+})
+
+EHandler(testrunactivate, {
+
+	markermap * markersource = mainlogic->getmarkers();
+	mprog * mp = new mprog(mainlogic->getmap());
+	world * w = new world(mainlogic->getdecoder());
+	robot * r = new robot(w);
+	mapmanager * man = mainlogic->getmanager();
+	man->choosestartpoint();
+	r->setupcorrds(man->getcurrenttarget()->getposition());
+	man->chooseoffset();
+	r->setuplook(man->getcurrenttarget()->getposition());
+	btexecutor * bte = new btexecutor(r);
+	zprog * zp = new zprog(bte, r);
+	targetoptimal * str = new targetoptimal;
+	str->setupmarkersource(markersource);
+	str->setupmprog(mp);
+	str->setupzprog(zp);
+	str->setupmap("testmap");
+	if (str->status())
+		str->go();
 
 })
 
@@ -129,10 +160,10 @@ logic::logic(
 
 	btn1->setactivate(click_btn1);
 
-	mapcore * M = new test_simplemap(decoder);
+	M = new test_simplemap(decoder);
 	M->choose("testmap");
 	M->load();
-	markermap * markers = new markermap();
+	markers = new markermap();
 	manager = new mapmanager(M, markers, view1);
 	manager->connecttoview();
 	chosenmarkertype = new markermanager;
@@ -179,6 +210,8 @@ logic::logic(
 	freemode->setactivate(modeactivate);
 	freemode->settext("F");
 
+	mtestrun->setactivate(testrunactivate);
+
 	clean;
 
 #undef clean
@@ -196,6 +229,30 @@ void logic::changetoolboxmode(component * pressed){
 	chosenmarkertype->setcurrentmarkertype(pressed->getname());
 	toolbox1->setactivecontrol(pressed);
 	app->update();
+
+}
+
+markermap * logic::getmarkers(){
+
+	return markers;
+
+}
+
+mapcore * logic::getmap(){
+
+	return M;
+
+}
+
+pather * logic::getdecoder(){
+
+	return decoder;
+
+}
+
+mapmanager * logic::getmanager(){
+
+	return manager;
 
 }
 

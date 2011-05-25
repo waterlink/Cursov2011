@@ -23,6 +23,7 @@
 #include "../mapcore/mapmanager.all.hpp"
 #include "../filecore/pather.all.hpp"
 #include "../markercore/markermanager.all.hpp"
+#include "../mapcore/mapcore.all.hpp"
 
 class
 logic{
@@ -62,6 +63,11 @@ public:
 
 	void changetoolboxmode(component * pressed);
 
+	markermap * getmarkers();
+	mapcore * getmap();
+	pather * getdecoder();
+	mapmanager * getmanager();
+
 protected:
 
 	
@@ -98,8 +104,9 @@ private:
 
 	//independent:
 
+	mapcore * M;
+	markermap * markers;
 	mapmanager * manager;
-
 	markermanager * chosenmarkertype;
 
 } * mainlogic;

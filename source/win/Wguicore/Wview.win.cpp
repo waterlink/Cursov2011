@@ -113,12 +113,14 @@ int Wview::dispatch(string message){
 				brush.lbStyle = BS_SOLID;
 				brush.lbColor = RGB(cr, cg, cb);
 				hbrush = CreateBrushIndirect(&brush);
-				SelectObject(backbuffer, hbrush);
+				if (ptype != "bits" && ptype != "pixel")
+					SelectObject(backbuffer, hbrush);
 				hpen = CreatePen(PS_SOLID, th, RGB(cr, cg, cb));
-				SelectObject(backbuffer, hpen);
+				if (ptype != "bits" && ptype != "pixel")
+					SelectObject(backbuffer, hpen);
 
-				SelectObject(hcdc, hbrush);
-				SelectObject(hcdc, hpen);
+				//SelectObject(hcdc, hbrush);
+				//SelectObject(hcdc, hpen);
 
 				if (ptype == "rectangle")
 					Rectangle(backbuffer, x, y, x + w, y + h);
@@ -139,13 +141,13 @@ int Wview::dispatch(string message){
 					SetPixel(backbuffer, x, y, RGB(cr, cg, cb));
 				if (ptype == "bits"){
 
-					HBITMAP hbm = CreateCompatibleBitmap(hdc, w, h);
+					HBITMAP hbm = CreateCompatibleBitmap(hdc, h, w);
 					SelectObject(hcdc, hbm);
 					for (int i = 0; i < h; i++)
 						for (int j = 0; j < w; ++j)
 							SetPixel(hcdc, i, j, pixeldrawer::draw(datamanager::getbyid(x)->get(i * w + j)));
 
-					StretchBlt(backbuffer, 0, 0, getsize().first, getsize().second, hcdc, 0, 0, w, h, SRCCOPY);
+					StretchBlt(backbuffer, 0, 0, getsize().first, getsize().second, hcdc, 0, 0, h, w, SRCCOPY);
 
 					DeleteObject(hbm);
 

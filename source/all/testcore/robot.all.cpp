@@ -47,6 +47,7 @@
 robot::robot(world * w){ 
 
 	this->w = w; 
+	rd0 = rd1 = 0.0;
 	t = 1.0 * clock() / CLOCKS_PER_SEC;
 
 }
@@ -58,7 +59,6 @@ double robot::grd0(){
 }
 double robot::grd1(){ 
 
-	update();
 	return rd1; 
 
 }
@@ -110,14 +110,14 @@ double robot::gsight(){
 void robot::slight(bool f){
 
 	update();
-	if (f) new logger(1, "testcore--robot::slight::test: message:light_enabled \n");
-	else new logger(1, "testcore--robot::slight::test: message:light_disabled \n");
+	if (f) new logger(0, "testcore--robot::slight::test: message:light_enabled \n");
+	else new logger(0, "testcore--robot::slight::test: message:light_disabled \n");
 
 }
 void robot::beep(){
 
 	update();
-	new logger(1, "testcore--robot::beep::test: message:beep \n");
+	new logger(0, "testcore--robot::beep::test: message:beep \n");
 
 }
 void robot::update(){
@@ -134,7 +134,7 @@ void robot::update(){
 
 	if (fabs(rd0 - rd1) > mather::epsilon() && fabs(rd0) > mather::epsilon() && fabs(rd1) > mather::epsilon()){
 
-		new logger(1, "testcore--robot::update::test: message:breaked \n");
+		new logger(0, "testcore--robot::update::test: message:breaked \n");
 		return;
 
 	}
@@ -198,7 +198,7 @@ void robot::update(){
 		"testcore--robot::update::test: message:moved x:%d y:%d lx:%d ly:%d t:%d \n", 
 		(int)x, (int)y, (int)lx, (int)ly, (int)t
 	);
-	new logger(1, logbuf);
+	new logger(0, logbuf);
 
 	if (!test()){
 
@@ -206,7 +206,7 @@ void robot::update(){
 		lx = oldlx, ly = oldly;
 		rd0 = rd1 = 0.0;
 		touch = true;
-		new logger(1, "testcore--robot::update::test: message:touched \n");
+		new logger(0, "testcore--robot::update::test: message:touched \n");
 
 	}
 	else { 
@@ -282,6 +282,19 @@ double robot::getmaxspeed(){
 pair < double, double > robot::getsize(){
 
 	return make_pair(sizex, sizey);
+
+}
+
+void robot::setupcorrds(pair < int, int > pos){
+
+	x = 1.0 * pos.first;
+	y = 1.0 * pos.second;
+
+}
+void robot::setuplook(pair < int, int > look){
+
+	lx = 1.0 * look.first;
+	ly = 1.0 * look.second;
 
 }
 

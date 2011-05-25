@@ -28,7 +28,7 @@
 using namespace std;
 
 class
-zprog{
+zprog: public izprog{
 
 public:
 

@@ -18,6 +18,8 @@
 
 #include <algorithm>
 
+#include "../utilcore/logger.all.hpp"
+
 #define maxn 500
 
 class
@@ -104,6 +106,8 @@ vector < pair < int, int > > mprog::getway(pair < int, int > A, pair < int, int 
 
 	}
 
+	new logger(0, "testcore--mprog::getway::debug: bfs done. calcing a way\n");
+
 	pair < int, int > u = make_pair(tx, ty);
 	R.push_back(u);
 	for (; u != make_pair(sx, sy); ){
@@ -114,7 +118,7 @@ vector < pair < int, int > > mprog::getway(pair < int, int > A, pair < int, int 
 			v.first += dx[i];
 			v.second += dy[i];
 
-			if (data.A[v.first][v.second] == data.A[u.first][u.second] + 1){
+			if (data.A[v.first][v.second] == data.A[u.first][u.second] - 1){
 
 				u = v;
 				R.push_back(u);
@@ -126,11 +130,13 @@ vector < pair < int, int > > mprog::getway(pair < int, int > A, pair < int, int 
 
 	}
 
+	new logger(0, "testcore--mprog::getway::debug: calcing a way done\n");
+
 	for (int i = 0; i < R.size() / 2; ++i)
 		swap(R[i], R[R.size() - 1 - i]);
 
-	return R;
 	delete dt;
+	return R;
 
 }
 

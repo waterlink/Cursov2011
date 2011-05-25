@@ -157,3 +157,19 @@
 [class logic] - class controlling main processes in program
 [class logic] - class controlling main processes in program
 [class Wview] - guicore view class for winapi
+[class pixeldrawer] - class for drawing pixels of map
+[class Wtoolbox] - gui class toolbox for winapi
+[class edgedrawer] - class, creates primitive for edges
+[class simpleedge] - class edge simple realization
+[class targetoptimal] - optimal strategy for targets
+[class mapmanager] - class to manage map, markermap and view it all
+[class mprog] - emulator class for makelov's module
+[class zprog] - emulator class for z0rch's module
+[class world] - world emulator
+[class robot] - robot emulator
+[class btexecutor] - emulator class for btexecutor
+[class robot] - robot emulator
+[class world] - world emulator
+[class mprog] - emulator class for makelov's module
+[class mapmanager] - class to manage map, markermap and view it all
+[class mapmanager] - class to manage map, markermap and view it all

@@ -169,3 +169,8 @@
   OK	- datamanager
   OK	- vectored - array for datamanager
 
+
+Refactor-TODO:
+	- do refactors in code
+	- make map values -1, 0, 1 be a constants in some class
+

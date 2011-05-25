@@ -25,7 +25,10 @@ int pixeldrawer::draw(int type){
 	// free - white
 	if (type == 1) return 255 + (255 << 8) + (255 << 16);
 	// obstacle - black
-	if (type == 2) return 0;
+	if (type == -1) return 0;
+
+	// red if something goes bad
+	return 255;
 
 }
 

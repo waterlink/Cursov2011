@@ -16,6 +16,8 @@
 
 #include "targetoptimal.all.hpp"
 
+#include <cstdio>
+
 targetoptimal::targetoptimal(){}
 targetoptimal::~targetoptimal(){}
 void targetoptimal::setupmarkersource(markermap * markersource){ this->markersource = markersource; }
@@ -79,11 +81,17 @@ bool targetoptimal::status(){
 
 	}
 
+	for (int i = 0; i < markers.size(); ++i) printf("%d: %d\n", i, E[i]);
+	//return false;
+
 	int curr = start;
 	marks.push_back(markers[start]);
 	for (; curr >= 0; ){
 
+		printf("curr: %d\n", curr);
+
 		int next = E[curr];
+		if (next < 0) break;
 		marks.push_back(markers[next]);
 		vector < pair < int, int > > eway = mprog->getway(markers[curr]->getposition(), markers[next]->getposition(), mapname);
 		if (eway.size() == 0){
@@ -95,6 +103,7 @@ bool targetoptimal::status(){
 		else V[curr]->setcolor(3);
 		for (int i = 0; i < eway.size(); ++i)
 			way.push_back(eway[i]);
+		curr = next;
 
 	}
 

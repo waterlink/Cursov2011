@@ -20,6 +20,7 @@ world::world(pather * decoder){
 
 	m = new test_simplemap(decoder); 
 	m->choose("testmap");
+	m->load();
 
 }
 world::~world(){ delete m; }

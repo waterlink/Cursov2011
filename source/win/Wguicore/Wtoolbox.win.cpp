@@ -127,6 +127,9 @@ int Wtoolbox::dispatch(string message){
 
 			Rectangle(hdc, rect.left, rect.top, rect.right, rect.bottom);
 
+			DeleteObject(hbrush);
+			DeleteObject(hpen);
+
 		EndPaint(hwnd, &ps); 
 
 	}

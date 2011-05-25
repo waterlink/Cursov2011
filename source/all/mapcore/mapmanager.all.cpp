@@ -409,6 +409,24 @@ void mapmanager::choosestartpoint(){
 
 }
 
+void mapmanager::chooseoffset(){
+
+	marker * mar, * lmar = 0;
+	for (markersource->catmarker(); (mar = markersource->catnextmarker()) != markersource->catlastmarker(); ){
+
+		if (mar->gettype() == "directionoffset"){
+
+			lmar = mar;
+			break;
+
+		}
+
+	}
+
+	currenttarget = lmar;
+
+}
+
 marker * mapmanager::getcurrenttarget(){ return currenttarget; }
 
 void mapmanager::clear(){ 

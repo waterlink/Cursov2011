@@ -41,6 +41,9 @@ public:
 	virtual double getmaxspeed();
 	virtual pair < double, double > getsize();
 
+	virtual void setupcorrds(pair < int, int > pos);
+	virtual void setuplook(pair < int, int > look);
+
 protected:
 
 	
