@@ -29,8 +29,10 @@ void propertymanager::notification(mapmanager * sender){
 	chosen = sender->getchosenmarker();
 	new logger(10, "markercore--propertymanager::notification::debug: chosen marker\n");
 	props->clearproperty();
+	new logger(10, "markercore--propertymanager::notification::debug: cleared\n");
 	props->addproperty("beep", /*"true"*/ chosen->getoption("beep"), "bool");
 	props->addproperty("light", /*"true"*/ chosen->getoption("light"), "bool");
+	new logger(10, "markercore--propertymanager::notification::debug: property added\n");
 	if (chosen->gettype() == "startpoint") 
 		props->addproperty("optimal", /*"true"*/ chosen->getoption("optimal"), "bool");
 

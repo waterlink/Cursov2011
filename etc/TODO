@@ -52,7 +52,7 @@
 			- free mode (F)
   WOK	- view - seems to be working, maybe needs some refactor and documentation
 	OK	- code bit copy primitive ( copy from datamanager using vectored array realization, needs a sizex & sizey )
-		- found some bug, after coding another module, i don't know what is it, but, when using toolbox map changing colors
+	fixed	- found some bug, after coding another module, i don't know what is it, but, when using toolbox map changing colors
   WOK	- status
 ######	- popup, don't need now
   TWOK	- properties
@@ -80,14 +80,14 @@
 	   F	- freemode
 			changed todo-mark to future-mark
 	   OK	- show map (here might be some problems, need to add bits functionallity for view)
-			- so, i can't stretch this fucking map ? is ***Blt is only for bitmaps?
-				- done, problem was with a compatible dc, compatible bitmap must be chosen first
+		OK	- so, i can't stretch this fucking map ? is ***Blt is only for bitmaps?
+			OK	- done, problem was with a compatible dc, compatible bitmap must be chosen first
 	   OK	- done edge adding, and startpoint/target <-> target|multitarget relating
 	   OK	- done offset setup
 	   OK	- make a decoding of coords relatively to map size
 			- done
   OK	- mapsync
-		- make a map stretching
+	OK	- make a map stretching
 		seems to be done
 5) fogcore - no module for now, this functionallity would be refactored later to this module
   TOK	- exploration of map
@@ -113,8 +113,9 @@
 	  F	- coords
 	  F	- name ?
 	  OK	- delegates to guicore/properties
-	- realedge
+  #OK#	- realedge
 		it must be done with color determining, this could be done after refactoring in strategycore
+		simpleedge has this functionallity now
 7) scenariocore	-	wtf?? i've forgotten that thing )), ok, i'll apply it to strategies, when they'll be fine
   OK	- vector of commands i think
   OK	- load
@@ -124,12 +125,15 @@
   OK	- run
   T?	- cancel (??? maybe ???)
   TOK	- command class
+  F	- call strategies to run
 8) strategycore
   OK	- strategy interface
   FOK	- optimalstrategy for targets
 		use Markelov's module to determine the best way for each edge
 		use z0rch's module to control the robot
-	  F	- need to do through scenariocore and with properties applied
+	  OK	- need to do through scenariocore and with properties applied
+	  		properties have been applied, still need to work through scenariocore
+	  		no ) scenariocore should call this strategies
 	  OK	- there must be marking of edges
 	  OK	- refactor function go into two: waycalc and go
   F	- non-optimalstrategy for targets
