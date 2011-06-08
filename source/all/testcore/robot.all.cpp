@@ -24,9 +24,9 @@
 #include "../utilcore/logger.all.hpp"
 #include "../utilcore/mather.all.hpp"
 
-#define maxspeed 15.0
-#define sizex 1.0
-#define sizey 1.0
+#define maxspeed 10.0
+#define sizex 0.1
+#define sizey 0.1
 
 /*
 		lxy

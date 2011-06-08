@@ -1,4 +1,4 @@
 target= all 
-module= strategycore 
+module= testcore 
  
 #end
