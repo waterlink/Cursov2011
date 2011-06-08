@@ -3,9 +3,12 @@
 
 namespace Robot
 {
-    __interface IRobotHasSound
+    class /*__interface*/ IRobotHasSound
     {
-        void SoundOn(void);
-        void SoundOff(void);
+    	public:
+    	virtual ~IRobotHasSound(){}
+    
+        virtual void SoundOn(void) = 0;
+        virtual void SoundOff(void) = 0;
     };
 }

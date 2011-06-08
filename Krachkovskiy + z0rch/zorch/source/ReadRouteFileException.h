@@ -4,7 +4,7 @@
 class ReadRouteFileException : public MainWindowException
 {
 public:
-    ReadRouteFileException(const wstring error = L"Ошибка чтения файла маршрута")
+    ReadRouteFileException(const wstring error = L("Ошибка чтения файла маршрута"))
         :MainWindowException(error)
     {}
 };

@@ -1,7 +1,17 @@
-﻿#include "MainWindow.h"
+#include "MainWindow.h"
 using namespace Robot;
 
 MainWindow * MainWindow::instance = 0;
+
+     const int MainWindow::windowWidth  = 400;
+     const int MainWindow::windowHeight = 305;
+     const int MainWindow::buttonConnection   = WM_USER + 1;
+     const int MainWindow::buttonPassRoute    = WM_USER + 2;
+     const int MainWindow::buttonLight        = WM_USER + 3;
+     const int MainWindow::buttonSound        = WM_USER + 4;
+     const int MainWindow::listboxRouteSelect = WM_USER + 5;
+     const int MainWindow::editGuide          = WM_USER + 6;
+     const int MainWindow::statusbar          = WM_USER + 7;
 
 void MainWindow::InitMainWindow(LRESULT (CALLBACK *WndProc)(HWND hWnd, UINT Message, UINT wParam, LONG lParam),
                                        HINSTANCE hInstance, int nCmdShow)
@@ -12,7 +22,7 @@ void MainWindow::InitMainWindow(LRESULT (CALLBACK *WndProc)(HWND hWnd, UINT Mess
 
         instance -> hInstance = hInstance;
         instance -> WndProc   = WndProc;
-        instance -> className = L"LEGO-robot";
+        instance -> className = L("LEGO-robot");
 
         instance -> CheckIsAlreadyOpened();
         instance -> RegisterWindowClass();
@@ -32,7 +42,7 @@ int MainWindow::OnCommand(HWND hWnd, UINT Message, UINT wParam, LONG lParam)
             {
                 if(IsDlgButtonChecked(hWnd, buttonConnection))
                 {
-                    SetDlgItemText(hWnd, buttonConnection, L"Прервать соединение с роботом");
+                    SetDlgItemText(hWnd, buttonConnection, L("Прервать соединение с роботом"));
                     robot -> OpenConnection();
                     EnableWindow(childWindows[buttonLight],     true);
                     EnableWindow(childWindows[buttonSound],     true);
@@ -41,7 +51,7 @@ int MainWindow::OnCommand(HWND hWnd, UINT Message, UINT wParam, LONG lParam)
                 }
                 else
                 {
-                    SetDlgItemText(hWnd, buttonConnection, L"Установить соединение с роботом");
+                    SetDlgItemText(hWnd, buttonConnection, L("Установить соединение с роботом"));
                     robot -> CloseConnection();
                     EnableWindow(childWindows[buttonLight],     false);
                     EnableWindow(childWindows[buttonSound],     false);
@@ -72,14 +82,14 @@ int MainWindow::OnCommand(HWND hWnd, UINT Message, UINT wParam, LONG lParam)
             {
                 if(IsDlgButtonChecked(hWnd, buttonLight))
                 {
-                    SetDlgItemText(hWnd, buttonLight, L"Выключить фонарь");
+                    SetDlgItemText(hWnd, buttonLight, L("Выключить фонарь"));
                     IRobotHasLight *lightRobot = dynamic_cast<IRobotHasLight *>(robot);
                     if(lightRobot) 
                         lightRobot->LightOn(); 
                 }
                 else
                 {
-                    SetDlgItemText(hWnd, buttonLight, L"Включить фонарь");
+                    SetDlgItemText(hWnd, buttonLight, L("Включить фонарь"));
                     IRobotHasLight *lightRobot = dynamic_cast<IRobotHasLight *>(robot);
                     if(lightRobot) 
                         lightRobot->LightOff(); 
@@ -95,14 +105,14 @@ int MainWindow::OnCommand(HWND hWnd, UINT Message, UINT wParam, LONG lParam)
             {
                 if(IsDlgButtonChecked(hWnd, buttonSound))
                 {
-                    SetDlgItemText(hWnd, buttonSound, L"Прекратить подачу звукового сигнала");
+                    SetDlgItemText(hWnd, buttonSound, L("Прекратить подачу звукового сигнала"));
                     IRobotHasSound *soundRobot = dynamic_cast<IRobotHasSound *>(robot);
                     if(soundRobot) 
                         soundRobot->SoundOn(); 
                 }
                 else
                 {
-                    SetDlgItemText(hWnd, buttonSound, L"Подать звуковой сигнал");
+                    SetDlgItemText(hWnd, buttonSound, L("Подать звуковой сигнал"));
                     IRobotHasSound *soundRobot = dynamic_cast<IRobotHasSound *>(robot);
                     if(soundRobot) 
                         soundRobot->SoundOff(); 
@@ -147,7 +157,7 @@ void MainWindow::RegisterWindowClass(void)
     WndClass.cbClsExtra    = 0;
     WndClass.cbWndExtra    = 0;
     WndClass.hInstance     = hInstance;
-    WndClass.hIcon         = LoadIcon(0, IDI_SHIELD);
+    WndClass.hIcon         = LoadIcon(0, IDI_APPLICATION);
     WndClass.hCursor       = LoadCursor(NULL, IDC_ARROW);
     WndClass.hbrBackground = (HBRUSH)COLOR_WINDOW;
     WndClass.lpszMenuName  = NULL;
@@ -178,7 +188,7 @@ IRobotRoute *MainWindow::GenerateRouteFromFile(int id)
     wchar_t curdir[lineSize] = {0};
     GetCurrentDirectory(lineSize, curdir);
     wstring filepath = curdir;
-    filepath += L"\\routes\\" + files[id];
+    filepath += L("\\routes\\") + files[id];
     if((hFile = CreateFile(filepath.c_str(), GENERIC_READ, FILE_SHARE_READ, 0, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, 0)) == INVALID_HANDLE_VALUE)
         throw OpenRouteFileException();
     
@@ -239,7 +249,7 @@ IRobotRoute *MainWindow::GenerateRouteFromFile(int id)
 void MainWindow::InitGUI(int nCmdShow)
 {
     InitCommonControls();
-    hWnd = CreateWindow(className.c_str(), L"Управление LEGO-роботом",
+    hWnd = CreateWindow(className.c_str(), L("Управление LEGO-роботом"),
                         WS_SYSMENU | WS_MINIMIZEBOX,
                         (GetSystemMetrics(SM_CXSCREEN) - windowWidth) / 2,
                         (GetSystemMetrics(SM_CYSCREEN) - windowHeight) / 2,
@@ -253,27 +263,35 @@ void MainWindow::InitGUI(int nCmdShow)
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
 
-    AppendChildWindow(editGuide,          L"Edit",         L"Выберите маршрут",                WS_CHILD | WS_VISIBLE | ES_CENTER    | ES_READONLY, 7, 7, 180, 20);
-    AppendChildWindow(listboxRouteSelect, WC_LISTBOX,      L"",                                WS_CHILD | WS_VISIBLE |  WS_VSCROLL  | LBS_NOTIFY      | LBS_NOINTEGRALHEIGHT, 7, 30, 180, 210, WS_EX_DLGMODALFRAME | WS_EX_TRANSPARENT | WS_EX_CLIENTEDGE);
-    AppendChildWindow(buttonConnection,   L"Button",       L"Установить соединение с роботом", WS_CHILD | WS_VISIBLE | BS_MULTILINE | BS_AUTOCHECKBOX | BS_PUSHLIKE, 200,  20, 170, 50);
-    AppendChildWindow(buttonLight,        L"Button",       L"Включить фонарь",                 WS_CHILD | WS_VISIBLE | BS_MULTILINE | BS_AUTOCHECKBOX | BS_PUSHLIKE, 200,  80, 170, 50);
-    AppendChildWindow(buttonSound,        L"Button",       L"Подать звуковой сигнал",          WS_CHILD | WS_VISIBLE | BS_MULTILINE | BS_AUTOCHECKBOX | BS_PUSHLIKE, 200, 140, 170, 50);
-    AppendChildWindow(buttonPassRoute,    L"Button",       L"Начать движение по маршруту",     WS_CHILD | WS_VISIBLE | BS_COMMANDLINK, 200, 200, 170, 50);
-    AppendChildWindow(statusbar,          STATUSCLASSNAME, L"",                                WS_CHILD | WS_VISIBLE | SBARS_SIZEGRIP, 0, 0, 0, 0);
+    AppendChildWindow(editGuide,          L("Edit"),         L("Выберите маршрут"),                WS_CHILD | WS_VISIBLE | ES_CENTER    | ES_READONLY, 7, 7, 180, 20);
+    AppendChildWindow(listboxRouteSelect, WC_LISTBOX,      L(""),                                WS_CHILD | WS_VISIBLE |  WS_VSCROLL  | LBS_NOTIFY      | LBS_NOINTEGRALHEIGHT, 7, 30, 180, 210, WS_EX_DLGMODALFRAME | WS_EX_TRANSPARENT | WS_EX_CLIENTEDGE);
+    AppendChildWindow(buttonConnection,   L("Button"),       L("Установить соединение с роботом"), WS_CHILD | WS_VISIBLE | BS_MULTILINE | BS_AUTOCHECKBOX | BS_PUSHLIKE, 200,  20, 170, 50);
+    AppendChildWindow(buttonLight,        L("Button"),       L("Включить фонарь"),                 WS_CHILD | WS_VISIBLE | BS_MULTILINE | BS_AUTOCHECKBOX | BS_PUSHLIKE, 200,  80, 170, 50);
+    AppendChildWindow(buttonSound,        L("Button"),       L("Подать звуковой сигнал"),          WS_CHILD | WS_VISIBLE | BS_MULTILINE | BS_AUTOCHECKBOX | BS_PUSHLIKE, 200, 140, 170, 50);
+    AppendChildWindow(buttonPassRoute,    L("Button"),       L("Начать движение по маршруту"),     WS_CHILD | WS_VISIBLE /*| BS_COMMANDLINK*/, 200, 200, 170, 50);
+    AppendChildWindow(statusbar,          STATUSCLASSNAME, L(""),                                WS_CHILD | WS_VISIBLE | SBARS_SIZEGRIP, 0, 0, 0, 0);
 
     GetDirFiles();
     int index = 0;
-    for_each(files.begin(), files.end(), [&](wstring &file)
+    /*for_each(files.begin(), files.end(), [&](wstring &file)
     {
         int pos = SendMessage(childWindows[listboxRouteSelect], LB_ADDSTRING, 0, (LPARAM)file.c_str());
         SendMessage(childWindows[listboxRouteSelect], LB_SETITEMDATA, pos, (LPARAM) index); 
         ++index;
-    });
+    });*/
+    
+    for (vector < wstring >::iterator it = files.begin(); it != files.end(); ++it){
+    
+    	int pos = SendMessage(childWindows[listboxRouteSelect], LB_ADDSTRING, 0, (LPARAM)it->c_str());
+        SendMessage(childWindows[listboxRouteSelect], LB_SETITEMDATA, pos, (LPARAM) index); 
+        ++index;
+    
+    }
 
     int coord[2] = { 225, -1 };
     SendMessage(childWindows[statusbar], SB_SETPARTS, 2, (LPARAM)&coord);
-    SendMessage(childWindows[statusbar], SB_SETTEXT, MAKEWPARAM(0,SBT_NOBORDERS), (LPARAM)L"LEGO-робот не подключен");
-    SendMessage(childWindows[statusbar], SB_SETTEXT, MAKEWPARAM(1,SBT_NOBORDERS), (LPARAM)L"Батарея: неизвестно");
+    SendMessage(childWindows[statusbar], SB_SETTEXT, MAKEWPARAM(0,SBT_NOBORDERS), (LPARAM)L("LEGO-робот не подключен"));
+    SendMessage(childWindows[statusbar], SB_SETTEXT, MAKEWPARAM(1,SBT_NOBORDERS), (LPARAM)L("Батарея: неизвестно"));
     EnableWindow(childWindows[buttonLight], false);
     EnableWindow(childWindows[buttonSound], false);
     EnableWindow(childWindows[buttonPassRoute], false);
@@ -282,17 +300,17 @@ void MainWindow::InitGUI(int nCmdShow)
 void MainWindow::UpdateStatusbarText(void)
 {
     wstring first;
-    wstring second = L"Батарея: ";
+    wstring second = L("Батарея: ");
     IRobotConsoleControl *robot = RobotControl::InitInstance();
     if(robot -> IsConnected())
     {
-        first   = L"Подключение выполнено";
-        second += robot -> GetBattery() + L"В";
+        first   = L("Подключение выполнено");
+        second += robot -> GetBattery() + L("В");
     }
     else
     {
-        first   = L"LEGO-робот не подключен";
-        second += L"неизвестно";
+        first   = L("LEGO-робот не подключен");
+        second += L("неизвестно");
     }
     SendMessage(childWindows[statusbar], SB_SETTEXT, MAKEWPARAM(0,SBT_NOBORDERS), (LPARAM)first.c_str());
     SendMessage(childWindows[statusbar], SB_SETTEXT, MAKEWPARAM(1,SBT_NOBORDERS), (LPARAM)second.c_str());
@@ -324,14 +342,14 @@ void MainWindow::GetDirFiles(void)
     const int size = 1024;
     wchar_t curDir[size] = {0};
     GetCurrentDirectory(size, curDir);
-    wcscat(curDir, L"\\routes\\*.txt");
+    wcscat(curDir, L("\\routes\\*.txt"));
 
     WIN32_FIND_DATA ffd;
     HANDLE hFind = FindFirstFile(curDir, &ffd);
  
     if (INVALID_HANDLE_VALUE == hFind) 
     {
-        //MessageBox(0, L"Cannot see any route files in the directory", L"Error", 0);
+        //MessageBox(0, L("Cannot see any route files in the directory"), L("Error"), 0);
         return;
     }
     else

@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "headers.h"
 #include "RobotControl.h"
 #include "DummyRoute.h"
@@ -42,13 +42,13 @@ private:
 
     IRobotRoute *GenerateRouteFromFile(int id);
 
-    static const int windowWidth  = 400;
-    static const int windowHeight = 305;
-    static const int buttonConnection   = WM_USER + 1;
-    static const int buttonPassRoute    = WM_USER + 2;
-    static const int buttonLight        = WM_USER + 3;
-    static const int buttonSound        = WM_USER + 4;
-    static const int listboxRouteSelect = WM_USER + 5;
-    static const int editGuide          = WM_USER + 6;
-    static const int statusbar          = WM_USER + 7;
+    static const int windowWidth;//  = 400;
+    static const int windowHeight;// = 305;
+    static const int buttonConnection;//   = WM_USER + 1;
+    static const int buttonPassRoute;//    = WM_USER + 2;
+    static const int buttonLight;//        = WM_USER + 3;
+    static const int buttonSound;//        = WM_USER + 4;
+    static const int listboxRouteSelect;// = WM_USER + 5;
+    static const int editGuide;//          = WM_USER + 6;
+    static const int statusbar;//          = WM_USER + 7;
 };

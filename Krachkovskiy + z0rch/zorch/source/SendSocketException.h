@@ -4,7 +4,7 @@
 class SendSocketException : public SocketException
 {
 public:
-    SendSocketException(const wstring error = L"Ошибка отправки сокета")
+    SendSocketException(const wstring error = L("Ошибка отправки сокета"))
         :SocketException(error)
     {}
 };

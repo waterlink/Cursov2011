@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "ExceptionHeaders.h"
 
 class InitConnectionException : public SocketException

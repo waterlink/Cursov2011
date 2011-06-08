@@ -4,7 +4,7 @@
 class InitJavaException : public InitConnectionException
 {
 public:
-    InitJavaException(const wstring error = L"Ошибка инициализации соединения с роботом")
+    InitJavaException(const wstring error = L("Ошибка инициализации соединения с роботом"))
         :InitConnectionException(error)
     {}
 };

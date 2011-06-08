@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "headers.h"
 #include "IRobotConsoleControl.h"
 #include "IRobotHasLight.h"

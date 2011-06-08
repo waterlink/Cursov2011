@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "IRobotRoute.h"
 using namespace Robot;
 

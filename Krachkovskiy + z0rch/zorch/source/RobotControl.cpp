@@ -1,8 +1,8 @@
-﻿#include "RobotControl.h"
+#include "RobotControl.h"
 #include "ExceptionHeaders.h"
-#include <iostream>
-#include <io.h>
-#include <fcntl.h>
+//#include <iostream>
+//#include <io.h>
+//#include <fcntl.h>
 
 namespace Robot
 {
@@ -21,15 +21,15 @@ namespace Robot
 
     RobotControl::RobotControl(void)
     {
-        HWND hConsole = FindWindow(L"ConsoleWindowClass", 0);
+        HWND hConsole = FindWindow(L("ConsoleWindowClass"), 0);
         while(hConsole)
         {
             SendMessage(hConsole, WM_CLOSE, 0, 0);
-            hConsole = FindWindow(L"ConsoleWindowClass", 0);
+            hConsole = FindWindow(L("ConsoleWindowClass"), 0);
         }
         CreateThread(0, 0, InitJavaConnection, (LPVOID)pathToJavaBat.c_str(), 0, 0);
         Sleep(6000);
-        hConsole = FindWindow(L"ConsoleWindowClass", 0);
+        hConsole = FindWindow(L("ConsoleWindowClass"), 0);
         if(!hConsole)
             throw InitJavaException();
         ShowWindow(hConsole, SW_HIDE);
@@ -134,12 +134,13 @@ namespace Robot
     
     void RobotControl::StartPassRoute(void)
     {
-        for_each(action.begin(), action.end(), [&](Action a)
+        //for_each(action.begin(), action.end(), [&](Action a)
+        for (list < Action >::iterator a = action.begin(); a != action.end(); ++a)
         {
             char *buf = new char[16];
-            sprintf(buf, "%.3f", a.time);
+            sprintf(buf, "%.3f", a->time);
             string command = buf;
-            switch(a.action)
+            switch(a->action)
             {
                 case Robot::RobotControl::Action::ROTATE:
                     command = "SRT=" + command;
@@ -156,7 +157,7 @@ namespace Robot
             SendSocket((char *)command.c_str());
             CheckAnswerIsOK();
             delete[] buf;
-        });
+        }
         action.clear();
     }
 
@@ -247,7 +248,7 @@ namespace Robot
         buff[size]=0;
         mbstowcs(wbuff, buff, maxsize); // mbstowcs или MultiByteToWideChar
         answer += wbuff;
-        wcscpy(wbuff, L"");
+        wcscpy(wbuff, L(""));
 
         return answer;
     }
@@ -255,17 +256,17 @@ namespace Robot
     void RobotControl::CheckConnection(void)
     {
         if(!activeConnection)
-            throw SocketConnectionIsNotEstablished(L"Connection is not established");
+            throw SocketConnectionIsNotEstablished(L("Connection is not established"));
     }
 
     void RobotControl::CheckAnswerIsOK(void)
     {
         wstring recv = ReceiveSocket();
-        if(recv == L"UnexpectedObstacle")
+        if(recv == L("UnexpectedObstacle"))
             throw UnexpectedObstacleExseption();
-        else if(recv == L"NotSupported")
+        else if(recv == L("NotSupported"))
             throw NotSupportedException();
-        else if(recv != L"OK")
+        else if(recv != L("OK"))
             throw InvalidAnswerException();
     }
 }

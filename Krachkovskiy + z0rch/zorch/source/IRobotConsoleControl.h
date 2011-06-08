@@ -1,16 +1,19 @@
-﻿#pragma once
+#pragma once
 #include "headers.h"
 #include "IRobotRoute.h"
 
 namespace Robot
 {
-    __interface IRobotConsoleControl
+    /*__interface*/ class IRobotConsoleControl
     {
-        void OpenConnection(void);
-        void CloseConnection(void);
-        bool IsConnected(void);
+    	public:
+    	virtual ~IRobotConsoleControl(){}
+    
+        virtual void OpenConnection(void) = 0;
+        virtual void CloseConnection(void) = 0;
+        virtual bool IsConnected(void) = 0;
 
-        void PassRoute(IRobotRoute &route);
-        wstring GetBattery(void);
+        virtual void PassRoute(IRobotRoute &route) = 0;
+        virtual wstring GetBattery(void) = 0;
     };
 }
