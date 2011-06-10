@@ -21,7 +21,7 @@ namespace Robot
 
     RobotControl::RobotControl(void)
     {
-        HWND hConsole = FindWindow(L("ConsoleWindowClass"), 0);
+        /*HWND hConsole = FindWindow(L("ConsoleWindowClass"), 0);
         while(hConsole)
         {
             SendMessage(hConsole, WM_CLOSE, 0, 0);
@@ -32,7 +32,7 @@ namespace Robot
         hConsole = FindWindow(L("ConsoleWindowClass"), 0);
         if(!hConsole)
             throw InitJavaException();
-        ShowWindow(hConsole, SW_HIDE);
+        ShowWindow(hConsole, SW_HIDE);*/
         
         activeConnection = false;
     }
