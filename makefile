@@ -14,12 +14,12 @@ win_RC=i586-mingw32msvc-windres
 win_CFLAGS= -c -Wall -mwindows 
 win_LDFLAGS= -mwindows -Wl,--allow-multiple-definition 
 win_DEFFS= -DWIN_target 
-win_LIBRARIES= -lwinspool -lcomctl32 
+win_LIBRARIES= -lwinspool -lcomctl32 ./Wzprog/RobotControl.o ./Wzprog/WS2_32.Lib
  
-win_spec_SOURCES= ./source/win/main/*.win.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/win/Wguicore/*.win.cpp ./source/all/utilcore/*.all.cpp ./source/all/maincore/*.all.cpp ./source/all/filecore/*.all.cpp ./source/win/Wfilecore/*.win.cpp ./source/all/mapcore/*.all.cpp ./source/all/markercore/*.all.cpp ./source/all/scenariocore/*.all.cpp ./source/all/strategycore/*.all.cpp ./source/all/testcore/*.all.cpp 
-win_spec_HEADERS= ./source/win/main/*.win.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/win/Wguicore/*.win.hpp ./source/all/utilcore/*.all.hpp ./source/all/maincore/*.all.hpp ./source/all/filecore/*.all.hpp ./source/win/Wfilecore/*.win.hpp ./source/all/mapcore/*.all.hpp ./source/all/markercore/*.all.hpp ./source/all/scenariocore/*.all.hpp ./source/all/strategycore/*.all.hpp ./source/all/testcore/*.all.hpp 
+win_spec_SOURCES= ./source/win/main/*.win.cpp ./source/all/robocore/*.all.cpp ./source/all/guicore/*.all.cpp ./source/win/Wguicore/*.win.cpp ./source/all/utilcore/*.all.cpp ./source/all/maincore/*.all.cpp ./source/all/filecore/*.all.cpp ./source/win/Wfilecore/*.win.cpp ./source/all/mapcore/*.all.cpp ./source/all/markercore/*.all.cpp ./source/all/scenariocore/*.all.cpp ./source/all/strategycore/*.all.cpp ./source/all/testcore/*.all.cpp ./source/win/Wrobocore/*.win.cpp 
+win_spec_HEADERS= ./source/win/main/*.win.hpp ./source/all/robocore/*.all.hpp ./source/all/guicore/*.all.hpp ./source/win/Wguicore/*.win.hpp ./source/all/utilcore/*.all.hpp ./source/all/maincore/*.all.hpp ./source/all/filecore/*.all.hpp ./source/win/Wfilecore/*.win.hpp ./source/all/mapcore/*.all.hpp ./source/all/markercore/*.all.hpp ./source/all/scenariocore/*.all.hpp ./source/all/strategycore/*.all.hpp ./source/all/testcore/*.all.hpp ./source/win/Wrobocore/*.win.hpp 
 win_spec_RESOURCES= 
-win_spec_OBJECTS= ./objects/win/main/*.win.o ./objects/all/robocore/*.win.all.o ./objects/all/guicore/*.win.all.o ./objects/win/Wguicore/*.win.o ./objects/all/utilcore/*.win.all.o ./objects/all/maincore/*.win.all.o ./objects/all/filecore/*.win.all.o ./objects/win/Wfilecore/*.win.o ./objects/all/mapcore/*.win.all.o ./objects/all/markercore/*.win.all.o ./objects/all/scenariocore/*.win.all.o ./objects/all/strategycore/*.win.all.o ./objects/all/testcore/*.win.all.o 
+win_spec_OBJECTS= ./objects/win/main/*.win.o ./objects/all/robocore/*.win.all.o ./objects/all/guicore/*.win.all.o ./objects/win/Wguicore/*.win.o ./objects/all/utilcore/*.win.all.o ./objects/all/maincore/*.win.all.o ./objects/all/filecore/*.win.all.o ./objects/win/Wfilecore/*.win.o ./objects/all/mapcore/*.win.all.o ./objects/all/markercore/*.win.all.o ./objects/all/scenariocore/*.win.all.o ./objects/all/strategycore/*.win.all.o ./objects/all/testcore/*.win.all.o ./objects/win/Wrobocore/*.win.o 
  
 LIBRARIES= 
  
@@ -588,4 +588,8 @@ all: linux win
 #tab 
  
 	$(win_CC) ./source/all/testcore/mprog.all.cpp $(win_CFLAGS) -o ./objects/all/testcore/mprog.win.all.o $(win_DEFFS) 
+ 
+#tab 
+./objects/win/Wrobocore/Wzprog.win.o: ./source/win/Wrobocore/Wzprog.win.cpp ./source/win/Wrobocore/Wzprog.win.hpp 
+	$(win_CC) ./source/win/Wrobocore/Wzprog.win.cpp $(win_CFLAGS) -o ./objects/win/Wrobocore/Wzprog.win.o $(win_DEFFS) 
 #end

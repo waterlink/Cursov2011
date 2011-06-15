@@ -1,0 +1,2 @@
+all: BTExecutor.java
+	/usr/lib/jvm/java-6-sun/bin/javac -Xbootclasspath/a:"/home/lexias/nxj/lejos_nxj/3rdparty/lib/bluecove.jar:/home/lexias/nxj/lejos_nxj/3rdparty/lib/bluecove-gpl.jar:/home/lexias/nxj/lejos_nxj/3rdparty/lib/bcel.jar:/home/lexias/nxj/lejos_nxj/3rdparty/lib/commons-cli.jar:/home/lexias/nxj/lejos_nxj/lib/jtools.jar:/home/lexias/nxj/lejos_nxj/lib/pccomm.jar:/home/lexias/nxj/lejos_nxj/lib/pctools.jar" BTExecutor.java

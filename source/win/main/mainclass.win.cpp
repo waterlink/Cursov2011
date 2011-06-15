@@ -33,6 +33,8 @@
 
 #include "../../all/utilcore/logger.all.hpp"
 
+#include "../Wrobocore/Wzprog.win.hpp"
+
 HINSTANCE mainclass::Inst = 0;
 
 HINSTANCE mainclass::getInst(){ return Inst; }
@@ -212,7 +214,9 @@ mainclass::run(){
 					new Wbutton("freemode", tbox),
 
 					mtest,
-					mtestrun
+					mtestrun,
+					
+					new Wzprog
 				);
 
 	return mainlogic->run();

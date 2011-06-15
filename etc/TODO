@@ -25,6 +25,8 @@
 				determines is it possible to get from A to B
 				if so, returns the best way
    OK	- improg - Markelov's module interface
+   TOK	- Wzprog
+   		- testing on robot left
 2) guicore	{winapi for WIN_target} and {opengl or qt for LINUX_target}
 	- messaging system
 	  TWOK	1) component, form - abstracts, {winapi partially, there still some todo's in code}

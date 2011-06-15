@@ -24,6 +24,7 @@
 #include "../filecore/pather.all.hpp"
 #include "../markercore/markermanager.all.hpp"
 #include "../mapcore/mapcore.all.hpp"
+#include "../robocore/izprog.all.hpp"
 
 class
 logic{
@@ -56,7 +57,9 @@ public:
 		button * freemode,
 
 		menu * mtest,
-		menu * mtestrun
+		menu * mtestrun,
+		
+		izprog * z0rchmodule
 	);
 
 	int run();
@@ -67,6 +70,7 @@ public:
 	mapcore * getmap();
 	pather * getdecoder();
 	mapmanager * getmanager();
+	izprog * getzprog();
 
 protected:
 
@@ -101,6 +105,8 @@ private:
 
 	menu * mtest;
 	menu * mtestrun;
+	
+	izprog * z0rchmodule;
 
 	//independent:
 

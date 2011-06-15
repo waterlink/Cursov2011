@@ -42,6 +42,9 @@ public class BTExecutorEx {
         PrintStream send = new PrintStream(sock.getOutputStream());
         //rd[ 0 ].regulateSpeed(true);
         //rd[ 1 ].regulateSpeed(true);
+        
+        double rt0 = 0.0;
+        double rt1 = 0.0;
 
 
         boolean q = true;
@@ -69,22 +72,22 @@ public class BTExecutorEx {
                 sensName = cmd.substring(1);
                 if( sensName.equals("RD_0") ) {
                     //rd[ 0 ].getPower();
-                    answer = "get rd0 called";
+                    //answer = "get rd0 called";
                 } else if( sensName.equals("RD_1") ) {
                     //rd[ 1 ].getPower();
-                    answer = "get rd1 called";
+                    //answer = "get rd1 called";
                 } else if( sensName.equals("ST") ) {
                    // answer = touch.isPressed() ? "1" : "0";
-                   answer = "get st called";
+                   answer = "1";
                 } else if( sensName.equals("SL") ) {
                    // answer = "" + ( light.getLightValue() / 100.0 );
-                   answer = "get sl called";
+                   answer = "0.0";
                 } else if( sensName.equals("SD") ) {
                     //answer = "" + ( ultra.getDistance() / 100.0 );
-                    answer = "get sd called";
+                    answer = "1.0";
                 } else if( sensName.equals("SC") ) {
                     //answer = "" + ( Battery.getVoltage() );
-                    answer = "get sc called";
+                    answer = "1.0";
                 }
                 break;
             case 'S':
@@ -99,11 +102,11 @@ public class BTExecutorEx {
                     if( name.equals("RD_0") ) {
                         //rd[ 0 ].setPower( (int) ( value * 100.0 ) );
                         //rd[ 0 ].forward();
-                        answer = "set rd0 called";
+                        answer = "OK";
                     } else if( name.equals("RD_1") ) {
                         //rd[ 1 ].setPower( (int) ( value * 100.0 ) );
                         //rd[ 1 ].forward();
-                        answer = "set rd1 called";
+                        answer = "OK";
                     }
                 }
                 break;

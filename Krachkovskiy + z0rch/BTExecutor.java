@@ -9,6 +9,16 @@ import java.io.*;
 import java.net.*;
 import java.util.regex.*;
 
+// import:
+import lejos.robotics.navigation.TachoPilot;
+
+// create
+// TachoPilot tp = new TachoPilot(56, 112, motor.C, motor.A, false);
+// move
+// tp.travel(100 mm);
+// rotate
+// tp.rotate(30 grad);
+
 /**
  */
 public class BTExecutor {
@@ -32,6 +42,8 @@ public class BTExecutor {
         rd[ 0 ] = Motor.A;
         rd[ 1 ] = Motor.C;
         rd[ 2 ] = Motor.B;
+        
+        TachoPilot tp = new TachoPilot(56, 112, Motor.C, Motor.A, false);
 
 //        battery = new RemoteBattery();
         light.setFloodlight(false);
@@ -90,16 +102,20 @@ public class BTExecutor {
                     String svalue = m.group(2);
                     System.out.println( "!!" + name + "===" + svalue );
                     double value = Double.parseDouble(svalue);
-                    if( name.equals("RD_0") ) {
-                        rd[ 0 ].setPower( (int) ( value * 100.0 ) );
-                        rd[ 0 ].forward();
+                    if( name.equals("RT") ) {				// here changed RD_0 to RD
+                        /*rd[ 0 ].setPower( (int) ( value * 100.0 ) );
+                        rd[ 0 ].forward();*/
+                        tp.rotate((float)value);
                         answer = "OK";
-                    } else if( name.equals("RD_1") ) {
-                        rd[ 1 ].setPower( (int) ( value * 100.0 ) );
-                        rd[ 1 ].forward();
+                    } else if( name.equals("RD") ) {			// here changed RD_1 to RT
+                        /*rd[ 1 ].setPower( (int) ( value * 100.0 ) );
+                        rd[ 1 ].forward();*/
                         answer = "OK";
+                        tp.travel((float)value);
+                        if (touch.isPressed()) answer = "UnexpectedObstacle";
                     }
                 }
+                answer = "OK";
                 break;
             }
             if( answer != null ) {

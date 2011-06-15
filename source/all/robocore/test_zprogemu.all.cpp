@@ -16,6 +16,8 @@
 
 #include "test_zprogemu.all.hpp"
 
+//#include "../../../Wzprog/RobotControl.h"
+
 test_zprogemu::test_zprogemu(test_roboemu_params * sample){
 
 	this->sample = sample;
@@ -59,16 +61,59 @@ test_zprogemu::setlight(bool fLight){
 void
 test_zprogemu::run(){
 
+    /*class FileRoute : public IRobotRoute
+    {
+    public:
+        FileRoute(double scale, Point startPos, Point offset)
+            :IRobotRoute(scale), start(startPos), offset(offset)
+        {}
+
+        RouteIterator Begin(void) { return route.begin(); }
+        RouteIterator End(void)   { return route.end();   }
+        Point GetStartPos(void)   { return start;         }
+        Point GetOffset(void)     { return offset;        }
+
+        void Push(Point p)        { route.push_back(p);   }
+    private:
+        list<Point> route;
+        Point start, offset;
+
+    } *fileRoute = new FileRoute(scale, Point(sx, sy), Point(lx, ly));*/
+
+	int px = sx, py = sy;
 	for (int i = 0; i < comm.size(); ++i){
 
-		printf(
+		/*printf(
 			"%c %d %d\n", 
 			comm[i].first, 
 			comm[i].second.first, 
 			comm[i].second.second
-		);
+		);*/
+		
+		/*if (comm[i].first == 'm'){
+		
+			fileRoute.Push(Point(comm[i].second.first + px, comm[i].second.second + py));
+			px += comm[i].second.first;
+			py += comm[i].second.second;
+		
+		}*/
 
 	}
+	
+	/*try{
+	
+		RobotControl::InitInstance()->OpenConnection();
+		RobotControl::InitInstance()->PassRoute(fileRoute);
+		RobotControl::InitInstance()->CloseConnection();
+	
+	}
+	catch(...){
+	
+		new logger(1, "RobotControl::error: unknown\n");
+	
+	}
+	
+     delete fileRoute;*/
 
 }
 

@@ -1,4 +1,4 @@
-target= all 
-module= testcore 
+target= win 
+module= Wrobocore 
  
 #end

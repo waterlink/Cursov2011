@@ -12,4 +12,5 @@
 [module all/scenariocore] - module for managing scenaries
 [module all/strategycore] - subsystem, controlling alog-behavior of robot
 [module all/testcore] - module for development testing purposes
+[module win/Wrobocore] - win specification for robo core
 #end

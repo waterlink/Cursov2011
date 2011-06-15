@@ -1,6 +1,6 @@
 all: main.exe
-main.exe: main.o RobotControl.o MainWindow.o
-	i586-mingw32msvc-g++ main.o RobotControl.o MainWindow.o -o main.exe -mwindows -lcomctl32 WS2_32.Lib
+main.exe: main.o RobotControl.o MainWindow.o ../../../objects/all/utilcore/logger.win.all.o
+	i586-mingw32msvc-g++ main.o RobotControl.o MainWindow.o ../../../objects/all/utilcore/logger.win.all.o -o main.exe -mwindows -lcomctl32 WS2_32.Lib
 main.o: main.cpp
 	i586-mingw32msvc-g++ main.cpp -c -o main.o
 RobotControl.o: RobotControl.cpp

@@ -4,6 +4,8 @@
 //#include <io.h>
 //#include <fcntl.h>
 
+#include "../../../source/all/utilcore/logger.all.hpp"
+
 namespace Robot
 {
     RobotControl *RobotControl::instance      = 0;
@@ -98,29 +100,33 @@ namespace Robot
             Point thisVector(p.x - t.x, p.y - t.y);
             Point nextVector(n.x - t.x, n.y - t.y);
             
-            double vectorMul = thisVector.x * nextVector.x + thisVector.y * nextVector.y;
-            double absThis   = sqrt((double)thisVector.x * thisVector.x + thisVector.y * thisVector.y);
-            double absNext   = sqrt((double)nextVector.x * nextVector.x + nextVector.y * nextVector.y);
-            angle = acos(vectorMul / (absThis * absNext));
-
             Action command;
-            command.action = Action::ROTATE;
-            if(pi / 2 - angle > 0) // до 180 градусов
-                command.time = angle * 180 / pi;
-            else
-                command.time = (pi - angle) * 180 / pi;
-            if(i)
-            {
-                if(thisVector.x * nextVector.y > thisVector.y * nextVector.x)
-                    command.time *= -1;
-            }
-            else
-            {
-                if(thisVector.x * nextVector.y < thisVector.y * nextVector.x)
-                    command.time *= -1;
-            }
-            if(abs(command.time) > command.eps)
-                action.push_back(command);
+            double vectorMul = (double)thisVector.x * nextVector.x + (double)thisVector.y * nextVector.y;
+	    double absThis   = sqrt((double)thisVector.x * thisVector.x + (double)thisVector.y * thisVector.y);
+	    double absNext   = sqrt((double)nextVector.x * nextVector.x + (double)nextVector.y * nextVector.y);
+          
+		    angle = acos(vectorMul / (absThis * absNext));
+
+		printf("angle: %.3lf\n", angle);
+
+		    command.action = Action::ROTATE;
+		    if(pi - angle > 0) // до 180 градусов
+		        command.time = angle * 180.0 / pi;
+		    else
+		        command.time = (pi - angle) * 180.0 / pi;
+		    if(i)
+		    {
+		        if((double)thisVector.x * nextVector.y > (double)thisVector.y * nextVector.x)
+		            command.time *= -1.0;
+		    }
+		    else
+		    {
+		        if((double)thisVector.x * nextVector.y < (double)thisVector.y * nextVector.x)
+		            command.time *= -1.0;
+		    }
+		    if(abs(command.time) > command.eps)
+		        action.push_back(command);
+		        
             command.action = Action::MOVE;
             command.time   = absNext * route.GetScale() * 1000; // millimeters?
             if(abs(command.time) > command.eps)
@@ -262,11 +268,12 @@ namespace Robot
     void RobotControl::CheckAnswerIsOK(void)
     {
         wstring recv = ReceiveSocket();
+        new logger(-1, "recv = " + recv);
         if(recv == L("UnexpectedObstacle"))
             throw UnexpectedObstacleExseption();
         else if(recv == L("NotSupported"))
             throw NotSupportedException();
-        else if(recv != L("OK"))
-            throw InvalidAnswerException();
+        else /*if(recv != L("OK"))
+            throw InvalidAnswerException();*/;
     }
 }

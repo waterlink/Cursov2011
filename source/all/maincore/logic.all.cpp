@@ -67,7 +67,8 @@ EHandler(testrunactivate, {
 	targetoptimal * str = new targetoptimal;
 	str->setupmarkersource(markersource);
 	str->setupmprog(mp);
-	str->setupzprog(zp);
+	//str->setupzprog(zp);
+	str->setupzprog(mainlogic->getzprog());
 	str->setupmap("testmap");
 	new logger(0, "maincore--testrunactivate::handler::debug: strategy setup done\n");
 	if (str->status())
@@ -101,7 +102,9 @@ logic::logic(
 		button * freemode,
 
 		menu * mtest,
-		menu * mtestrun
+		menu * mtestrun,
+		
+		izprog * z0rchmodule
 ){
 
 #define clean \
@@ -214,6 +217,8 @@ logic::logic(
 	freemode->settext("F");
 
 	mtestrun->setactivate(testrunactivate);
+	
+	this->z0rchmodule = z0rchmodule;
 
 	clean;
 
@@ -256,6 +261,12 @@ pather * logic::getdecoder(){
 mapmanager * logic::getmanager(){
 
 	return manager;
+
+}
+
+izprog * logic::getzprog(){
+
+	return z0rchmodule;
 
 }
 

@@ -186,3 +186,12 @@
 [class propertymanager] - class for managing properties of marker and its property window
 [class targetoptimal] - optimal strategy for targets
 [class robot] - robot emulator
+[class scenario] - class for managing commands
+[class command] - class command for robot
+[class mainclass] - win version of main class, contains initialization, run method and finalization
+[class logic] - class controlling main processes in program
+[class izprog] - interface for z0rch's program
+[class test_zprogemu] - console emulator of external module z0rch's program
+[class mainclass] - win version of main class, contains initialization, run method and finalization
+[class logic] - class controlling main processes in program
+[class Wzprog] - z0rch module adapter, win specification
