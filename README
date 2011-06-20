@@ -13,3 +13,17 @@ warranty. In no event will the authors be held liable for any damages
 arising from the use of this software.
 
 
+To run project:
+1. run btexec
+	$NXJ_HOME/bin/nxjpc ./BTExecutor
+	or
+	$NXJ_HOME\bin\nxjpc .\BTExecutor
+2. run project:
+	copy to wine-partition ./binary/x.exe and run it
+	or
+	.\binary\x.exe
+
+or
+
+use bat-file for that
+
