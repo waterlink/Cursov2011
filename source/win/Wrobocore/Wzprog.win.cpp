@@ -63,6 +63,8 @@ void Wzprog::passstartcoords(int sx, int sy, int lx, int ly){
 }
 void Wzprog::moverel(int dx, int dy){
 
+	printf("moving rel: %d %d\n", dx, dy);
+
 	Point topush;
 	IRobotRoute::RouteIterator iter = fileRoute->End();
 	if (fileRoute->Begin() == fileRoute->End())

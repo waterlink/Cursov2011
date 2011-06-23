@@ -84,8 +84,10 @@ namespace Robot
             n = *nextIterator;
             if(i == 0)
             {  
-                t = route.GetStartPos();
-                p = route.GetOffset();
+                //t = route.GetStartPos();
+                //p = route.GetOffset();
+                p = route.GetStartPos();
+                t = route.GetOffset();
             }
             else if(i == 1)
             {
@@ -97,23 +99,38 @@ namespace Robot
                 t = *thisIterator;
                 p = *prevIterator;
             }
-            Point thisVector(p.x - t.x, p.y - t.y);
+            Point thisVector(t.x - p.x, t.y - p.y);
             Point nextVector(n.x - t.x, n.y - t.y);
+            if (i == 0)
+            	nextVector = Point(n.x - p.x, n.y - p.y);
             
             Action command;
             double vectorMul = (double)thisVector.x * nextVector.x + (double)thisVector.y * nextVector.y;
 	    double absThis   = sqrt((double)thisVector.x * thisVector.x + (double)thisVector.y * thisVector.y);
 	    double absNext   = sqrt((double)nextVector.x * nextVector.x + (double)nextVector.y * nextVector.y);
+	    double vectorCrossMul = (double)thisVector.x * nextVector.y - (double)thisVector.y * nextVector.x;
+	    
+	    
+	    printf("%d %d; %d %d;\n", thisVector.x, thisVector.y, nextVector.x, nextVector.y);
+          
+          if (fabs(vectorMul) < command.eps && fabs(absThis * absNext) < command.eps)
+          	angle = 0.0;
+          else {
           
 		    angle = acos(vectorMul / (absThis * absNext));
+		    double sinangle = vectorCrossMul;
+		    angle = -angle;
+		    if (sinangle < 0.0) angle = -angle;
 
 		printf("angle: %.3lf\n", angle);
 
 		    command.action = Action::ROTATE;
-		    if(pi - angle > 0) // до 180 градусов
+		    //if (angle > 180.0) angle = angle - 2 * pi;
+		    command.time = angle * 180.0 / pi;
+		    /*if(pi - angle > 0) // до 180 градусов
 		        command.time = angle * 180.0 / pi;
 		    else
-		        command.time = (pi - angle) * 180.0 / pi;
+		        command.time = (pi - angle) * 180.0 / pi;*/
 		    if(i)
 		    {
 		        if((double)thisVector.x * nextVector.y > (double)thisVector.y * nextVector.x)
@@ -127,6 +144,8 @@ namespace Robot
 		    if(abs(command.time) > command.eps)
 		        action.push_back(command);
 		        
+		}
+		
             command.action = Action::MOVE;
             command.time   = absNext * route.GetScale() * 1000; // millimeters?
             if(abs(command.time) > command.eps)

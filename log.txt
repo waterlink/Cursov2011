@@ -195,3 +195,6 @@
 [class mainclass] - win version of main class, contains initialization, run method and finalization
 [class logic] - class controlling main processes in program
 [class Wzprog] - z0rch module adapter, win specification
+[class Wzprog] - z0rch module adapter, win specification
+[class targetoptimal] - optimal strategy for targets
+[class mprog] - emulator class for makelov's module

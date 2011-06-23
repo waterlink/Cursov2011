@@ -30,8 +30,9 @@ bool targetoptimal::go(){
 		int j = 0;
 		for (int i = 1; i <= way.size(); ++i){
 
-			if (i < way.size()) 
-				zprog->moverel(way[i].first - way[i - 1].first, way[i].second - way[i - 1].second);
+			if (i < way.size())
+				if (way[i].first - way[i - 1].first != 0 || way[i].second - way[i - 1].second != 0) 
+					zprog->moverel(way[i].first - way[i - 1].first, way[i].second - way[i - 1].second);
 
 			if (j < marks.size()) if (way[i - 1] == marks[j]->getposition()){
 

@@ -168,7 +168,7 @@
 				- save scenario
 				- run scenario
 			- test
-				- test run
+			  OK	- test run
 		  OK	- help
 				- instruction
 			  OK	- about
